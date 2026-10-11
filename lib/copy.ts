@@ -69,7 +69,6 @@ export const LINKS = {
   signup: `${APP}/auth/signup`,
   privacy: `${APP}/privacy`,
   terms: `${APP}/terms`,
-  // À CONFIRMER : aucun compte social n'est référencé dans le dépôt.
-  instagram: 'https://www.instagram.com/stacbase',
-  linkedin: 'https://www.linkedin.com/company/stacbase',
+  instagram: 'https://www.instagram.com/app.stacbase/',
+  linkedin: 'https://www.linkedin.com/company/stacbase/',
 }
