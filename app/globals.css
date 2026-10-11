@@ -1,0 +1,364 @@
+:root {
+  --paper: #ffffff;
+  --ink: #0b0b0b;
+  --ink-soft: #3d3d40;
+  --muted: #5f5f66;
+  --rule: #8d8d93;
+  --green-deep: #24561a;
+  --green: #3c7f22;
+  --green-edge: #1c4313;
+  --knob: #fcefc6;
+  --gutter: clamp(18px, 3vw, 44px);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ── Page : trois bandes, le mot au centre ─────────────────────────── */
+
+.page {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: var(--gutter);
+  overflow: hidden;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.headline {
+  margin: 0;
+  font-size: clamp(17px, 1.45vw, 22px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.subline {
+  margin: 6px 0 0;
+  font-size: clamp(14px, 1.05vw, 16px);
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+/* ── L'interrupteur « Try now » ─────────────────────────────────────── */
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 150px;
+  height: 38px;
+  margin-top: 4px;
+  padding: 0 18px 0 46px;
+  border-radius: 999px;
+  border: 1px solid var(--green-edge);
+  background: linear-gradient(90deg, var(--green-deep) 0%, var(--green) 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16), 0 6px 14px -8px rgb(28 67 19 / 0.7);
+  transition: transform 0.2s var(--ease-out);
+}
+
+.switch-knob {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--knob);
+  border: 1px solid var(--green-edge);
+  box-shadow: inset 0 -2px 3px rgb(120 90 20 / 0.18), 0 1px 2px rgb(0 0 0 / 0.25);
+  transform: translate(0, -50%);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.switch-label {
+  transition: transform 0.5s var(--ease-out);
+}
+
+.switch:hover .switch-knob,
+.switch:focus-visible .switch-knob {
+  transform: translate(110px, -50%);
+}
+
+.switch:hover .switch-label,
+.switch:focus-visible .switch-label {
+  transform: translateX(-30px);
+}
+
+.switch:active {
+  transform: scale(0.98);
+}
+
+/* ── Réseaux ─────────────────────────────────────────────────────────── */
+
+.social {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  color: #6c6c72;
+}
+
+.social a {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 8px;
+  transition: color 0.2s var(--ease-out);
+}
+
+.social a:hover {
+  color: var(--ink);
+}
+
+/* ── La scène : le mot-symbole et son encre ─────────────────────────── */
+
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: 0 calc(var(--gutter) * -1);
+  padding: clamp(40px, 7vh, 96px) var(--gutter);
+  touch-action: pan-y;
+}
+
+.mark-wrap {
+  position: relative;
+  margin: 0;
+  width: min(94vw, 1560px);
+  font-weight: inherit;
+}
+
+.open {
+  position: absolute;
+  left: 7.5%;
+  top: 0.5%;
+  font-size: clamp(22px, 3.4vw, 54px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transform: translateY(-55%);
+}
+
+.mark {
+  display: block;
+  position: relative;
+}
+
+.mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.ink {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ink-source {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Bas de page ─────────────────────────────────────────────────────── */
+
+.bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.tagline {
+  margin: 0;
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 2;
+  max-width: 62ch;
+}
+
+.tagline strong {
+  font-weight: 800;
+}
+
+.under {
+  padding-bottom: 9px;
+  border-bottom: 1.5px solid var(--rule);
+}
+
+/* Le mot clé change de couleur, sur la palette des matières du logo. */
+.chip {
+  display: inline-block;
+  padding: 1px 9px 2px;
+  border: 1px solid rgb(11 11 11 / 0.45);
+  border-radius: 999px;
+  font-weight: 700;
+  line-height: 1.5;
+  background: #fff0c4;
+  animation: chip-colors 9s var(--ease-out) infinite;
+}
+
+@keyframes chip-colors {
+  0%, 16% { background: #fff0c4; }
+  20%, 36% { background: #ffd2e6; }
+  40%, 56% { background: #e4dcff; }
+  60%, 76% { background: #d4f1d8; }
+  80%, 96% { background: #d9e4ff; }
+  100% { background: #fff0c4; }
+}
+
+.legal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.legal a {
+  text-decoration: none;
+}
+
+.legal a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lang {
+  display: inline-flex;
+  margin-left: 22px;
+  padding: 3px;
+  gap: 2px;
+  border-radius: 10px;
+  background: #f0f0f1;
+}
+
+.lang button {
+  min-width: 40px;
+  height: 34px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lang button[aria-pressed='true'] {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ── Téléphone : la composition se met debout ──────────────────────── */
+
+@media (max-width: 760px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'intro social'
+      'cta cta';
+    row-gap: 22px;
+  }
+
+  .intro {
+    grid-area: intro;
+  }
+
+  .social {
+    grid-area: social;
+    gap: 10px;
+  }
+
+  .switch {
+    grid-area: cta;
+    width: 168px;
+    height: 46px;
+    font-size: 16px;
+  }
+
+  .switch-knob {
+    width: 36px;
+    height: 36px;
+  }
+
+  .switch:hover .switch-knob,
+  .switch:focus-visible .switch-knob {
+    transform: translate(122px, -50%);
+  }
+
+  .open {
+    left: 6%;
+    top: -14%;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .legal {
+    width: 100%;
+  }
+
+  .lang {
+    margin-left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch,
+  .switch-knob,
+  .switch-label {
+    transition: none;
+  }
+
+  .chip {
+    animation: none;
+  }
+}
