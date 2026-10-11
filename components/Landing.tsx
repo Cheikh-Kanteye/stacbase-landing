@@ -12,9 +12,11 @@ function initialLang(): Lang {
     const saved = window.localStorage.getItem(STORAGE_KEY)
     if (saved === 'en' || saved === 'fr') return saved
   } catch {
-    /* stockage indisponible : on retombe sur la langue du navigateur */
+    /* stockage indisponible : on retombe sur l'anglais */
   }
-  return navigator.language?.toLowerCase().startsWith('fr') ? 'fr' : 'en'
+  // Anglais pour tout le monde (décision du 2026-10-11) : la langue du
+  // navigateur n'est pas consultée, seul le choix EN/FR l'emporte.
+  return 'en'
 }
 
 function InstagramIcon() {
