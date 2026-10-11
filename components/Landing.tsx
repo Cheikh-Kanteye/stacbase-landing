@@ -97,7 +97,6 @@ export function Landing() {
           stageRef={stageRef}
           markRef={markRef}
           videoSrc='/media/stacbase-logo.mp4'
-          maskSrc='/media/stacbase-wordmark.png'
           onReady={onReady}
         />
       </section>

@@ -152,12 +152,6 @@ a {
   -webkit-user-drag: none;
 }
 
-/* Le logo vivant est dessiné dans le canevas : le mot-symbole noir, gardé
-   pour les lecteurs d'écran et sans WebGL, s'efface quand il est prêt. */
-.stage[data-live='true'] .mark img {
-  opacity: 0;
-}
-
 .ink {
   position: absolute;
   inset: 0;
