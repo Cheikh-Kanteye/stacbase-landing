@@ -34,7 +34,7 @@ const PRESSURE_DECAY = 0.8
 /** Force des tourbillons : c'est elle qui fait s'enrouler l'encre. */
 const CURL = 8
 /** Rayon d'une touche, en pixels CSS à 1440 px de large. */
-const SPLAT_RADIUS_PX = 18
+const SPLAT_RADIUS_PX = 28
 /** Le liquide suit la main à cette fraction de sa vitesse. */
 const FOLLOW = 0.16
 /** Encre versée par touche (le bord de l'encre est à 0,5). */
