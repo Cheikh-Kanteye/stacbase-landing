@@ -39,6 +39,8 @@ const SPLAT_RADIUS_PX = 28
 const FOLLOW = 0.25
 /** Encre versée par touche (le bord de l'encre est à 0,5). */
 const INK_PER_SPLAT = 0.5
+/** Force du passage d'introduction, rapportée à celle d'un geste de la main. */
+const INTRO_FORCE = 0.35
 /** Après le dernier geste, la simulation tourne encore ce temps-là, puis s'arrête. */
 const IDLE_STOP_MS = 7000
 
@@ -422,7 +424,7 @@ export function InkReveal({
      * de l'encre. La vitesse injectée est exprimée en cases de la grille par
      * seconde, pour que le liquide suive la main à sa vitesse réelle.
      */
-    const splat = (x: number, y: number, dx: number, dy: number, dt: number) => {
+    const splat = (x: number, y: number, dx: number, dy: number, dt: number, force: number) => {
       if (!ready || !velocity || !dye) return
       const u = P.splat.uniforms
       use(P.splat)
@@ -431,8 +433,8 @@ export function InkReveal({
       gl.uniform2f(u.uPoint, x / width, 1 - y / height)
       gl.uniform1f(u.uRadius, radius)
 
-      const vx = ((dx / width) * velocity.read.width * FOLLOW) / dt
-      const vy = ((-dy / height) * velocity.read.height * FOLLOW) / dt
+      const vx = ((dx / width) * velocity.read.width * FOLLOW * force) / dt
+      const vy = ((-dy / height) * velocity.read.height * FOLLOW * force) / dt
       gl.uniform2f(u.uTexel, velocity.read.texel[0], velocity.read.texel[1])
       gl.uniform1i(u.uTarget, bindTex(0, velocity.read.texture))
       gl.uniform3f(u.uColor, vx, vy, 0)
@@ -525,7 +527,7 @@ export function InkReveal({
     let videoReady = false
     let lastVideoTime = -1
     let pointer: { x: number; y: number } | null = null
-    let pending: { x: number; y: number; dx: number; dy: number }[] = []
+    let pending: { x: number; y: number; dx: number; dy: number; force: number }[] = []
     let auto: { from: number; duration: number; loop: boolean } | null = demo
       ? { from: performance.now(), duration: 6000, loop: true }
       : null
@@ -540,7 +542,7 @@ export function InkReveal({
     // La main dans le liquide : chaque déplacement pousse le fluide dans sa
     // direction et y verse de l'encre. Un grand geste est découpé en touches
     // rapprochées, pour un sillage continu plutôt qu'une suite de taches.
-    const move = (x: number, y: number) => {
+    const move = (x: number, y: number, force = 1) => {
       if (!pointer) {
         pointer = { x, y }
         return
@@ -551,7 +553,7 @@ export function InkReveal({
       if (dist < 0.5) return
       const steps = Math.max(1, Math.ceil(dist / (14 * scale)))
       for (let i = 1; i <= steps; i += 1) {
-        pending.push({ x: pointer.x + (dx * i) / steps, y: pointer.y + (dy * i) / steps, dx: dx / steps, dy: dy / steps })
+        pending.push({ x: pointer.x + (dx * i) / steps, y: pointer.y + (dy * i) / steps, dx: dx / steps, dy: dy / steps, force })
       }
       pointer = { x, y }
       lastInput = performance.now()
@@ -597,9 +599,11 @@ export function InkReveal({
           auto = null
           pointer = null
         } else if (raw >= 0) {
-          const p = auto.loop ? 0.5 - 0.5 * Math.cos(raw * Math.PI) : 1 - Math.pow(1 - raw, 2)
+          // Accélère puis ralentit, sans à-coup ; et pousse le liquide bien
+          // moins fort qu'une main : une invitation, pas une éclaboussure.
+          const p = 0.5 - 0.5 * Math.cos((auto.loop ? raw : Math.min(1, raw)) * Math.PI)
           const { x, y } = autoPath(p)
-          move(x, y)
+          move(x, y, INTRO_FORCE)
         }
       }
 
@@ -617,7 +621,7 @@ export function InkReveal({
       // Les touches d'une même image se partagent son temps : la vitesse
       // injectée reste celle de la main, quel que soit leur nombre.
       const share = dt / Math.max(1, pending.length)
-      for (const s of pending) splat(s.x, s.y, s.dx, s.dy, share * pending.length)
+      for (const s of pending) splat(s.x, s.y, s.dx, s.dy, share * pending.length, s.force)
       pending = []
       step(dt)
 
@@ -678,7 +682,7 @@ export function InkReveal({
       if (demo || reduced) return
       auto = coarse
         ? { from: performance.now(), duration: 7000, loop: true }
-        : { from: performance.now() + 500, duration: 1800, loop: false }
+        : { from: performance.now() + 900, duration: 3800, loop: false }
       lastInput = performance.now()
       wake()
     }
