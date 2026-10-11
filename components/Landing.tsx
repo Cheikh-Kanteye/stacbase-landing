@@ -58,7 +58,6 @@ export function Landing() {
   }
 
   const onReady = useCallback(() => setLive(true), [])
-  const [from, to] = copy.underline
 
   return (
     <main className='page'>
@@ -68,11 +67,12 @@ export function Landing() {
           <p className='subline'>{copy.subline}</p>
         </div>
 
-        {/* Un interrupteur : au survol, le bouton glisse en position « on ».
-            Le clic ouvre la création de compte. */}
-        <a className='switch' href={LINKS.signup} aria-label={copy.ctaLabel}>
-          <span className='switch-knob' aria-hidden />
-          <span className='switch-label'>{copy.cta}</span>
+        {/* Un lien, simplement : le mot et une flèche légère. */}
+        <a className='cta' href={LINKS.signup} aria-label={copy.ctaLabel}>
+          {copy.cta}
+          <svg viewBox='0 0 24 24' width='18' height='18' fill='none' stroke='currentColor' strokeWidth='1.5' aria-hidden>
+            <path d='M5 12h13M13 6l6 6-6 6' strokeLinecap='round' strokeLinejoin='round' />
+          </svg>
         </a>
 
         <nav className='social' aria-label='Social'>
@@ -93,7 +93,13 @@ export function Landing() {
             <img src='/media/stacbase-wordmark.png' alt={copy.wordmarkAlt} width={1600} height={400} draggable={false} />
           </span>
         </h1>
-        <InkReveal stageRef={stageRef} markRef={markRef} videoSrc='/media/stacbase-logo.mp4' onReady={onReady} />
+        <InkReveal
+          stageRef={stageRef}
+          markRef={markRef}
+          videoSrc='/media/stacbase-logo.mp4'
+          maskSrc='/media/stacbase-wordmark.png'
+          onReady={onReady}
+        />
       </section>
 
       <footer className='bottom'>
@@ -107,14 +113,7 @@ export function Landing() {
               ) : (
                 segment.text
               )
-            const underlined = index >= from && index <= to
-            return underlined ? (
-              <span key={index} className='under'>
-                {content}
-              </span>
-            ) : (
-              <span key={index}>{content}</span>
-            )
+            return <span key={index}>{content}</span>
           })}
         </p>
 

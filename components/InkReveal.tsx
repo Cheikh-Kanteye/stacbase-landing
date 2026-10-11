@@ -28,19 +28,17 @@ const DYE_RES = 512
 const PRESSURE_ITERATIONS = 20
 /** Combien la vitesse et l'encre s'effacent par seconde. */
 const VELOCITY_DISSIPATION = 1.4
-const DYE_DISSIPATION = 0.75
+const DYE_DISSIPATION = 1.3
 /** Pression conservée d'une image à l'autre : un liquide qui a de la mémoire. */
 const PRESSURE_DECAY = 0.8
 /** Force des tourbillons : c'est elle qui fait s'enrouler l'encre. */
-const CURL = 12
+const CURL = 8
 /** Rayon d'une touche, en pixels CSS à 1440 px de large. */
-const SPLAT_RADIUS_PX = 28
+const SPLAT_RADIUS_PX = 15
 /** Le liquide suit la main à cette fraction de sa vitesse. */
-const FOLLOW = 0.25
+const FOLLOW = 0.16
 /** Encre versée par touche (le bord de l'encre est à 0,5). */
-const INK_PER_SPLAT = 0.5
-/** Force du passage d'introduction, rapportée à celle d'un geste de la main. */
-const INTRO_FORCE = 0.35
+const INK_PER_SPLAT = 0.38
 /** Après le dernier geste, la simulation tourne encore ce temps-là, puis s'arrête. */
 const IDLE_STOP_MS = 7000
 
@@ -175,6 +173,7 @@ void main() {
 const DISPLAY_FS = `${HEAD}
 uniform sampler2D uDye;
 uniform sampler2D uVideo;
+uniform sampler2D uMask;
 uniform vec4 uRect;
 uniform vec2 uRes;
 uniform float uTime;
@@ -190,22 +189,36 @@ float noise(vec2 p) {
 }
 
 void main() {
-  float d = texture(uDye, vUv).r;
-  if (d < 0.08) { o = vec4(0.0); return; }
-  // Repère de l'écran (origine en haut) pour placer la vidéo.
+  // Repère de l'écran (origine en haut) pour placer le logo.
   vec2 suv = vec2(vUv.x, 1.0 - vUv.y);
-  vec2 px = suv * uRes;
-  float n = noise(px / 30.0 + uTime * 0.4) - 0.5;
-  float m = smoothstep(0.42, 0.5, d + n * 0.06);
-  if (m < 0.002) { o = vec4(0.0); return; }
-  vec3 col = vec3(0.0);
+
+  // L'encre, dessous : un liquide noir que la main remue.
+  float ink = 0.0;
+  float d = texture(uDye, vUv).r;
+  if (d > 0.08) {
+    float n = noise(suv * uRes / 30.0 + uTime * 0.4) - 0.5;
+    ink = smoothstep(0.42, 0.5, d + n * 0.06);
+  }
+
+  // Le logo, dessus et toujours visible. La vidéo est sur fond noir : on ne
+  // garde que les lettres — le masque des lettres, plus ce qui est assez
+  // lumineux pour en déborder (nuage, reflets).
+  vec3 logo = vec3(0.0);
+  float a = 0.0;
   vec2 vuv = (suv - uRect.xy) / uRect.zw;
   if (uHasVideo > 0.5 && vuv.x >= 0.0 && vuv.x <= 1.0 && vuv.y >= 0.0 && vuv.y <= 1.0) {
-    // Le noir de la vidéo n'est pas tout à fait noir : on l'écrase pour qu'il
-    // se fonde dans l'encre, sans bord visible au cadre de la vidéo.
-    col = max(texture(uVideo, vuv).rgb - 0.045, 0.0) * 1.05;
+    logo = texture(uVideo, vuv).rgb;
+    // Le masque vient d'une seule matière (les perles), un peu plus large
+    // que les autres : seul, il laissait voir le fond noir en ombre derrière
+    // les lettres. On n'en garde que ce qui n'est pas presque noir.
+    float lum = max(logo.r, max(logo.g, logo.b));
+    float mask = texture(uMask, vuv).a * smoothstep(0.03, 0.09, lum);
+    float glow = smoothstep(0.08, 0.22, lum);
+    a = max(mask, glow);
   }
-  o = vec4(col * m, m);
+
+  // Logo sur encre, alpha prémultiplié : l'encre noire n'ajoute pas de couleur.
+  o = vec4(logo * a, a + ink * (1.0 - a));
 }`
 
 type GL = WebGL2RenderingContext
@@ -315,11 +328,14 @@ export function InkReveal({
   stageRef,
   markRef,
   videoSrc,
+  maskSrc,
   onReady,
 }: {
   stageRef: RefObject<HTMLElement | null>
   markRef: RefObject<HTMLElement | null>
   videoSrc: string
+  /** Silhouette des lettres, cadrée comme la vidéo : elle détoure le logo. */
+  maskSrc: string
   onReady?: () => void
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -368,6 +384,18 @@ export function InkReveal({
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]))
+
+    // Le masque des lettres : la même image que le mot-symbole noir, cadrée
+    // comme la vidéo.
+    const maskTexture = gl.createTexture()
+    gl.activeTexture(gl.TEXTURE3)
+    gl.bindTexture(gl.TEXTURE_2D, maskTexture)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]))
+    let maskReady = false
 
     let velocity: DoubleTarget | null = null
     let dye: DoubleTarget | null = null
@@ -515,7 +543,6 @@ export function InkReveal({
 
     // ── État ──────────────────────────────────────────────────────────
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const coarse = window.matchMedia('(pointer: coarse)').matches
     // `?ink=demo` : la main traverse le liquide en continu, pour vérifier le
     // rendu sans souris (capture automatique, revue).
     const demo = new URLSearchParams(window.location.search).get('ink') === 'demo'
@@ -586,6 +613,7 @@ export function InkReveal({
       }
     }
 
+    let painted = false
     const draw = (now: number) => {
       // Image en cours : un geste reçu pendant le calcul ne relance pas une
       // seconde boucle.
@@ -595,37 +623,23 @@ export function InkReveal({
 
       if (auto) {
         const raw = (now - auto.from) / auto.duration
-        if (!auto.loop && raw >= 1) {
-          auto = null
-          pointer = null
-        } else if (raw >= 0) {
-          // Accélère puis ralentit, sans à-coup ; et pousse le liquide bien
-          // moins fort qu'une main : une invitation, pas une éclaboussure.
-          const p = 0.5 - 0.5 * Math.cos((auto.loop ? raw : Math.min(1, raw)) * Math.PI)
-          const { x, y } = autoPath(p)
-          move(x, y, INTRO_FORCE)
-        }
+        const p = 0.5 - 0.5 * Math.cos(raw * Math.PI)
+        const { x, y } = autoPath(p)
+        move(x, y)
       }
 
-      // Plus rien ne bouge depuis longtemps : l'encre a disparu, on s'arrête.
-      if (!auto && now - lastInput > IDLE_STOP_MS) {
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null)
-        gl.viewport(0, 0, canvas.width, canvas.height)
-        gl.clearColor(0, 0, 0, 0)
-        gl.clear(gl.COLOR_BUFFER_BIT)
-        if (!video.paused) video.pause()
-        raf = 0
-        return
+      // Le fluide ne calcule que tant qu'il bouge : passé ce délai, l'encre
+      // s'est effacée et seule la vidéo du logo demande encore une image.
+      const fluid = !!auto || now - lastInput < IDLE_STOP_MS
+      if (fluid) {
+        // Les touches d'une même image se partagent son temps : la vitesse
+        // injectée reste celle de la main, quel que soit leur nombre.
+        for (const s of pending) splat(s.x, s.y, s.dx, s.dy, dt, s.force)
+        pending = []
+        step(dt)
       }
 
-      // Les touches d'une même image se partagent son temps : la vitesse
-      // injectée reste celle de la main, quel que soit leur nombre.
-      const share = dt / Math.max(1, pending.length)
-      for (const s of pending) splat(s.x, s.y, s.dx, s.dy, share * pending.length, s.force)
-      pending = []
-      step(dt)
-
-      // Affichage : l'encre découpée, la vidéo à l'intérieur.
+      let frame = false
       if (videoReady && video.readyState >= 2) {
         if (video.paused) void video.play().catch(() => {})
         if (video.currentTime !== lastVideoTime) {
@@ -633,15 +647,19 @@ export function InkReveal({
           gl.activeTexture(gl.TEXTURE2)
           gl.bindTexture(gl.TEXTURE_2D, videoTexture)
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, video)
+          frame = true
         }
       }
-      if (dye) {
+
+      // Rien n'a changé : on garde l'image déjà affichée.
+      if (dye && (fluid || frame || !painted)) {
         const u = P.display.uniforms
         use(P.display)
         gl.uniform2f(u.uTexel, 1 / canvas.width, 1 / canvas.height)
         gl.uniform1i(u.uDye, bindTex(0, dye.read.texture))
         gl.uniform1i(u.uVideo, bindTex(2, videoTexture))
-        gl.uniform1f(u.uHasVideo, videoReady ? 1 : 0)
+        gl.uniform1i(u.uMask, bindTex(3, maskTexture))
+        gl.uniform1f(u.uHasVideo, videoReady && maskReady ? 1 : 0)
         gl.uniform1f(u.uTime, reduced ? 0 : (now - start) / 1000)
         const s = stage.getBoundingClientRect()
         const m = mark.getBoundingClientRect()
@@ -652,6 +670,7 @@ export function InkReveal({
         gl.clearColor(0, 0, 0, 0)
         gl.clear(gl.COLOR_BUFFER_BIT)
         gl.drawArrays(gl.TRIANGLES, 0, 6)
+        painted = true
       }
 
       raf = visible ? requestAnimationFrame(draw) : 0
@@ -669,23 +688,31 @@ export function InkReveal({
       canvas.width = Math.max(1, Math.round(width * dpr))
       canvas.height = Math.max(1, Math.round(height * dpr))
       if (changed || !ready) allocate()
+      painted = false
       wake()
     }
 
     const onVideoReady = () => {
       if (videoReady) return
       videoReady = true
-      onReady?.()
       start = performance.now()
-      // Avec « réduire les animations », pas de passage spontané : l'encre ne
-      // suit que la souris, qui est un geste de l'utilisateur.
-      if (demo || reduced) return
-      auto = coarse
-        ? { from: performance.now(), duration: 7000, loop: true }
-        : { from: performance.now() + 900, duration: 3800, loop: false }
-      lastInput = performance.now()
+      if (maskReady) onReady?.()
       wake()
     }
+
+    // Le logo n'apparaît qu'avec son masque : sans lui, la vidéo montrerait
+    // son fond noir.
+    const maskImage = new Image()
+    maskImage.onload = () => {
+      gl.activeTexture(gl.TEXTURE3)
+      gl.bindTexture(gl.TEXTURE_2D, maskTexture)
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, maskImage)
+      maskReady = true
+      painted = false
+      if (videoReady) onReady?.()
+      wake()
+    }
+    maskImage.src = maskSrc
 
     const observer = new ResizeObserver(resize)
     observer.observe(stage)
@@ -724,7 +751,7 @@ export function InkReveal({
       video.pause()
       freeAll()
     }
-  }, [stageRef, markRef, onReady])
+  }, [stageRef, markRef, maskSrc, onReady])
 
   return (
     <>

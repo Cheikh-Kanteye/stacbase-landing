@@ -4,10 +4,6 @@
   --ink-soft: #3d3d40;
   --muted: #5f5f66;
   --rule: #8d8d93;
-  --green-deep: #24561a;
-  --green: #3c7f22;
-  --green-edge: #1c4313;
-  --knob: #fcefc6;
   --gutter: clamp(18px, 3vw, 44px);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -69,59 +65,28 @@ a {
   line-height: 1.4;
 }
 
-/* ── L'interrupteur « Try now » ─────────────────────────────────────── */
+/* ── « Try now » : un lien, une flèche légère ───────────────────────── */
 
-.switch {
-  position: relative;
+.cta {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
-  width: 150px;
-  height: 38px;
-  margin-top: 4px;
-  padding: 0 18px 0 46px;
-  border-radius: 999px;
-  border: 1px solid var(--green-edge);
-  background: linear-gradient(90deg, var(--green-deep) 0%, var(--green) 100%);
-  color: #fff;
-  font-size: 15px;
+  gap: 8px;
+  margin-top: 2px;
+  padding: 6px 2px;
+  color: var(--ink);
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16), 0 6px 14px -8px rgb(28 67 19 / 0.7);
-  transition: transform 0.2s var(--ease-out);
 }
 
-.switch-knob {
-  position: absolute;
-  left: 4px;
-  top: 50%;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--knob);
-  border: 1px solid var(--green-edge);
-  box-shadow: inset 0 -2px 3px rgb(120 90 20 / 0.18), 0 1px 2px rgb(0 0 0 / 0.25);
-  transform: translate(0, -50%);
-  transition: transform 0.5s var(--ease-out);
+.cta svg {
+  transition: transform 0.4s var(--ease-out);
 }
 
-.switch-label {
-  transition: transform 0.5s var(--ease-out);
-}
-
-.switch:hover .switch-knob,
-.switch:focus-visible .switch-knob {
-  transform: translate(110px, -50%);
-}
-
-.switch:hover .switch-label,
-.switch:focus-visible .switch-label {
-  transform: translateX(-30px);
-}
-
-.switch:active {
-  transform: scale(0.98);
+.cta:hover svg,
+.cta:focus-visible svg {
+  transform: translateX(4px);
 }
 
 /* ── Réseaux ─────────────────────────────────────────────────────────── */
@@ -180,10 +145,17 @@ a {
 
 .mark img {
   display: block;
+  transition: opacity 0.5s var(--ease-out);
   width: 100%;
   height: auto;
   user-select: none;
   -webkit-user-drag: none;
+}
+
+/* Le logo vivant est dessiné dans le canevas : le mot-symbole noir, gardé
+   pour les lecteurs d'écran et sans WebGL, s'efface quand il est prêt. */
+.stage[data-live='true'] .mark img {
+  opacity: 0;
 }
 
 .ink {
@@ -222,10 +194,6 @@ a {
   font-weight: 800;
 }
 
-.under {
-  padding-bottom: 9px;
-  border-bottom: 1.5px solid var(--rule);
-}
 
 /* Le mot clé change de couleur, sur la palette des matières du logo. */
 .chip {
@@ -314,21 +282,9 @@ a {
     gap: 10px;
   }
 
-  .switch {
+  .cta {
     grid-area: cta;
-    width: 168px;
-    height: 46px;
-    font-size: 16px;
-  }
-
-  .switch-knob {
-    width: 36px;
-    height: 36px;
-  }
-
-  .switch:hover .switch-knob,
-  .switch:focus-visible .switch-knob {
-    transform: translate(122px, -50%);
+    justify-self: start;
   }
 
   .open {
@@ -352,9 +308,7 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .switch,
-  .switch-knob,
-  .switch-label {
+  .cta svg {
     transition: none;
   }
 

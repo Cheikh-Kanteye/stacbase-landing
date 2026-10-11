@@ -13,8 +13,6 @@ export interface Copy {
   open: string
   wordmarkAlt: string
   tagline: Segment[]
-  /** Mots soulignés de la phrase du bas (indices dans `tagline`). */
-  underline: [number, number]
   privacy: string
   terms: string
   langLabel: string
@@ -37,7 +35,6 @@ export const COPY: Record<Lang, Copy> = {
       { text: 'digital marketers', tone: 'highlight' },
       { text: ' into one stack' },
     ],
-    underline: [1, 3],
     privacy: 'Privacy',
     terms: 'Terms',
     langLabel: 'Language',
@@ -58,7 +55,6 @@ export const COPY: Record<Lang, Copy> = {
       { text: 'modernes', tone: 'strong' },
       { text: ', réunis en une seule stack' },
     ],
-    underline: [1, 3],
     privacy: 'Confidentialité',
     terms: 'Conditions',
     langLabel: 'Langue',
