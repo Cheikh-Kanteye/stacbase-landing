@@ -212,6 +212,7 @@ a {
 
 .legal {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   color: var(--muted);
