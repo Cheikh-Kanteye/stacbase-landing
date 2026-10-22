@@ -65,7 +65,8 @@
 .becomes span { animation: pointDown 2.8s 1s ease-in-out infinite; }
 .heroBottom { animation: riseIn .8s .52s both; }
 .ribbon { overflow: hidden; background: #0b0b0b; color: #d8f36a; margin: 0 calc(clamp(22px, 5vw, 80px) * -1); padding: 15px 0; }
-.ribbonTrack { display: flex; width: max-content; animation: travel 24s linear infinite; }
+.ribbonTrack { display: flex; width: max-content; animation: travel 32s linear infinite; }
+.ribbonSequence { display: flex; flex: 0 0 auto; min-width: 100vw; justify-content: space-around; }
 .ribbonTrack span { display: inline-flex; align-items: center; gap: 24px; white-space: nowrap; padding: 0 24px; font-size: 13px; font-weight: 700; letter-spacing: .12em; }
 .ribbonTrack b { font-size: 18px; font-weight: 500; }
 .ribbon:hover .ribbonTrack { animation-play-state: paused; }

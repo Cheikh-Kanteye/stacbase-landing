@@ -135,7 +135,13 @@ export function AdafriStory() {
             </div>
           </div>
         </section>
-        <div className={styles.ribbon} aria-hidden='true'><div className={styles.ribbonTrack}>{Array.from({ length: 4 }, (_, index) => <span key={index}>ADAFRI <b>→</b> STACBASE <b>✳</b></span>)}</div></div>
+        <div className={styles.ribbon} aria-hidden='true'>
+          <div className={styles.ribbonTrack}>
+            {[0, 1].map((copy) => <div className={styles.ribbonSequence} key={copy}>
+              {Array.from({ length: 8 }, (_, index) => <span key={index}>ADAFRI <b>→</b> STACBASE <b>✳</b></span>)}
+            </div>)}
+          </div>
+        </div>
         <section id='histoire' className={`${styles.chapter} ${styles.reveal}`} data-reveal aria-labelledby='origins-title'>
           <p className={styles.label}>{copy.chapter}</p>
           <div>
