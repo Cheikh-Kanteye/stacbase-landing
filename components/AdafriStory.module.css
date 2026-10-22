@@ -13,8 +13,8 @@
 .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 32px; }
 .dot { width: 9px; height: 9px; border-radius: 50%; background: #5d7730; box-shadow: 0 0 0 0 rgb(93 119 48 / 35%); animation: pulse 2.8s ease-out infinite; }
 .title { margin: 0; font-size: clamp(72px, 13.8vw, 210px); line-height: .93; letter-spacing: -.075em; font-weight: 700; }
-.oldName { display: flex; align-items: center; gap: clamp(20px, 6vw, 100px); color: #777770; }
-.becomes { display: flex; align-items: center; gap: 28px; font-size: clamp(17px, 2.2vw, 32px); font-weight: 400; letter-spacing: -.03em; color: #50504b; }
+.oldName { display: flex; flex-wrap: wrap; align-items: center; gap: 4px clamp(20px, 6vw, 100px); color: #777770; }
+.becomes { display: flex; align-items: center; gap: 14px; white-space: nowrap; font-size: clamp(17px, 2.2vw, 32px); font-weight: 400; letter-spacing: -.03em; color: #50504b; }
 .becomes span { font-size: clamp(35px, 6vw, 90px); color: #0b0b0b; }
 .newName { display: block; margin-top: 12px; }
 .period { color: #718b32; }

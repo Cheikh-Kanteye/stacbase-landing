@@ -9,7 +9,7 @@ const PRODUCTS = 'https://work.stacbase.com/share/projects/434b611f-08c8-4a40-88
 const story = {
   fr: {
     home: 'Accueil Stacbase', login: 'Se connecter', language: 'Langue',
-    eyebrow: 'Une nouvelle étape, ensemble.', becomes: 'devient',
+    eyebrow: 'Une nouvelle étape, ensemble.', becomes: 'continue avec',
     lead: 'Tout a commencé avec vos campagnes. Aujourd’hui, notre ambition accompagne tout votre quotidien.',
     cta: 'Découvrir Stacbase', read: 'Lire notre histoire',
     chapter: '01 — Nos origines', title: 'La publicité nous a réunis.',
@@ -33,7 +33,7 @@ const story = {
     letter: 'Lire la lettre à notre communauté',
     questions: 'Vous connaissiez Adafri ?',
     faq: [
-      ['Pourquoi ce nouveau nom ?', 'Stacbase exprime une ambition plus large : réunir les outils et les opérations du quotidien dans une même base. La publicité reste une partie de cette histoire.'],
+      ['Comment Adafri continue avec Stacbase ?', 'Adafri poursuit son histoire dans un espace de travail plus large : Stacbase. La publicité reste une partie de cet écosystème.'],
       ['À qui s’adresse Stacbase ?', 'Aux agences, aux freelances et aux équipes marketing qui souhaitent retrouver leurs outils dans un espace de travail commun.'],
       ['Où découvrir la plateforme ?', 'Vous pouvez explorer les outils depuis cette page, créer un compte sur Stacbase ou vous connecter si vous possédez déjà un compte Stacbase.'],
     ],
@@ -43,7 +43,7 @@ const story = {
   },
   en: {
     home: 'Stacbase home', login: 'Sign in', language: 'Language',
-    eyebrow: 'Our next chapter. Together.', becomes: 'becomes',
+    eyebrow: 'Our next chapter. Together.', becomes: 'continues with',
     lead: 'It started with your campaigns. Today, our ambition reaches across your working day.',
     cta: 'Discover Stacbase', read: 'Read our story',
     chapter: '01 — Where we started', title: 'Advertising brought us together.',
@@ -67,7 +67,7 @@ const story = {
     letter: 'Read our letter to the community',
     questions: 'Already know Adafri?',
     faq: [
-      ['Why a new name?', 'Stacbase reflects a broader ambition: bringing everyday tools and operations into one shared base. Advertising remains part of that story.'],
+      ['How does Adafri continue with Stacbase?', 'Adafri continues its story within a broader workspace: Stacbase. Advertising remains part of this ecosystem.'],
       ['Who is Stacbase for?', 'Agencies, freelancers and marketing teams who want their tools together in a shared workspace.'],
       ['Where can I explore the platform?', 'Explore the tools from this page, create a Stacbase account, or sign in if you already have a Stacbase account.'],
     ],
@@ -138,7 +138,7 @@ export function AdafriStory() {
         <div className={styles.ribbon} aria-hidden='true'>
           <div className={styles.ribbonTrack}>
             {[0, 1].map((copy) => <div className={styles.ribbonSequence} key={copy}>
-              {Array.from({ length: 8 }, (_, index) => <span key={index}>ADAFRI <b>→</b> STACBASE <b>✳</b></span>)}
+              {Array.from({ length: 8 }, (_, index) => <span key={index}>{lang === 'fr' ? 'ADAFRI CONTINUE AVEC STACBASE' : 'ADAFRI CONTINUES WITH STACBASE'} <b>✳</b></span>)}
             </div>)}
           </div>
         </div>

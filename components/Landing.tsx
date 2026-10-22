@@ -119,7 +119,7 @@ export function Landing() {
         </p>
 
         <div className='legal'>
-          <a href='/adafri'>{lang === 'fr' ? 'Adafri devient Stacbase' : 'Adafri becomes Stacbase'}</a>
+          <a href='/adafri'>{lang === 'fr' ? 'Adafri continue avec Stacbase' : 'Adafri continues with Stacbase'}</a>
           <span aria-hidden>|</span>
           <a href='/careers'>{lang === 'fr' ? 'Carrières' : 'Careers'}</a>
           <span aria-hidden>|</span>
