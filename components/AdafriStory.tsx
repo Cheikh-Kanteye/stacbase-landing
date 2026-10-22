@@ -87,12 +87,28 @@ export function AdafriStory() {
     } catch { /* Keep the page's default language when storage is unavailable. */ }
   }, [])
   useEffect(() => { document.documentElement.lang = lang }, [lang])
+  useEffect(() => {
+    const root = document.querySelector('[data-adafri-story]')
+    if (!root || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const sections = root.querySelectorAll<HTMLElement>('[data-reveal]')
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(styles.visible)
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' })
+    sections.forEach((section) => observer.observe(section))
+    root.setAttribute('data-motion', 'ready')
+    return () => observer.disconnect()
+  }, [])
   function choose(next: Lang) {
     setLang(next)
     try { localStorage.setItem('stacbase-landing-lang', next) } catch { /* Optional preference. */ }
   }
   return (
-    <div className={styles.page} lang={lang}>
+    <div className={styles.page} lang={lang} data-adafri-story>
       <header className={styles.header}>
         <a href='/' aria-label={copy.home} className={styles.brand}>
           <img src='/media/stacbase-wordmark.png' alt='Stacbase' width={1600} height={400} />
@@ -119,7 +135,8 @@ export function AdafriStory() {
             </div>
           </div>
         </section>
-        <section id='histoire' className={styles.chapter} aria-labelledby='origins-title'>
+        <div className={styles.ribbon} aria-hidden='true'><div className={styles.ribbonTrack}>{Array.from({ length: 4 }, (_, index) => <span key={index}>ADAFRI <b>→</b> STACBASE <b>✳</b></span>)}</div></div>
+        <section id='histoire' className={`${styles.chapter} ${styles.reveal}`} data-reveal aria-labelledby='origins-title'>
           <p className={styles.label}>{copy.chapter}</p>
           <div>
             <h2 id='origins-title'>{copy.title}</h2>
@@ -131,12 +148,12 @@ export function AdafriStory() {
             <a href={NOTE} className={styles.source}>{copy.source} ↗</a>
           </div>
         </section>
-        <section className={styles.chapter} aria-labelledby='lesson-title'>
+        <section className={`${styles.chapter} ${styles.reveal}`} data-reveal aria-labelledby='lesson-title'>
           <p className={styles.label}>{copy.next}</p>
           <div><h2 id='lesson-title'>{copy.nextTitle}</h2><p className={styles.body}>{copy.nextBody}</p></div>
         </section>
-        <div className={styles.manifesto}><p>{copy.quote}</p><span aria-hidden>↘</span></div>
-        <section className={styles.chapter} aria-labelledby='future-title'>
+        <div className={`${styles.manifesto} ${styles.reveal}`} data-reveal><p>{copy.quote}</p><span aria-hidden>↘</span></div>
+        <section className={`${styles.chapter} ${styles.reveal}`} data-reveal aria-labelledby='future-title'>
           <p className={styles.label}>{copy.future}</p>
           <div>
             <h2 id='future-title'>{copy.futureTitle}</h2><p className={styles.body}>{copy.futureBody}</p>
@@ -145,15 +162,15 @@ export function AdafriStory() {
             <a href={PRODUCTS} className={styles.textLink}>{copy.products} <span aria-hidden>↗</span></a>
           </div>
         </section>
-        <section className={styles.community} aria-labelledby='community-title'>
+        <section className={`${styles.community} ${styles.reveal}`} data-reveal aria-labelledby='community-title'>
           <span className={styles.communityMark} aria-hidden>↗</span>
           <div><h2 id='community-title'>{copy.community}</h2><p className={styles.body}>{copy.communityBody}</p><a href={NOTE} className={styles.textLink}>{copy.letter} <span aria-hidden>↗</span></a></div>
         </section>
-        <section className={styles.chapter} aria-labelledby='faq-title'>
+        <section className={`${styles.chapter} ${styles.reveal}`} data-reveal aria-labelledby='faq-title'>
           <h2 id='faq-title' className={styles.faqTitle}>{copy.questions}</h2>
           <div className={styles.faq}>{copy.faq.map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden>+</span></summary><p>{answer}</p></details>)}</div>
         </section>
-        <section className={styles.closing}>
+        <section className={`${styles.closing} ${styles.reveal}`} data-reveal>
           <p>{copy.end}</p>
           <a href={LINKS.signup} className={styles.primary}>{copy.signup} <span aria-hidden>↗</span></a>
         </section>
