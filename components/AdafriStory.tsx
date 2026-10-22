@@ -111,7 +111,7 @@ export function AdafriStory() {
     <div className={styles.page} lang={lang} data-adafri-story>
       <header className={styles.header}>
         <a href='/' aria-label={copy.home} className={styles.brand}>
-          <img src='/media/stacbase-wordmark.png' alt='Stacbase' width={1600} height={400} />
+          <img src='/media/stacbase-wordmark-color.png' alt='Stacbase' width={1600} height={290} />
         </a>
         <nav aria-label={copy.language} className={styles.navigation}>
           <div className={styles.languages}>
