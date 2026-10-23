@@ -1,0 +1,67 @@
+.faq {
+  display: grid;
+}
+
+.item {
+  border-bottom: 1px solid var(--line);
+}
+
+.item button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 22px 0;
+  border: 0;
+  background: none;
+  font-size: clamp(16px, 1.4vw, 19px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.item button > span {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  transition: transform 0.5s var(--ease-out), background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.item button:hover > span {
+  border-color: var(--violet);
+  color: var(--violet);
+}
+
+.item[data-open] button > span {
+  border-color: var(--violet);
+  background: var(--violet);
+  color: #fff;
+  transform: rotate(45deg);
+}
+
+.body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease-out);
+}
+
+.body > div {
+  overflow: hidden;
+}
+
+.item[data-open] .body {
+  grid-template-rows: 1fr;
+}
+
+.body p {
+  max-width: 62ch;
+  margin: 0;
+  padding: 0 0 24px;
+  color: var(--muted);
+}

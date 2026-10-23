@@ -1,7 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { LINKS, type Lang } from '@/lib/copy'
+import type { CSSProperties } from 'react'
+import { LINKS } from '@/lib/copy'
+import { ArrowDown, ArrowRight, ArrowUpRight } from './site/icons'
+import { useLang } from './site/lang'
+import { useReveal, Words } from './site/motion'
+import { SiteFooter, SiteNav } from './site/Shell'
 import styles from './Careers.module.css'
 
 const copy = {
@@ -32,45 +36,27 @@ const copy = {
 }
 
 export function Careers() {
-  const [lang, setLang] = useState<Lang>('fr')
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('stacbase-landing-lang')
-      if (saved === 'en' || saved === 'fr') setLang(saved)
-    } catch { /* Language preference is optional. */ }
-  }, [])
-  useEffect(() => { document.documentElement.lang = lang }, [lang])
-  function choose(next: Lang) {
-    setLang(next)
-    try { localStorage.setItem('stacbase-landing-lang', next) } catch { /* Optional. */ }
-  }
+  const [lang, choose] = useLang('fr')
+  useReveal(lang)
   const c = copy[lang]
   return <div className={styles.page} lang={lang}>
-    <header className={styles.header}>
-      <a className={styles.brand} href='/' aria-label={c.back}><img src='/media/stacbase-wordmark.png' width={1600} height={400} alt='Stacbase' /></a>
-      <nav className={styles.nav} aria-label={lang === 'fr' ? 'Navigation' : 'Navigation'}>
-        <a href='/'>{c.back} ↗</a>
-        <div className={styles.lang} role='group' aria-label='Language / Langue'>
-          {(['fr', 'en'] as const).map(code => <button key={code} type='button' lang={code} aria-pressed={lang === code} onClick={() => choose(code)}>{code.toUpperCase()}</button>)}
-        </div>
-      </nav>
-    </header>
-    <main>
+    <SiteNav lang={lang} onLang={choose} />
+    <main className='container'>
       <section className={styles.hero}>
-        <p className={styles.label}><span className={styles.dot} />{c.label}</p>
-        <h1>{c.title}</h1>
-        <p className={styles.lead}>{c.lead}</p>
-        <a className={styles.scroll} href='#mission'>{c.missionLabel} ↓</a>
+        <p className={styles.label} data-reveal><span className={styles.dot} />{c.label}</p>
+        <h1 className='display'><Words text={c.title} delay={100} /></h1>
+        <p className='lead' data-reveal style={{ '--d': '400ms' } as CSSProperties}>{c.lead}</p>
+        <a className='link-arrow' href='#mission' data-reveal style={{ '--d': '550ms' } as CSSProperties}>{c.missionLabel} <ArrowDown size={16} /></a>
       </section>
       <section id='mission' className={styles.section} aria-labelledby='mission-title'>
-        <p className={styles.label}>{c.missionLabel}</p>
-        <div><h2 id='mission-title'>{c.missionTitle}</h2><p>{c.mission}</p><a className={styles.link} href='/adafri'>{c.story} ↗</a></div>
+        <p className={styles.label} data-reveal>{c.missionLabel}</p>
+        <div data-reveal><h2 id='mission-title' className='h2'>{c.missionTitle}</h2><p className='lead'>{c.mission}</p><a className='link-arrow' href='/adafri'>{c.story} <ArrowRight size={16} /></a></div>
       </section>
-      <section className={styles.join} aria-labelledby='join-title'>
+      <section className={styles.join} aria-labelledby='join-title' data-reveal='scale'>
         <p className={styles.label}>{c.joinLabel}</p>
-        <div><h2 id='join-title'>{c.joinTitle}</h2><p>{c.join}</p><a className={styles.button} href={LINKS.linkedin} target='_blank' rel='noopener noreferrer'>{c.linkedin} ↗</a></div>
+        <div><h2 id='join-title' className='h2'>{c.joinTitle}</h2><p>{c.join}</p><a className='btn btn-light' href={LINKS.linkedin} target='_blank' rel='noopener noreferrer'>{c.linkedin} <ArrowUpRight size={17} /></a></div>
       </section>
     </main>
-    <footer className={styles.footer}><span>{c.footer}</span><a href='/'>{c.back} ↗</a></footer>
+    <SiteFooter lang={lang} />
   </div>
 }

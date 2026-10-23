@@ -1,36 +1,14 @@
-.page { max-width: 1600px; margin: auto; padding: 0 clamp(22px, 5vw, 80px); }
-.header { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid #dededb; padding: 28px 0; }
-.brand { display: block; width: 132px; }
-.brand img { width: 100%; height: auto; display: block; }
-.nav, .lang { display: flex; align-items: center; gap: 24px; }
-.nav a, .footer a { text-decoration: none; font-size: 14px; }
-.nav a:hover, .footer a:hover { text-decoration: underline; }
-.lang { gap: 4px; }
-.lang button { font: inherit; font-size: 12px; background: transparent; border: 0; color: #686868; padding: 10px 8px; cursor: pointer; }
-.lang button[aria-pressed='true'] { color: #0b0b0b; text-decoration: underline; text-underline-offset: 5px; }
-.hero { min-height: 75svh; padding: clamp(60px, 8vw, 120px) 0 70px; display: flex; align-items: flex-start; flex-direction: column; }
-.label { margin: 0; color: #55584d; font-size: 13px; letter-spacing: .08em; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #759636; }
-.hero h1 { max-width: 1050px; margin: 38px 0; font-size: clamp(60px, 9vw, 135px); line-height: .98; font-weight: 600; letter-spacing: -.065em; }
-.lead { max-width: 720px; margin: 0; font-size: clamp(20px, 2.1vw, 30px); line-height: 1.4; letter-spacing: -.025em; }
-.scroll { margin-top: auto; padding-top: 54px; text-decoration: underline; text-underline-offset: 6px; font-size: 14px; }
-.section, .join { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; padding: clamp(60px, 7vw, 100px) 0; border-top: 1px solid #dededb; scroll-margin-top: 30px; }
-.section h2, .join h2 { font-size: clamp(34px, 4vw, 62px); font-weight: 500; letter-spacing: -.045em; line-height: 1.1; max-width: 700px; margin: 0 0 25px; }
-.section p:not(.label), .join p:not(.label) { color: #51514c; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.6; max-width: 660px; margin: 0 0 30px; }
-.link { text-decoration: underline; text-underline-offset: 5px; font-size: 15px; }
-.join { padding: clamp(40px, 6vw, 80px); background: #d8f36a; border: 0; margin-bottom: 80px; }
-.join p:not(.label) { color: #30362a; }
-.button { display: inline-flex; gap: 40px; justify-content: space-between; align-items: center; background: #0b0b0b; color: white; text-decoration: none; padding: 18px 24px; font-size: 16px; }
-.button:hover { background: #333; }
-.footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid #dededb; padding: 28px 0; color: #62625a; font-size: 13px; }
-@media (max-width: 700px) {
-  .header { padding: 20px 0; }
-  .brand { width: 105px; }
-  .nav { gap: 10px; }
-  .nav a { font-size: 12px; }
-  .hero { min-height: 70svh; }
-  .hero h1 { font-size: clamp(54px, 12vw, 80px); }
-  .section, .join { grid-template-columns: 1fr; gap: 24px; }
-  .join { margin-bottom: 45px; }
-  .footer { flex-direction: column; }
+.page { position: relative; }
+.hero { display: grid; justify-items: start; gap: 24px; min-height: 64svh; padding: clamp(70px, 10vw, 140px) 0 60px; max-width: 1050px; }
+.label { margin: 0; color: var(--violet); font-size: 13px; letter-spacing: .08em; font-weight: 600; display: flex; align-items: center; gap: 10px; text-transform: uppercase; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 0 4px var(--violet-soft); }
+.section, .join { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; padding: clamp(60px, 7vw, 100px) 0; border-top: 1px solid var(--line); scroll-margin-top: 100px; align-items: start; }
+.section :global(.h2), .join :global(.h2) { margin-bottom: 22px; max-width: 700px; }
+.section :global(.lead) { margin-bottom: 28px; max-width: 660px; }
+.join { padding: clamp(40px, 6vw, 80px); margin-top: 20px; border: 0; border-radius: var(--radius-xl); color: #fff;
+  background: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.07) 0 1px, transparent 1px 56px), linear-gradient(140deg, #4a1fff, #7c3aed 60%, #c243b6); }
+.join .label { color: rgb(255 255 255 / 0.8); }
+.join p:not(.label) { color: rgb(255 255 255 / 0.82); font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; max-width: 620px; margin: 0 0 28px; }
+@media (max-width: 760px) {
+  .section, .join { grid-template-columns: 1fr; gap: 20px; }
 }

@@ -1,187 +1,375 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import type { CSSProperties } from 'react'
 import { LINKS, type Lang } from '@/lib/copy'
-import styles from './AdafriStory.module.css'
+import { AdHub } from './AdHub'
+import { MiniCampaign, MiniCrm } from './mock/Mocks'
+import {
+  ArrowDown, ArrowRight, ArrowUpRight, Bolt, Calendar, Chart, Chat, Compass, Doc, Globe, Heart, Mail, Megaphone, Pen,
+  Quote, Rocket, Sparkle, Users, Wallet,
+} from './site/icons'
+import { Faq } from './site/Faq'
+import { useLang } from './site/lang'
+import { CountUp, Swap, useAutoTabs, useReveal, Words } from './site/motion'
+import { SiteFooter, SiteNav } from './site/Shell'
+import s from './AdafriStory.module.css'
 
 const NOTE = 'https://work.stacbase.com/share/notes/c9227acb-882e-42bf-bb0f-139bd67a8c98'
 const PRODUCTS = 'https://work.stacbase.com/share/projects/434b611f-08c8-4a40-8834-3c0a8b4dc502'
+
 const story = {
   fr: {
-    home: 'Accueil Stacbase', login: 'Se connecter', language: 'Langue',
-    eyebrow: 'Une nouvelle étape, ensemble.', becomes: 'continue avec',
+    eyebrow: 'Une nouvelle étape, ensemble',
+    title1: 'Adafri continue',
+    title2: 'avec',
     lead: 'Tout a commencé avec vos campagnes. Aujourd’hui, notre ambition accompagne tout votre quotidien.',
     cta: 'Découvrir Stacbase', read: 'Lire notre histoire',
-    chapter: '01 — Nos origines', title: 'La publicité nous a réunis.',
-    intro: 'Adafri est né d’une idée simple : rendre la publicité Google plus accessible aux PME africaines. De Dakar à Brazzaville, vous avez donné vie à cette idée, campagne après campagne.',
-    campaigns: 'campagnes lancées avec Adafri', people: 'personnes avec qui repenser le parcours',
-    source: 'Les chiffres et l’histoire de notre évolution',
-    next: '02 — Ce que nous avons appris', nextTitle: 'Votre journée ne s’arrête pas à une campagne.',
-    nextBody: 'Il y a aussi les clients à suivre, les projets à faire avancer et l’équipe à coordonner. À vos côtés, nous avons vu les onglets s’accumuler, les données se disperser et les outils se multiplier.',
-    quote: 'Un outil nous a réunis. Un espace de travail nous fait avancer.',
-    future: '03 — Le prochain chapitre', futureTitle: 'Ouvrez Stacbase.',
-    futureBody: 'Adafri évolue au sein d’un écosystème plus large : Stacbase. Un même espace pour réunir les outils du quotidien des agences, des freelances et des équipes marketing.',
-    tools: '22+ outils, un seul espace.',
-    rows: [
-      ['Faire connaître', 'Les campagnes publicitaires restent au cœur de notre histoire.'],
-      ['Organiser', 'Clients, projets et documents trouvent leur place dans le même espace.'],
-      ['Travailler ensemble', 'Une base commune pour les échanges et le travail de votre équipe.'],
+    chapters: [
+      { tab: 'Nos origines', label: '01 — Nos origines', title: 'La publicité nous a réunis.', body: 'Adafri est né d’une idée simple : rendre la publicité Google plus accessible aux PME africaines. De Dakar à Brazzaville, vous avez donné vie à cette idée, campagne après campagne.', link: 'Les chiffres de notre évolution' },
+      { tab: 'Ce que nous avons appris', label: '02 — Ce que nous avons appris', title: 'Votre journée ne s’arrête pas à une campagne.', body: 'Il y a aussi les clients à suivre, les projets à faire avancer et l’équipe à coordonner. À vos côtés, nous avons vu les onglets s’accumuler, les données se disperser et les outils se multiplier.', link: 'Lire la lettre à notre communauté' },
+      { tab: 'Le prochain chapitre', label: '03 — Le prochain chapitre', title: 'Ouvrez Stacbase.', body: 'Adafri évolue au sein d’un écosystème plus large : Stacbase. Un même espace pour réunir les outils du quotidien des agences, des freelances et des équipes marketing.', link: 'Explorer les outils' },
+      { tab: 'La communauté', label: '04 — La communauté', title: 'La suite se construit avec vous.', body: 'Vos usages ont fait grandir Adafri. Ils continuent de guider Stacbase. Notre ambition : construire avec notre communauté un environnement qui répond à la réalité de votre travail.', link: 'Lire la lettre à notre communauté' },
     ],
-    products: 'Explorer les outils',
-    community: 'La suite se construit avec vous.',
-    communityBody: 'Vos usages ont fait grandir Adafri. Ils continuent de guider Stacbase. Notre ambition : construire avec notre communauté un environnement qui répond à la réalité de votre travail.',
-    letter: 'Lire la lettre à notre communauté',
+    storyKicker: 'Notre histoire', storyTitle: 'D’Adafri à Stacbase, en quatre chapitres.',
+    campaigns: 'campagnes lancées avec Adafri', people: 'personnes avec qui repenser le parcours',
+    tabsPile: ['Google Ads', 'WhatsApp', 'Tableur', 'Gmail', 'Factures', 'Agenda'],
+    toolsLabel: '22+ outils, un seul espace',
+    quote: 'Un outil nous a réunis. Un espace de travail nous fait avancer.',
+    quoteBy: 'L’équipe Stacbase',
+    mid: { eyebrow: 'Ce qui ne change pas', title: 'La même envie de vous faire avancer.', lead: 'La publicité reste au cœur de notre histoire. Autour d’elle, Stacbase ajoute tout ce qui fait votre journée : vos clients, vos projets, vos documents et votre équipe.', cta: 'Ouvrir mon espace' },
+    split: {
+      badge: 'Stacbase', title: '22+ outils, un seul espace.',
+      rows: [
+        ['Faire connaître', 'Les campagnes publicitaires restent au cœur de notre histoire : Google, Meta et Orange Max it, avec des rapports complets.'],
+        ['Organiser', 'Clients, projets et documents trouvent leur place dans le même espace, reliés à vos campagnes.'],
+        ['Travailler ensemble', 'Une base commune pour les échanges et le travail de votre équipe, avec les accès que vous choisissez.'],
+      ],
+      more: 'Explorer les outils',
+    },
+    team: { title: 'Lancement · Teranga Hotel', comments: [['Awa', 'Visuels validés, on lance lundi ?'], ['Moussa', 'Oui, budget et ciblage prêts.'], ['Fatou', 'Je prépare la relance WhatsApp.']], tasks: 'tâches terminées' },
     questions: 'Vous connaissiez Adafri ?',
     faq: [
       ['Comment Adafri continue avec Stacbase ?', 'Adafri poursuit son histoire dans un espace de travail plus large : Stacbase. La publicité reste une partie de cet écosystème.'],
       ['À qui s’adresse Stacbase ?', 'Aux agences, aux freelances et aux équipes marketing qui souhaitent retrouver leurs outils dans un espace de travail commun.'],
       ['Où découvrir la plateforme ?', 'Vous pouvez explorer les outils depuis cette page, créer un compte sur Stacbase ou vous connecter si vous possédez déjà un compte Stacbase.'],
     ],
-    end: 'La même envie de vous faire avancer. Un nouvel horizon.',
-    signup: 'Ouvrir mon espace', back: 'Retour à l’accueil',
-    privacy: 'Confidentialité', terms: 'Conditions',
+    end: 'Un nouvel horizon, la même ambition.', endLead: 'Créez votre espace en quelques minutes. Le plan Free suffit pour commencer.',
+    signup: 'Ouvrir mon espace', login: 'Se connecter',
   },
   en: {
-    home: 'Stacbase home', login: 'Sign in', language: 'Language',
-    eyebrow: 'Our next chapter. Together.', becomes: 'continues with',
+    eyebrow: 'Our next chapter, together',
+    title1: 'Adafri continues',
+    title2: 'with',
     lead: 'It started with your campaigns. Today, our ambition reaches across your working day.',
     cta: 'Discover Stacbase', read: 'Read our story',
-    chapter: '01 — Where we started', title: 'Advertising brought us together.',
-    intro: 'Adafri began with a simple idea: make Google advertising more accessible to African small businesses. From Dakar to Brazzaville, you brought that idea to life, one campaign at a time.',
-    campaigns: 'campaigns launched with Adafri', people: 'people who helped rethink the experience',
-    source: 'The numbers and story behind our evolution',
-    next: '02 — What we learned', nextTitle: 'Your day goes beyond a campaign.',
-    nextBody: 'There are clients to follow up with, projects to move forward and a team to coordinate. Working alongside you, we saw tabs pile up, information scatter and tools multiply.',
-    quote: 'One tool brought us together. One workspace moves us forward.',
-    future: '03 — What comes next', futureTitle: 'Open Stacbase.',
-    futureBody: 'Adafri is evolving within a broader ecosystem: Stacbase. One workspace bringing together everyday tools for agencies, freelancers and marketing teams.',
-    tools: '22+ tools. One workspace.',
-    rows: [
-      ['Reach your audience', 'Advertising campaigns remain at the heart of our story.'],
-      ['Get organised', 'Clients, projects and documents belong in the same workspace.'],
-      ['Work together', 'A shared base for your team’s conversations and daily work.'],
+    chapters: [
+      { tab: 'Where we started', label: '01 — Where we started', title: 'Advertising brought us together.', body: 'Adafri began with a simple idea: make Google advertising more accessible to African small businesses. From Dakar to Brazzaville, you brought that idea to life, one campaign at a time.', link: 'The numbers behind our evolution' },
+      { tab: 'What we learned', label: '02 — What we learned', title: 'Your day goes beyond a campaign.', body: 'There are clients to follow up with, projects to move forward and a team to coordinate. Working alongside you, we saw tabs pile up, information scatter and tools multiply.', link: 'Read our letter to the community' },
+      { tab: 'What comes next', label: '03 — What comes next', title: 'Open Stacbase.', body: 'Adafri is evolving within a broader ecosystem: Stacbase. One workspace bringing together everyday tools for agencies, freelancers and marketing teams.', link: 'Explore the tools' },
+      { tab: 'Our community', label: '04 — Our community', title: 'The next chapter is built with you.', body: 'The way you work helped Adafri grow. It continues to guide Stacbase. Our ambition is to build with our community a workspace that reflects the reality of your day.', link: 'Read our letter to the community' },
     ],
-    products: 'Explore the tools',
-    community: 'The next chapter is built with you.',
-    communityBody: 'The way you work helped Adafri grow. It continues to guide Stacbase. Our ambition is to build with our community a workspace that reflects the reality of your day.',
-    letter: 'Read our letter to the community',
+    storyKicker: 'Our story', storyTitle: 'From Adafri to Stacbase, in four chapters.',
+    campaigns: 'campaigns launched with Adafri', people: 'people who helped rethink the experience',
+    tabsPile: ['Google Ads', 'WhatsApp', 'Spreadsheet', 'Gmail', 'Invoices', 'Calendar'],
+    toolsLabel: '22+ tools, one workspace',
+    quote: 'One tool brought us together. One workspace moves us forward.',
+    quoteBy: 'The Stacbase team',
+    mid: { eyebrow: 'What stays the same', title: 'The same drive to move you forward.', lead: 'Advertising remains at the heart of our story. Around it, Stacbase adds everything that makes your day: your clients, your projects, your documents and your team.', cta: 'Open my workspace' },
+    split: {
+      badge: 'Stacbase', title: '22+ tools. One workspace.',
+      rows: [
+        ['Reach your audience', 'Advertising campaigns remain at the heart of our story: Google, Meta and Orange Max it, with complete reports.'],
+        ['Get organised', 'Clients, projects and documents belong in the same workspace, connected to your campaigns.'],
+        ['Work together', 'A shared base for your team’s conversations and daily work, with the access you choose.'],
+      ],
+      more: 'Explore the tools',
+    },
+    team: { title: 'Launch · Teranga Hotel', comments: [['Awa', 'Visuals approved, launch on Monday?'], ['Moussa', 'Yes, budget and targeting are ready.'], ['Fatou', 'I’m preparing the WhatsApp follow-up.']], tasks: 'tasks done' },
     questions: 'Already know Adafri?',
     faq: [
       ['How does Adafri continue with Stacbase?', 'Adafri continues its story within a broader workspace: Stacbase. Advertising remains part of this ecosystem.'],
       ['Who is Stacbase for?', 'Agencies, freelancers and marketing teams who want their tools together in a shared workspace.'],
       ['Where can I explore the platform?', 'Explore the tools from this page, create a Stacbase account, or sign in if you already have a Stacbase account.'],
     ],
-    end: 'The same drive to move you forward. A new horizon.',
-    signup: 'Open my workspace', back: 'Back to home',
-    privacy: 'Privacy', terms: 'Terms',
+    end: 'A new horizon, the same ambition.', endLead: 'Create your workspace in minutes. The Free plan is enough to begin.',
+    signup: 'Open my workspace', login: 'Sign in',
   },
 }
 
-export function AdafriStory() {
-  const [lang, setLang] = useState<Lang>('fr')
-  const copy = story[lang]
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('stacbase-landing-lang')
-      if (saved === 'en' || saved === 'fr') setLang(saved)
-    } catch { /* Keep the page's default language when storage is unavailable. */ }
-  }, [])
-  useEffect(() => { document.documentElement.lang = lang }, [lang])
-  useEffect(() => {
-    const root = document.querySelector('[data-adafri-story]')
-    if (!root || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const sections = root.querySelectorAll<HTMLElement>('[data-reveal]')
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add(styles.visible)
-          observer.unobserve(entry.target)
-        }
-      })
-    }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' })
-    sections.forEach((section) => observer.observe(section))
-    root.setAttribute('data-motion', 'ready')
-    return () => observer.disconnect()
-  }, [])
-  function choose(next: Lang) {
-    setLang(next)
-    try { localStorage.setItem('stacbase-landing-lang', next) } catch { /* Optional preference. */ }
-  }
-  return (
-    <div className={styles.page} lang={lang} data-adafri-story>
-      <header className={styles.header}>
-        <a href='/' aria-label={copy.home} className={styles.brand}>
-          <img src='/media/stacbase-wordmark-color.png' alt='Stacbase' width={1600} height={290} />
-        </a>
-        <nav aria-label={copy.language} className={styles.navigation}>
-          <div className={styles.languages}>
-            {(['fr', 'en'] as const).map(code => <button key={code} type='button' lang={code} aria-pressed={lang === code} onClick={() => choose(code)}>{code.toUpperCase()}</button>)}
+const CHAPTER_ICONS = [Compass, Bolt, Rocket, Heart]
+const CHAPTER_LINKS = [NOTE, NOTE, PRODUCTS, NOTE]
+const TOOL_ICONS = [Megaphone, Chat, Users, Mail, Calendar, Doc, Pen, Wallet, Chart, Globe, Sparkle, Quote]
+const SPLIT_ICONS = [Megaphone, Users, Chat]
+
+type Copy = (typeof story)['fr']
+
+/** Le visuel qui accompagne chaque chapitre. */
+function ChapterVisual({ i, c, lang }: { i: number; c: Copy; lang: Lang }) {
+  const locale = lang === 'fr' ? 'fr-FR' : 'en-US'
+  if (i === 0)
+    return (
+      <div className={`${s.visual} ${s.vOrigins}`}>
+        <div className={s.statCard}>
+          <strong>
+            <CountUp value={87000} suffix='+' locale={locale} />
+          </strong>
+          <span>{c.campaigns}</span>
+        </div>
+        <div className={`${s.statCard} ${s.statCardB}`}>
+          <strong>
+            <CountUp value={3500} locale={locale} />
+          </strong>
+          <span>{c.people}</span>
+        </div>
+        <div className={s.route}>
+          <span>Dakar</span>
+          <i />
+          <span>Brazzaville</span>
+        </div>
+      </div>
+    )
+  if (i === 1)
+    return (
+      <div className={`${s.visual} ${s.vTabs}`}>
+        {c.tabsPile.map((label, k) => (
+          <div key={label} className={s.tabCard} style={{ '--k': k } as CSSProperties}>
+            <span />
+            {label}
           </div>
-          <a className={styles.login} href='https://work.stacbase.com/auth/login'>{copy.login} <span aria-hidden>↗</span></a>
-        </nav>
-      </header>
+        ))}
+      </div>
+    )
+  if (i === 2)
+    return (
+      <div className={`${s.visual} ${s.vTools}`}>
+        <div className={s.toolGrid}>
+          {TOOL_ICONS.map((Icon, k) => (
+            <span key={k} style={{ '--k': k } as CSSProperties}>
+              <Icon size={20} />
+            </span>
+          ))}
+        </div>
+        <p>{c.toolsLabel}</p>
+      </div>
+    )
+  return (
+    <div className={`${s.visual} ${s.vQuote}`}>
+      <Quote size={28} />
+      <p>{c.quote}</p>
+      <span>{c.quoteBy}</span>
+    </div>
+  )
+}
+
+function TeamMock({ c }: { c: Copy }) {
+  return (
+    <div className={s.team}>
+      <div className={s.teamHead}>
+        <strong>{c.team.title}</strong>
+        <div className={s.faces}>
+          {c.team.comments.map(([name], k) => (
+            <span key={name} data-tone={k}>
+              {name[0]}
+            </span>
+          ))}
+        </div>
+      </div>
+      {c.team.comments.map(([name, text], k) => (
+        <div key={name} className={s.comment} style={{ '--i': k } as CSSProperties}>
+          <span data-tone={k}>{name[0]}</span>
+          <div>
+            <strong>{name}</strong>
+            <p>{text}</p>
+          </div>
+        </div>
+      ))}
+      <div className={s.teamFoot}>
+        <div className={s.teamBar}>
+          <i />
+        </div>
+        <span>8/10 {c.team.tasks}</span>
+      </div>
+    </div>
+  )
+}
+
+export function AdafriStory() {
+  const [lang, choose] = useLang('fr')
+  const c = story[lang]
+  useReveal(lang)
+  const rows = useAutoTabs<HTMLElement>(c.split.rows.length, 5500)
+
+  return (
+    <div className={s.page}>
+      <SiteNav lang={lang} onLang={choose} current='/adafri' />
+
       <main>
-        <section className={styles.hero} aria-labelledby='transition-title'>
-          <p className={styles.eyebrow}><span className={styles.dot} />{copy.eyebrow}</p>
-          <h1 id='transition-title' className={styles.title}>
-            <span className={styles.oldName}>Adafri<span className={styles.becomes}>{copy.becomes} <span aria-hidden>↘</span></span></span>
-            <span className={styles.newName}>Stacbase<span className={styles.period}>.</span></span>
-          </h1>
-          <div className={styles.heroBottom}>
-            <p className={styles.lead}>{copy.lead}</p>
-            <div className={styles.actions}>
-              <a href={LINKS.signup} className={styles.primary}>{copy.cta} <span aria-hidden>↗</span></a>
-              <a href='#histoire' className={styles.textLink}>{copy.read} <span aria-hidden>↓</span></a>
+        {/* ── Première vue, encadrée ───────────────────────────────────── */}
+        <section className={s.heroWrap}>
+          <div className={s.hero}>
+            <div className={s.heroText}>
+              <p className={s.eyebrow} data-reveal>
+                <span className={s.dot} />
+                {c.eyebrow}
+              </p>
+              <h1 className='display'>
+                <Words text={c.title1} delay={100} />
+                <br />
+                <span className={s.titleLine}>
+                  <Words text={c.title2} delay={350} />{' '}
+                  <span className={`grad-text ${s.newName}`}>Stacbase.</span>
+                </span>
+              </h1>
+              <p className={`lead ${s.lead}`} data-reveal style={{ '--d': '500ms' } as CSSProperties}>
+                {c.lead}
+              </p>
+              <div className={s.ctas} data-reveal style={{ '--d': '650ms' } as CSSProperties}>
+                <a className='btn btn-primary' href={LINKS.signup}>
+                  {c.cta}
+                  <ArrowUpRight size={17} />
+                </a>
+                <a className='btn btn-ghost' href='#histoire'>
+                  {c.read}
+                  <ArrowDown size={17} />
+                </a>
+              </div>
+            </div>
+
+            {/* Le hub Publicité, là où l'histoire d'Adafri continue. */}
+            <AdHub lang={lang} />
+          </div>
+        </section>
+
+        {/* ── Notre histoire, en quatre chapitres ─────────────────────── */}
+        <section id='histoire' className={`container ${s.story}`}>
+          <header className={s.storyHead}>
+            <p className={s.kicker} data-reveal>
+              {c.storyKicker}
+            </p>
+            <h2 className='h2'>
+              <Words text={c.storyTitle} />
+            </h2>
+          </header>
+          <div className={s.chapters}>
+            {c.chapters.map((ch, i) => {
+              const Icon = CHAPTER_ICONS[i]
+              return (
+                <article key={ch.tab} className={s.chapter} data-reveal style={{ '--d': `${(i % 2) * 120}ms` } as CSSProperties}>
+                  <ChapterVisual i={i} c={c} lang={lang} />
+                  <div className={s.chapterText}>
+                    <p className={s.chapterLabel}>
+                      <Icon size={15} /> {ch.label}
+                    </p>
+                    <h3 className={s.chapterTitle}>{ch.title}</h3>
+                    <p className={s.chapterBody}>{ch.body}</p>
+                    <a className='link-arrow' href={CHAPTER_LINKS[i]}>
+                      {ch.link}
+                      <ArrowRight size={16} />
+                    </a>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* ── Ce qui ne change pas ─────────────────────────────────────── */}
+        <section className={`container ${s.mid}`}>
+          <p className={s.kicker} data-reveal>
+            {c.mid.eyebrow}
+          </p>
+          <h2 className='h2'>
+            <Words text={c.mid.title} />
+          </h2>
+          <p className='lead' data-reveal>
+            {c.mid.lead}
+          </p>
+          <a className='btn btn-dark' href={LINKS.signup} data-reveal>
+            {c.mid.cta}
+            <ArrowUpRight size={17} />
+          </a>
+        </section>
+
+        {/* ── Ce qui change : accordéon + visuel ───────────────────────── */}
+        <section className={`container ${s.split}`} ref={rows.ref} {...rows.hover}>
+          <div className={s.splitText}>
+            <span className='badge' data-reveal>
+              <span className='badge-icon'>
+                <Sparkle size={13} />
+              </span>
+              {c.split.badge}
+            </span>
+            <h2 className='h2'>
+              <Words text={c.split.title} />
+            </h2>
+            <div className={s.rows}>
+              {c.split.rows.map(([title, body], i) => {
+                const Icon = SPLIT_ICONS[i]
+                const on = rows.active === i
+                return (
+                  <button
+                    key={title}
+                    type='button'
+                    className={s.row}
+                    aria-expanded={on}
+                    onClick={() => rows.select(i)}
+                    data-reveal
+                    style={{ '--d': `${i * 90}ms` } as CSSProperties}
+                  >
+                    <span className={s.rowHead}>
+                      <Icon size={20} />
+                      {title}
+                      <ArrowUpRight size={16} />
+                    </span>
+                    <span className={s.rowBody}>
+                      <span>{body}</span>
+                    </span>
+                    <i className={s.rowLine}>{on && rows.running ? <b key={`l-${i}`} /> : null}</i>
+                  </button>
+                )
+              })}
+            </div>
+            <a className='link-arrow' href={PRODUCTS} data-reveal>
+              {c.split.more}
+              <ArrowRight size={16} />
+            </a>
+          </div>
+          <div className={s.splitVisual} data-reveal='scale'>
+            <div className={s.splitPanel} data-tone={rows.active} aria-hidden />
+            <Swap id={`${rows.active}-${lang}`} className={s.splitView}>
+              {rows.active === 0 ? <MiniCampaign lang={lang} /> : rows.active === 1 ? <MiniCrm lang={lang} /> : <TeamMock c={c} />}
+            </Swap>
+          </div>
+        </section>
+
+        {/* ── Questions ────────────────────────────────────────────────── */}
+        <section className={`container ${s.faqGrid}`}>
+          <h2 className='h2'>
+            <Words text={c.questions} />
+          </h2>
+          <Faq items={c.faq as [string, string][]} />
+        </section>
+
+        {/* ── Fin ──────────────────────────────────────────────────────── */}
+        <section className={s.endWrap}>
+          <div className={s.end} data-reveal='scale'>
+            <div className={s.endGlow} aria-hidden />
+            <h2 className='h2'>{c.end}</h2>
+            <p>{c.endLead}</p>
+            <div className={s.ctas}>
+              <a className='btn btn-light' href={LINKS.signup}>
+                {c.signup}
+                <ArrowUpRight size={17} />
+              </a>
+              <a className={`btn ${s.endGhost}`} href={LINKS.login}>
+                {c.login}
+              </a>
             </div>
           </div>
         </section>
-        <div className={styles.ribbon} aria-hidden='true'>
-          <div className={styles.ribbonTrack}>
-            {[0, 1].map((copy) => <div className={styles.ribbonSequence} key={copy}>
-              {Array.from({ length: 8 }, (_, index) => <span key={index}>{lang === 'fr' ? 'ADAFRI CONTINUE AVEC STACBASE' : 'ADAFRI CONTINUES WITH STACBASE'} <b>✳</b></span>)}
-            </div>)}
-          </div>
-        </div>
-        <section id='histoire' className={`${styles.chapter} ${styles.reveal}`} data-reveal aria-labelledby='origins-title'>
-          <p className={styles.label}>{copy.chapter}</p>
-          <div>
-            <h2 id='origins-title'>{copy.title}</h2>
-            <p className={styles.body}>{copy.intro}</p>
-            <dl className={styles.stats}>
-              <div><dt>87 000<span>+</span></dt><dd>{copy.campaigns}</dd></div>
-              <div><dt>3 500</dt><dd>{copy.people}</dd></div>
-            </dl>
-            <a href={NOTE} className={styles.source}>{copy.source} ↗</a>
-          </div>
-        </section>
-        <section className={`${styles.chapter} ${styles.reveal}`} data-reveal aria-labelledby='lesson-title'>
-          <p className={styles.label}>{copy.next}</p>
-          <div><h2 id='lesson-title'>{copy.nextTitle}</h2><p className={styles.body}>{copy.nextBody}</p></div>
-        </section>
-        <div className={`${styles.manifesto} ${styles.reveal}`} data-reveal><p>{copy.quote}</p><span aria-hidden>↘</span></div>
-        <section className={`${styles.chapter} ${styles.reveal}`} data-reveal aria-labelledby='future-title'>
-          <p className={styles.label}>{copy.future}</p>
-          <div>
-            <h2 id='future-title'>{copy.futureTitle}</h2><p className={styles.body}>{copy.futureBody}</p>
-            <p className={styles.tools}>{copy.tools}</p>
-            <div className={styles.rows}>{copy.rows.map(([title, body], i) => <div className={styles.row} key={title}><span className={styles.number}>0{i + 1}</span><div><h3>{title}</h3><p>{body}</p></div><span aria-hidden>↗</span></div>)}</div>
-            <a href={PRODUCTS} className={styles.textLink}>{copy.products} <span aria-hidden>↗</span></a>
-          </div>
-        </section>
-        <section className={`${styles.community} ${styles.reveal}`} data-reveal aria-labelledby='community-title'>
-          <span className={styles.communityMark} aria-hidden>↗</span>
-          <div><h2 id='community-title'>{copy.community}</h2><p className={styles.body}>{copy.communityBody}</p><a href={NOTE} className={styles.textLink}>{copy.letter} <span aria-hidden>↗</span></a></div>
-        </section>
-        <section className={`${styles.chapter} ${styles.reveal}`} data-reveal aria-labelledby='faq-title'>
-          <h2 id='faq-title' className={styles.faqTitle}>{copy.questions}</h2>
-          <div className={styles.faq}>{copy.faq.map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden>+</span></summary><p>{answer}</p></details>)}</div>
-        </section>
-        <section className={`${styles.closing} ${styles.reveal}`} data-reveal>
-          <p>{copy.end}</p>
-          <a href={LINKS.signup} className={styles.primary}>{copy.signup} <span aria-hidden>↗</span></a>
-        </section>
       </main>
-      <footer className={styles.footer}><a href='/'>{copy.back} ↗</a><span>Adafri → Stacbase</span><div><a href={LINKS.privacy}>{copy.privacy}</a><a href={LINKS.terms}>{copy.terms}</a></div></footer>
+
+      <SiteFooter lang={lang} />
     </div>
   )
 }
