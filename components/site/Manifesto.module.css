@@ -1,0 +1,120 @@
+.dialog {
+  width: min(720px, calc(100vw - 24px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 40px 90px -30px rgb(15 12 46 / 0.55);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.dialog::backdrop {
+  background: rgb(15 12 46 / 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.dialog[open] {
+  animation: open 0.55s var(--ease-out) both;
+}
+
+.dialog[open]::backdrop {
+  animation: veil 0.4s ease both;
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+    filter: blur(6px);
+  }
+}
+
+@keyframes veil {
+  from {
+    opacity: 0;
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - 32px);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.head h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.head p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.3s var(--ease-out);
+}
+
+.close:hover {
+  border-color: var(--ink);
+  transform: rotate(90deg);
+}
+
+.body {
+  overflow: auto;
+  padding: 20px;
+  background: var(--bg-soft);
+}
+
+.body img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 560px) {
+  .head {
+    flex-wrap: wrap;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .actions :global(.btn) {
+    flex: 1;
+  }
+
+  .body {
+    padding: 12px;
+  }
+}

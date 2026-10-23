@@ -817,3 +817,533 @@
     width: 100%;
   }
 }
+
+/* ── Refonte du texte (Abdou, 2026-10-23) ─────────────────────────────── */
+
+.ctaRow {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+/* La douleur : les onglets s'empilent, la note grimpe. */
+.painBody {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.painVisual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 440px;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background:
+    repeating-linear-gradient(90deg, rgb(124 58 237 / 0.07) 0 1px, transparent 1px 40px),
+    var(--bg-tint);
+}
+
+.tabPile {
+  position: relative;
+  width: 240px;
+  height: 260px;
+}
+
+.tabCard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 220px;
+  margin: -24px 0 0 -110px;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  font-weight: 600;
+  transform: translate(calc((var(--k) - 3) * 20px), calc((var(--k) - 3) * 22px)) rotate(calc((var(--k) - 3) * 3deg));
+}
+
+.tabCard span {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--grad);
+}
+
+.tabCard i {
+  margin-left: auto;
+  color: var(--muted);
+  font-style: normal;
+}
+
+:global(.is-in) .tabCard {
+  animation: pile-in 0.7s var(--ease-out) both;
+  animation-delay: calc(var(--k) * 110ms + 150ms);
+}
+
+@keyframes pile-in {
+  from {
+    opacity: 0;
+    transform: translate(0, -70px) rotate(0deg);
+  }
+}
+
+.bill {
+  position: absolute;
+  right: clamp(12px, 3vw, 28px);
+  bottom: clamp(12px, 3vw, 28px);
+  display: grid;
+  gap: 2px;
+  width: 210px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: var(--shadow-lg);
+}
+
+.bill strong {
+  color: var(--pink);
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.bill > span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.bill ul {
+  display: grid;
+  gap: 4px;
+  margin: 10px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  font-size: 12px;
+}
+
+.bill li {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ink-2);
+}
+
+/* Les bénéfices et les personas. */
+.benefits,
+.audience {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: clamp(36px, 5vw, 56px);
+}
+
+.benefit,
+.persona {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--grad-soft);
+  transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
+}
+
+.benefit:hover,
+.persona:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.benefit p,
+.persona p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.benefitIcon,
+.personaIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--violet-soft);
+  color: var(--violet);
+}
+
+.personaIcon[data-tone='1'] {
+  background: #ffe4ec;
+  color: #e11d48;
+}
+
+.personaIcon[data-tone='2'] {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.personaIcon[data-tone='3'] {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.closing {
+  margin: clamp(28px, 4vw, 40px) 0 0;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+/* La boîte à outils : les outils réels du hub actif. */
+.count {
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.12);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.toolGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.tool {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  animation: tool-in 0.6s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 60ms + 120ms);
+}
+
+.tool[data-soon] {
+  border-style: dashed;
+  background: transparent;
+}
+
+@keyframes tool-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.toolIcon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: var(--violet-soft);
+  color: var(--violet);
+}
+
+.toolName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.toolName em {
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: var(--bg-soft);
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.toolDesc {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* La différence : avant / avec Stacbase. */
+.diff {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 1000px;
+  margin: clamp(36px, 5vw, 56px) auto 0;
+}
+
+.before,
+.after {
+  padding: 28px;
+  border-radius: var(--radius-lg);
+}
+
+.before {
+  border: 1px dashed var(--line-strong);
+  background: var(--bg-soft);
+}
+
+.after {
+  background:
+    radial-gradient(80% 80% at 100% 0%, rgb(244 42 92 / 0.25), transparent 70%),
+    linear-gradient(150deg, #4a1fff, #7c3aed);
+  color: #fff;
+}
+
+.diffLabel {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.before ol {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.before li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink-2);
+  font-size: 15px;
+  transform: rotate(calc((var(--i) - 1.5) * 0.8deg));
+}
+
+.before li span {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #ffe4ec;
+  color: #e11d48;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.afterCard {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgb(255 255 255 / 0.12);
+}
+
+.afterCard p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.afterLogo {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--violet);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.afterIcons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.afterIcons span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--violet);
+}
+
+:global(.is-in) .afterIcons span {
+  animation: tool-in 0.6s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 80ms + 300ms);
+}
+
+.punch {
+  max-width: 640px;
+  margin: clamp(28px, 4vw, 40px) auto 0;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.sign {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+@media (max-width: 1080px) {
+  .benefits,
+  .audience {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .benefits,
+  .audience,
+  .diff,
+  .toolGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bill {
+    width: 180px;
+  }
+}
+
+/* ── Investir : devenir co-propriétaire ───────────────────────────────── */
+
+.investWrap {
+  padding: clamp(80px, 11vw, 150px) clamp(10px, 2vw, 24px) 0;
+}
+
+.invest {
+  position: relative;
+  overflow: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(56px, 8vw, 110px) var(--gutter);
+  border-radius: var(--radius-xl);
+  background: #0f0c2e;
+  color: #fff;
+}
+
+.investGlow {
+  position: absolute;
+  inset: -30% -10% auto;
+  height: 130%;
+  background:
+    radial-gradient(40% 50% at 25% 40%, rgb(244 42 92 / 0.4), transparent 70%),
+    radial-gradient(45% 55% at 75% 35%, rgb(124 58 237 / 0.6), transparent 70%);
+  background-size: 130% 130%;
+  animation: invest-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes invest-drift {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+.investText {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.investLead {
+  margin: 0;
+  color: rgb(255 255 255 / 0.78);
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.6;
+}
+
+.investPoints {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.investPoints li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.06);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+:global(.is-in) .investPoints li {
+  animation: tool-in 0.6s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 100ms + 300ms);
+}
+
+.investPoints li span {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--violet);
+}
+
+.investCtas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.investGhost {
+  border-color: rgb(255 255 255 / 0.25);
+  background: transparent;
+  color: #fff;
+}
+
+.investGhost:hover {
+  border-color: #fff;
+  transform: translateY(-2px);
+}

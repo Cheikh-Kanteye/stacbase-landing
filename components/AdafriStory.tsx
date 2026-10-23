@@ -1,6 +1,6 @@
 'use client'
 
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { LINKS, type Lang } from '@/lib/copy'
 import { AdHub } from './AdHub'
 import { MiniCampaign, MiniCrm } from './mock/Mocks'
@@ -11,16 +11,16 @@ import {
 import { Faq } from './site/Faq'
 import { useLang } from './site/lang'
 import { CountUp, Swap, useAutoTabs, useReveal, Words } from './site/motion'
+import { Manifesto } from './site/Manifesto'
 import { SiteFooter, SiteNav } from './site/Shell'
 import s from './AdafriStory.module.css'
 
-const NOTE = 'https://work.stacbase.com/share/notes/c9227acb-882e-42bf-bb0f-139bd67a8c98'
 const PRODUCTS = 'https://work.stacbase.com/share/projects/434b611f-08c8-4a40-8834-3c0a8b4dc502'
 
 const story = {
   fr: {
     eyebrow: 'Une nouvelle étape, ensemble',
-    title1: 'Adafri continue',
+    title1: 'Adafri va + loin',
     title2: 'avec',
     lead: 'Tout a commencé avec vos campagnes. Aujourd’hui, notre ambition accompagne tout votre quotidien.',
     cta: 'Découvrir Stacbase', read: 'Lire notre histoire',
@@ -33,12 +33,12 @@ const story = {
     storyKicker: 'Notre histoire', storyTitle: 'D’Adafri à Stacbase, en quatre chapitres.',
     campaigns: 'campagnes lancées avec Adafri', people: 'personnes avec qui repenser le parcours',
     tabsPile: ['Google Ads', 'WhatsApp', 'Tableur', 'Gmail', 'Factures', 'Agenda'],
-    toolsLabel: '22+ outils, un seul espace',
+    toolsLabel: '25+ outils, un seul espace',
     quote: 'Un outil nous a réunis. Un espace de travail nous fait avancer.',
     quoteBy: 'L’équipe Stacbase',
     mid: { eyebrow: 'Ce qui ne change pas', title: 'La même envie de vous faire avancer.', lead: 'La publicité reste au cœur de notre histoire. Autour d’elle, Stacbase ajoute tout ce qui fait votre journée : vos clients, vos projets, vos documents et votre équipe.', cta: 'Ouvrir mon espace' },
     split: {
-      badge: 'Stacbase', title: '22+ outils, un seul espace.',
+      badge: 'Stacbase', title: '25+ outils, un seul espace.',
       rows: [
         ['Faire connaître', 'Les campagnes publicitaires restent au cœur de notre histoire : Google, Meta et Orange Max it, avec des rapports complets.'],
         ['Organiser', 'Clients, projets et documents trouvent leur place dans le même espace, reliés à vos campagnes.'],
@@ -46,10 +46,10 @@ const story = {
       ],
       more: 'Explorer les outils',
     },
-    team: { title: 'Lancement · Teranga Hotel', comments: [['Awa', 'Visuels validés, on lance lundi ?'], ['Moussa', 'Oui, budget et ciblage prêts.'], ['Fatou', 'Je prépare la relance WhatsApp.']], tasks: 'tâches terminées' },
+    team: { title: 'Lancement · Teranga Hotel', comments: [['Jacob', 'Visuels validés, on lance lundi ?'], ['Marc', 'Oui, budget et ciblage prêts.'], ['Cynthia', 'Je prépare la relance WhatsApp.']], tasks: 'tâches terminées' },
     questions: 'Vous connaissiez Adafri ?',
     faq: [
-      ['Comment Adafri continue avec Stacbase ?', 'Adafri poursuit son histoire dans un espace de travail plus large : Stacbase. La publicité reste une partie de cet écosystème.'],
+      ['Comment Adafri va plus loin avec Stacbase ?', 'Adafri poursuit son histoire dans un espace de travail plus large : Stacbase. La publicité reste une partie de cet écosystème.'],
       ['À qui s’adresse Stacbase ?', 'Aux agences, aux freelances et aux équipes marketing qui souhaitent retrouver leurs outils dans un espace de travail commun.'],
       ['Où découvrir la plateforme ?', 'Vous pouvez explorer les outils depuis cette page, créer un compte sur Stacbase ou vous connecter si vous possédez déjà un compte Stacbase.'],
     ],
@@ -58,7 +58,7 @@ const story = {
   },
   en: {
     eyebrow: 'Our next chapter, together',
-    title1: 'Adafri continues',
+    title1: 'Adafri goes further',
     title2: 'with',
     lead: 'It started with your campaigns. Today, our ambition reaches across your working day.',
     cta: 'Discover Stacbase', read: 'Read our story',
@@ -71,12 +71,12 @@ const story = {
     storyKicker: 'Our story', storyTitle: 'From Adafri to Stacbase, in four chapters.',
     campaigns: 'campaigns launched with Adafri', people: 'people who helped rethink the experience',
     tabsPile: ['Google Ads', 'WhatsApp', 'Spreadsheet', 'Gmail', 'Invoices', 'Calendar'],
-    toolsLabel: '22+ tools, one workspace',
+    toolsLabel: '25+ tools, one workspace',
     quote: 'One tool brought us together. One workspace moves us forward.',
     quoteBy: 'The Stacbase team',
     mid: { eyebrow: 'What stays the same', title: 'The same drive to move you forward.', lead: 'Advertising remains at the heart of our story. Around it, Stacbase adds everything that makes your day: your clients, your projects, your documents and your team.', cta: 'Open my workspace' },
     split: {
-      badge: 'Stacbase', title: '22+ tools. One workspace.',
+      badge: 'Stacbase', title: '25+ tools. One workspace.',
       rows: [
         ['Reach your audience', 'Advertising campaigns remain at the heart of our story: Google, Meta and Orange Max it, with complete reports.'],
         ['Get organised', 'Clients, projects and documents belong in the same workspace, connected to your campaigns.'],
@@ -84,7 +84,7 @@ const story = {
       ],
       more: 'Explore the tools',
     },
-    team: { title: 'Launch · Teranga Hotel', comments: [['Awa', 'Visuals approved, launch on Monday?'], ['Moussa', 'Yes, budget and targeting are ready.'], ['Fatou', 'I’m preparing the WhatsApp follow-up.']], tasks: 'tasks done' },
+    team: { title: 'Launch · Teranga Hotel', comments: [['Jacob', 'Visuals approved, launch on Monday?'], ['Marc', 'Yes, budget and targeting are ready.'], ['Cynthia', 'I’m preparing the WhatsApp follow-up.']], tasks: 'tasks done' },
     questions: 'Already know Adafri?',
     faq: [
       ['How does Adafri continue with Stacbase?', 'Adafri continues its story within a broader workspace: Stacbase. Advertising remains part of this ecosystem.'],
@@ -97,7 +97,8 @@ const story = {
 }
 
 const CHAPTER_ICONS = [Compass, Bolt, Rocket, Heart]
-const CHAPTER_LINKS = [NOTE, NOTE, PRODUCTS, NOTE]
+// `null` : le chapitre ouvre le manifeste (la lettre à la communauté).
+const CHAPTER_LINKS: (string | null)[] = [null, null, PRODUCTS, null]
 const TOOL_ICONS = [Megaphone, Chat, Users, Mail, Calendar, Doc, Pen, Wallet, Chart, Globe, Sparkle, Quote]
 const SPLIT_ICONS = [Megaphone, Users, Chat]
 
@@ -198,6 +199,7 @@ export function AdafriStory() {
   const c = story[lang]
   useReveal(lang)
   const rows = useAutoTabs<HTMLElement>(c.split.rows.length, 5500)
+  const [manifesto, setManifesto] = useState(false)
 
   return (
     <div className={s.page}>
@@ -262,10 +264,17 @@ export function AdafriStory() {
                     </p>
                     <h3 className={s.chapterTitle}>{ch.title}</h3>
                     <p className={s.chapterBody}>{ch.body}</p>
-                    <a className='link-arrow' href={CHAPTER_LINKS[i]}>
-                      {ch.link}
-                      <ArrowRight size={16} />
-                    </a>
+                    {CHAPTER_LINKS[i] ? (
+                      <a className='link-arrow' href={CHAPTER_LINKS[i]!}>
+                        {ch.link}
+                        <ArrowRight size={16} />
+                      </a>
+                    ) : (
+                      <button type='button' className={`link-arrow ${s.linkButton}`} onClick={() => setManifesto(true)}>
+                        {ch.link}
+                        <ArrowRight size={16} />
+                      </button>
+                    )}
                   </div>
                 </article>
               )
@@ -369,6 +378,7 @@ export function AdafriStory() {
         </section>
       </main>
 
+      <Manifesto lang={lang} open={manifesto} onClose={() => setManifesto(false)} />
       <SiteFooter lang={lang} />
     </div>
   )

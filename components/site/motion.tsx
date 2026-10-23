@@ -46,7 +46,7 @@ export function Words({ text, delay = 0 }: { text: string; delay?: number }) {
 }
 
 /** Un nombre qui compte jusqu'à sa valeur quand il entre à l'écran. */
-export function CountUp({ value, locale, suffix = '' }: { value: number; locale: string; suffix?: string }) {
+export function CountUp({ value, locale, suffix = '', prefix = '' }: { value: number; locale: string; suffix?: string; prefix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const [shown, setShown] = useState(value)
 
@@ -76,8 +76,9 @@ export function CountUp({ value, locale, suffix = '' }: { value: number; locale:
   }, [value])
 
   return (
-    <span ref={ref} aria-label={`${value.toLocaleString(locale)}${suffix}`}>
+    <span ref={ref} aria-label={`${prefix}${value.toLocaleString(locale)}${suffix}`}>
       <span aria-hidden>
+        {prefix}
         {shown.toLocaleString(locale)}
         {suffix}
       </span>

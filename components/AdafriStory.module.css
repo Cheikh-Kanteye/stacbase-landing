@@ -750,3 +750,13 @@
 :global([data-motion]) .chapter:not(:global(.is-in)) * {
   animation-play-state: paused;
 }
+
+/* Lien qui ouvre le manifeste : un bouton habillé comme les autres liens. */
+.linkButton {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
