@@ -519,7 +519,6 @@
   border-radius: 20px;
   background: #f8f8fb;
   color: var(--ink);
-  animation: view-in 0.7s var(--ease-out) both;
 }
 
 @keyframes view-in {

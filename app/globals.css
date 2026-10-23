@@ -698,6 +698,42 @@ a.badge:hover {
   }
 }
 
+/* Échange de contenu (onglets) : l'ancien sort, le nouveau entre. */
+.swap {
+  display: grid;
+}
+
+.swap > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.swap-in {
+  animation: swap-in 0.7s var(--ease-out) both;
+  animation-delay: var(--swap-delay, 0ms);
+}
+
+.swap-out {
+  pointer-events: none;
+  animation: swap-out 0.45s var(--ease-in-out) both;
+}
+
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--dir, 1) * 36px));
+    filter: blur(8px);
+  }
+}
+
+@keyframes swap-out {
+  to {
+    opacity: 0;
+    transform: translateX(calc(var(--dir, 1) * -36px));
+    filter: blur(8px);
+  }
+}
+
 /* Transitions entre les pages du site (navigation entre documents). */
 @view-transition {
   navigation: auto;

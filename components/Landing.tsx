@@ -6,7 +6,7 @@ import { InkReveal } from './InkReveal'
 import { AppMock, DayMock, MiniAnalytics, MiniCampaign, MiniCrm, MiniWhatsApp, POWER_ICONS, POWER_VIEWS } from './mock/Mocks'
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, Layers, Rocket, Sparkle } from './site/icons'
 import { useLang } from './site/lang'
-import { CountUp, Marquee, useAutoTabs, useReveal, useScrollProgress, Words } from './site/motion'
+import { CountUp, Marquee, Swap, useAutoTabs, useReveal, useScrollProgress, Words } from './site/motion'
 import { Faq } from './site/Faq'
 import { SiteFooter, SiteNav } from './site/Shell'
 import s from './Landing.module.css'
@@ -237,8 +237,10 @@ export function Landing() {
                 })}
               </div>
               <div className={s.powerPanel} role='tabpanel' data-reveal='scale'>
-                <div className={s.powerView} key={`${tabs.active}-${lang}`}>
-                  <PowerView lang={lang} />
+                <div className={s.powerView}>
+                  <Swap id={`${tabs.active}-${lang}`}>
+                    <PowerView lang={lang} />
+                  </Swap>
                 </div>
               </div>
             </div>

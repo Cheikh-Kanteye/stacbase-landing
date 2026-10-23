@@ -2,11 +2,11 @@
 
 // Le hub Publicité de l'application, produit par produit — comme les onglets
 // de produits de Calendly : une icône par produit, une carte qui change.
-import type { CSSProperties } from 'react'
+import { useEffect, useRef, type CSSProperties } from 'react'
 import type { Lang } from '@/lib/copy'
 import { MiniWhatsApp } from './mock/Mocks'
-import { ArrowRight, Chat, Globe, Image, Mail, Megaphone, Phone, Search, Thumb } from './site/icons'
-import { useAutoTabs } from './site/motion'
+import { ArrowRight, Chat, Globe, Image, Mail, Phone, Search, Thumb } from './site/icons'
+import { Swap, useAutoTabs } from './site/motion'
 import s from './AdHub.module.css'
 
 const APP = 'https://work.stacbase.com/dashboard'
@@ -58,6 +58,16 @@ const HUB = {
 
 const ICONS = [Search, Image, Thumb, Phone, Chat, Mail]
 const ROUTES = ['google-search', 'google-display', 'meta', 'maxit', 'bulk-whatsapp', 'mass-mailing']
+// Une couleur par produit, comme chez Calendly : l'onglet actif, le fond et
+// le panneau de l'aperçu prennent la teinte du produit.
+const COLORS = [
+  { c: '#7c3aed', soft: '#ede7fe', glow: ['#c4b5fd', '#8b5cf6', '#f0abfc'] },
+  { c: '#2563eb', soft: '#dbeafe', glow: ['#93c5fd', '#3b82f6', '#a5f3fc'] },
+  { c: '#e11d48', soft: '#ffe4ec', glow: ['#fda4af', '#f472b6', '#c4b5fd'] },
+  { c: '#ea580c', soft: '#ffedd5', glow: ['#fdba74', '#fb923c', '#fde68a'] },
+  { c: '#16a34a', soft: '#dcfce7', glow: ['#86efac', '#2dd4bf', '#bef264'] },
+  { c: '#150c78', soft: '#e0e7ff', glow: ['#a5b4fc', '#6366f1', '#93c5fd'] },
+]
 const TONES = ['violet', 'indigo', 'pink', 'amber', 'green', 'navy']
 
 type V = (typeof HUB)['fr']['v']
@@ -182,20 +192,71 @@ function Visual({ i, v, lang }: { i: number; v: V; lang: Lang }) {
 export function AdHub({ lang, id }: { lang: Lang; id?: string }) {
   const t = HUB[lang]
   const tabs = useAutoTabs(t.products.length, 7000)
-  const p = t.products[tabs.active]
-  const Icon = ICONS[tabs.active]
-  const tag = tabs.active === 3 ? [t.tags.early, t.tags.sn] : tabs.active === 4 ? [t.tags.new] : []
+  const active = tabs.active
+  const p = t.products[active]
+  const Icon = ICONS[active]
+  const tag = active === 3 ? [t.tags.early, t.tags.sn] : active === 4 ? [t.tags.new] : []
+  const color = COLORS[active]
+
+  // Sens de l'échange : vers la droite quand on avance, vers la gauche sinon.
+  const last = useRef(active)
+  const dir = active >= last.current ? 1 : -1
+  useEffect(() => {
+    last.current = active
+  }, [active])
+
+  // Au défilement, le fond s'élargit jusqu'aux bords de l'écran (`--e`).
+  useEffect(() => {
+    const el = tabs.ref.current
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const r = el.getBoundingClientRect()
+      const h = window.innerHeight
+      const e = Math.min(1, Math.max(0, (h * 0.8 - r.top) / (h * 0.6)))
+      el.style.setProperty('--e', e.toFixed(3))
+      el.style.setProperty('--bleed', `${Math.max(0, (window.innerWidth - r.width) / 2 - 24)}px`)
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [tabs.ref])
 
   return (
-    <div id={id} className={s.stage} ref={tabs.ref} {...tabs.hover} data-reveal='scale' style={{ '--d': '300ms' } as CSSProperties}>
-      <div className={s.aurora} data-tone={TONES[tabs.active]} aria-hidden />
-      <p className={s.hubLabel}>
-        <Megaphone size={15} /> {t.hub}
-      </p>
+    <div
+      id={id}
+      className={s.stage}
+      ref={tabs.ref}
+      {...tabs.hover}
+      data-reveal='scale'
+      style={{ '--d': '300ms', '--c': color.c, '--soft': color.soft, '--i': active } as CSSProperties}
+    >
+      {/* Un fond flou par produit ; on passe de l'un à l'autre en fondu. */}
+      <div className={s.backdrop} aria-hidden>
+        {COLORS.map((col, i) => (
+          <div
+            key={i}
+            className={s.glow}
+            data-on={i === active || undefined}
+            style={{ '--g1': col.glow[0], '--g2': col.glow[1], '--g3': col.glow[2] } as CSSProperties}
+          />
+        ))}
+      </div>
+
       <div className={s.tabs} role='tablist' aria-label={t.hub}>
+        <span className={s.indicator} aria-hidden />
         {t.products.map((product, i) => {
           const TabIcon = ICONS[i]
-          const on = tabs.active === i
+          const on = active === i
           return (
             <button
               key={product.name}
@@ -207,36 +268,43 @@ export function AdHub({ lang, id }: { lang: Lang; id?: string }) {
               className={s.tab}
               onClick={() => tabs.select(i)}
             >
-              <TabIcon size={22} />
+              <TabIcon size={24} />
               {on && tabs.running ? (
                 <svg className={s.ring} viewBox='0 0 60 60' aria-hidden key={`r-${i}`}>
-                  <rect x='2' y='2' width='56' height='56' rx='18' pathLength={1} />
+                  <rect x='2' y='2' width='56' height='56' rx='19' pathLength={1} />
                 </svg>
               ) : null}
             </button>
           )
         })}
       </div>
-      <div className={s.card} role='tabpanel' key={`${tabs.active}-${lang}`}>
-        <div className={s.text}>
-          <p className={s.badge}>
-            <span className={s.badgeIcon} data-tone={TONES[tabs.active]}>
-              <Icon size={14} />
-            </span>
-            {p.name}
-            {tag.map((label) => (
-              <em key={label}>{label}</em>
-            ))}
-          </p>
-          <h2 className={s.title}>{p.title}</h2>
-          <p className={s.body}>{p.body}</p>
-          <a className='link-arrow' href={`${APP}/${ROUTES[tabs.active]}`}>
-            {t.more}
-            <ArrowRight size={16} />
-          </a>
-        </div>
-        <div className={s.visual} data-tone={TONES[tabs.active]}>
-          <Visual i={tabs.active} v={t.v} lang={lang} />
+
+      <div className={s.card} role='tabpanel'>
+        <Swap id={`${active}-${lang}`} dir={dir} className={s.textSwap}>
+          <div className={s.text}>
+            <p className={s.badge}>
+              <span className={s.badgeIcon}>
+                <Icon size={14} />
+              </span>
+              {p.name}
+              {tag.map((label) => (
+                <em key={label}>{label}</em>
+              ))}
+            </p>
+            <h2 className={s.title}>{p.title}</h2>
+            <p className={s.body}>{p.body}</p>
+            <a className={s.more} href={`${APP}/${ROUTES[active]}`}>
+              {t.more}
+              <ArrowRight size={16} />
+            </a>
+          </div>
+        </Swap>
+        <div className={s.visual} data-tone={TONES[active]}>
+          <i className={s.pillL} aria-hidden />
+          <i className={s.pillR} aria-hidden />
+          <Swap id={`${active}-${lang}`} dir={dir} className={s.visualSwap}>
+            <Visual i={active} v={t.v} lang={lang} />
+          </Swap>
         </div>
       </div>
     </div>

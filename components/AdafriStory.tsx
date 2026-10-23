@@ -10,7 +10,7 @@ import {
 } from './site/icons'
 import { Faq } from './site/Faq'
 import { useLang } from './site/lang'
-import { CountUp, useAutoTabs, useReveal, Words } from './site/motion'
+import { CountUp, Swap, useAutoTabs, useReveal, Words } from './site/motion'
 import { SiteFooter, SiteNav } from './site/Shell'
 import s from './AdafriStory.module.css'
 
@@ -336,9 +336,9 @@ export function AdafriStory() {
           </div>
           <div className={s.splitVisual} data-reveal='scale'>
             <div className={s.splitPanel} data-tone={rows.active} aria-hidden />
-            <div className={s.splitView} key={`${rows.active}-${lang}`}>
+            <Swap id={`${rows.active}-${lang}`} className={s.splitView}>
               {rows.active === 0 ? <MiniCampaign lang={lang} /> : rows.active === 1 ? <MiniCrm lang={lang} /> : <TeamMock c={c} />}
-            </div>
+            </Swap>
           </div>
         </section>
 

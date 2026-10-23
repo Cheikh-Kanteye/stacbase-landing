@@ -11,7 +11,6 @@
 
 .hero {
   position: relative;
-  overflow: hidden;
   max-width: 1440px;
   margin: 0 auto;
   padding: clamp(150px, 20vh, 200px) var(--gutter) clamp(30px, 5vw, 70px);
@@ -534,7 +533,6 @@
 .splitView {
   position: relative;
   width: min(100%, 400px);
-  animation: view-in 0.7s var(--ease-out) both;
 }
 
 @keyframes view-in {

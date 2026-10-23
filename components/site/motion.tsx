@@ -165,3 +165,39 @@ export function Marquee({ children, speed = 38 }: { children: ReactNode; speed?:
     </div>
   )
 }
+
+/**
+ * Fondu enchaîné directionnel : quand `id` change, l'ancien contenu sort d'un
+ * côté pendant que le nouveau entre de l'autre (sens donné par `dir`). Les
+ * deux sont empilés dans la même cellule de grille : pas de saut de mise en
+ * page pendant l'échange.
+ */
+export function Swap({ id, dir = 1, children, className = '' }: { id: string | number; dir?: number; children: ReactNode; className?: string }) {
+  const [lastId, setLastId] = useState(id)
+  const [prev, setPrev] = useState<{ id: string | number; node: ReactNode } | null>(null)
+  const node = useRef(children)
+  if (id !== lastId) {
+    setPrev({ id: lastId, node: node.current })
+    setLastId(id)
+  }
+  node.current = children
+
+  useEffect(() => {
+    if (!prev) return
+    const t = window.setTimeout(() => setPrev(null), 600)
+    return () => window.clearTimeout(t)
+  }, [prev])
+
+  return (
+    <div className={`swap ${className}`} style={{ '--dir': dir } as CSSProperties}>
+      {prev ? (
+        <div key={`out-${prev.id}`} className='swap-out' aria-hidden inert>
+          {prev.node}
+        </div>
+      ) : null}
+      <div key={`in-${id}`} className='swap-in'>
+        {children}
+      </div>
+    </div>
+  )
+}
