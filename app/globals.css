@@ -111,7 +111,7 @@ button {
 
 .display {
   margin: 0;
-  font-size: clamp(42px, 6.4vw, 84px);
+  font-size: clamp(40px, 5.4vw, 72px);
   font-weight: 600;
   line-height: 1.02;
   letter-spacing: -0.045em;
@@ -120,7 +120,7 @@ button {
 
 .h2 {
   margin: 0;
-  font-size: clamp(32px, 4.2vw, 56px);
+  font-size: clamp(30px, 3.6vw, 48px);
   font-weight: 600;
   line-height: 1.06;
   letter-spacing: -0.04em;

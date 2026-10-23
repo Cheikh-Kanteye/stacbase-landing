@@ -13,12 +13,12 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://stacbase.com'),
-  title: 'Stacbase — 22+ tools in one system',
+  title: 'Stacbase — 25+ tools in one system',
   description:
     'The everyday tools for modern digital marketers into one stack: campaigns, WhatsApp, CRM, e-mails, invoices and analytics. This OS doesn’t add another tab. It makes them disappear.',
   icons: { icon: '/icon.png' },
   openGraph: {
-    title: 'Stacbase — 22+ tools in one system',
+    title: 'Stacbase — 25+ tools in one system',
     description: 'The everyday tools for modern digital marketers into one stack.',
     images: [{ url: '/media/stacbase-logo-poster.jpg', width: 1600, height: 400, alt: 'Stacbase' }],
   },

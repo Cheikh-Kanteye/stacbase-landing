@@ -6,11 +6,11 @@ import { ArrowUpRight, InstagramIcon, LinkedInIcon } from './icons'
 
 const NAV = {
   en: {
-    links: [['/#product', 'Product'], ['/#how', 'How it works'], ['/#pricing', 'Pricing'], ['/adafri', 'Adafri']],
-    login: 'Sign in', start: 'Start free', menu: 'Menu', lang: 'Language',
+    links: [['/#product', 'Product'], ['/#tools', 'Tools'], ['/#pricing', 'Pricing'], ['/adafri', 'Adafri']],
+    login: 'Sign in', start: 'Get started for free', menu: 'Menu', lang: 'Language',
   },
   fr: {
-    links: [['/#product', 'Produit'], ['/#how', 'Comment ça marche'], ['/#pricing', 'Tarifs'], ['/adafri', 'Adafri']],
+    links: [['/#product', 'Produit'], ['/#tools', 'Outils'], ['/#pricing', 'Tarifs'], ['/adafri', 'Adafri']],
     login: 'Se connecter', start: 'Commencer gratuitement', menu: 'Menu', lang: 'Langue',
   },
 } as const
@@ -96,19 +96,19 @@ export function SiteNav({ lang, onLang, current }: { lang: Lang; onLang: (l: Lan
 
 const FOOT = {
   en: {
-    pitch: 'The everyday tools for modern digital marketers, in one stack.',
+    pitch: 'Less app juggling. More marketing done.',
     cols: [
-      ['Product', [['/#product', 'Tools'], ['/#pricing', 'Pricing'], [LINKS.signup, 'Create an account'], [LINKS.login, 'Sign in']]],
-      ['Company', [['/adafri', 'Adafri continues with Stacbase'], ['/careers', 'Careers']]],
+      ['Product', [['/#tools', 'Explore all tools'], ['/#product', 'Features'], ['/#pricing', 'Pricing']]],
+      ['Company', [['/adafri', 'About Stacbase'], [LINKS.linkedin, 'Community'], ['/careers', 'Careers']]],
       ['Legal', [[LINKS.privacy, 'Privacy'], [LINKS.terms, 'Terms']]],
     ],
     rights: 'Stacbase. All rights reserved.',
   },
   fr: {
-    pitch: 'Les outils du quotidien des marketeurs digitaux, réunis en une seule stack.',
+    pitch: 'Moins de jonglage. Plus de marketing.',
     cols: [
-      ['Produit', [['/#product', 'Les outils'], ['/#pricing', 'Tarifs'], [LINKS.signup, 'Créer un compte'], [LINKS.login, 'Se connecter']]],
-      ['Entreprise', [['/adafri', 'Adafri continue avec Stacbase'], ['/careers', 'Carrières']]],
+      ['Produit', [['/#tools', 'Tous les outils'], ['/#product', 'Fonctionnalités'], ['/#pricing', 'Tarifs']]],
+      ['Entreprise', [['/adafri', 'À propos de Stacbase'], [LINKS.linkedin, 'Communauté'], ['/careers', 'Carrières']]],
       ['Légal', [[LINKS.privacy, 'Confidentialité'], [LINKS.terms, 'Conditions']]],
     ],
     rights: 'Stacbase. Tous droits réservés.',

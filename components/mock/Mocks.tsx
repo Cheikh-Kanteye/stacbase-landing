@@ -10,7 +10,7 @@ import s from './Mocks.module.css'
 const T = {
   en: {
     nav: ['Home', 'Campaigns', 'WhatsApp', 'CRM', 'E-mails', 'Analytics', 'Invoices', 'AI agent'],
-    hello: 'Good morning, Awa', today: 'Here is your day at ACME Studio',
+    hello: 'Good morning, Jacob', today: 'Here is your day at ACME Studio',
     search: 'Search anything…',
     kpis: [['Spend', '$1,240', '+12%'], ['Clicks', '8,432', '+8%'], ['Conversions', '312', '+21%'], ['WhatsApp delivered', '98%', '+3%']],
     perf: 'Campaign performance', last: 'Last 14 days', clicks: 'Clicks', conv: 'Conversions',
@@ -19,7 +19,7 @@ const T = {
     campaigns: 'Campaigns', cols: ['Campaign', 'Channel', 'Status', 'Spend'],
     rows: [['Summer sale', 'Search', 'Live', '$420'], ['Brand awareness', 'Display', 'Live', '$310'], ['New collection', 'Meta', 'Paused', '$180']],
     live: 'Live', paused: 'Paused', delivered: 'Delivered', sent: 'Sent', reading: 'Read',
-    waHello: 'Hello Fatou 👋', waBody: 'Our new collection is here: −20% this weekend only. Reply YES to receive the catalogue.',
+    waHello: 'Hello Cynthia 👋', waBody: 'Our new collection is here: −20% this weekend only. Reply YES to receive the catalogue.',
     waYes: 'YES, please!', sending: 'Sending · Weekend promo',
     pipe: [['Teranga Hotel', 'Proposal', '$2,400'], ['Nafa Foods', 'Won', '$1,150'], ['Kora Studio', 'Contacted', '$900']],
     sessions: 'Sessions', sources: [['Organic search', 46], ['Social', 28], ['Paid', 18], ['Direct', 8]],
@@ -36,7 +36,7 @@ const T = {
   },
   fr: {
     nav: ['Accueil', 'Campagnes', 'WhatsApp', 'CRM', 'E-mails', 'Analytics', 'Factures', 'Agent IA'],
-    hello: 'Bonjour, Awa', today: 'Voici votre journée chez ACME Studio',
+    hello: 'Bonjour, Jacob', today: 'Voici votre journée chez ACME Studio',
     search: 'Rechercher…',
     kpis: [['Dépenses', '1 240 $', '+12 %'], ['Clics', '8 432', '+8 %'], ['Conversions', '312', '+21 %'], ['WhatsApp livrés', '98 %', '+3 %']],
     perf: 'Performance des campagnes', last: '14 derniers jours', clicks: 'Clics', conv: 'Conversions',
@@ -45,7 +45,7 @@ const T = {
     campaigns: 'Campagnes', cols: ['Campagne', 'Canal', 'Statut', 'Dépenses'],
     rows: [['Soldes d’été', 'Search', 'En ligne', '420 $'], ['Notoriété', 'Display', 'En ligne', '310 $'], ['Nouvelle collection', 'Meta', 'En pause', '180 $']],
     live: 'En ligne', paused: 'En pause', delivered: 'Livrés', sent: 'Envoyés', reading: 'Lus',
-    waHello: 'Bonjour Fatou 👋', waBody: 'Notre nouvelle collection est arrivée : −20 % ce week-end seulement. Répondez OUI pour recevoir le catalogue.',
+    waHello: 'Bonjour Cynthia 👋', waBody: 'Notre nouvelle collection est arrivée : −20 % ce week-end seulement. Répondez OUI pour recevoir le catalogue.',
     waYes: 'OUI, avec plaisir !', sending: 'Envoi · Promo du week-end',
     pipe: [['Teranga Hotel', 'Proposition', '2 400 $'], ['Nafa Foods', 'Gagné', '1 150 $'], ['Kora Studio', 'Contacté', '900 $']],
     sessions: 'Sessions', sources: [['Recherche naturelle', 46], ['Réseaux sociaux', 28], ['Payant', 18], ['Direct', 8]],
@@ -150,7 +150,7 @@ export function AppMock({ lang }: { lang: Lang }) {
               <span className={s.iconBtn}>
                 <Bell size={15} />
               </span>
-              <span className={s.avatar}>AW</span>
+              <span className={s.avatar}>JA</span>
             </div>
           </div>
           <div className={s.kpis}>

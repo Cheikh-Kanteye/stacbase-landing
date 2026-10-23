@@ -1,51 +1,57 @@
 'use client'
 
-import { useCallback, useRef, useState, type CSSProperties } from 'react'
-import { COPY, LINKS, PLAN_PRICES, PLATFORMS, type PlanCode } from '@/lib/copy'
-import { InkReveal } from './InkReveal'
-import { AppMock, DayMock, MiniAnalytics, MiniCampaign, MiniCrm, MiniWhatsApp, POWER_ICONS, POWER_VIEWS } from './mock/Mocks'
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, Layers, Rocket, Sparkle } from './site/icons'
+import { useState, type CSSProperties } from 'react'
+import { COPY, LINKS, PLAN_PRICES, PLATFORMS, TOOL_HUBS, type PlanCode } from '@/lib/copy'
+import { AppMock, MiniAnalytics, MiniCampaign, MiniCrm, MiniWhatsApp } from './mock/Mocks'
+import {
+  ArrowDown, ArrowRight, ArrowUpRight, Bolt, Calendar, Chart, Chat, Check, Compass, Doc, Layers, Megaphone, Pen, Rocket,
+  Sparkle, Users, Wallet,
+} from './site/icons'
+import { Faq } from './site/Faq'
+import { Manifesto } from './site/Manifesto'
 import { useLang } from './site/lang'
 import { CountUp, Marquee, Swap, useAutoTabs, useReveal, useScrollProgress, Words } from './site/motion'
-import { Faq } from './site/Faq'
 import { SiteFooter, SiteNav } from './site/Shell'
 import s from './Landing.module.css'
 
 const MINIS = [MiniCampaign, MiniWhatsApp, MiniCrm, MiniAnalytics]
 const PLANS: PlanCode[] = ['free', 'starter', 'pro', 'large']
+const HUB_ICONS = [Megaphone, Chart, Chat, Layers, Doc, Sparkle]
+const BENEFIT_ICONS = [Calendar, Pen, Bolt, Wallet]
+const AUDIENCE_ICONS = [Megaphone, Users, Sparkle, Rocket]
+// Montants d'illustration de la pile d'abonnements, en dollars par mois.
+const BILLS = [12, 29, 19, 49, 25, 15, 39]
 
 export function Landing() {
   const [lang, choose] = useLang('en')
   const c = COPY[lang]
+  const hubs = TOOL_HUBS[lang]
   const locale = lang === 'fr' ? 'fr-FR' : 'en-US'
   useReveal(lang)
 
   const heroVisual = useScrollProgress<HTMLDivElement>()
-  const tabs = useAutoTabs(c.power.tabs.length, 6500)
-  const PowerView = POWER_VIEWS[tabs.active]
+  const tabs = useAutoTabs(hubs.length, 6500)
+  const hub = hubs[tabs.active]
+  const HubIcon = HUB_ICONS[tabs.active]
+  const money = (n: number) => (lang === 'fr' ? `${n} $` : `$${n}`)
 
-  // Scène finale : l'encre révèle le logo vivant sous la souris.
-  const [live, setLive] = useState(false)
-  const stageRef = useRef<HTMLElement>(null)
-  const markRef = useRef<HTMLSpanElement>(null)
-  const onReady = useCallback(() => setLive(true), [])
+  const [manifesto, setManifesto] = useState(false)
 
   return (
     <div className={s.page}>
       <SiteNav lang={lang} onLang={choose} />
 
       <main>
-        {/* ── Première vue ─────────────────────────────────────────────── */}
+        {/* ── 1. Hero ─────────────────────────────────────────────────── */}
         <section className={s.hero}>
           <div className={s.heroGlow} aria-hidden />
           <div className={`container ${s.heroText}`}>
-            <a className={`badge ${s.heroBadge}`} href='#product'>
+            <span className={`badge ${s.heroBadge}`}>
               <span className='badge-icon'>
                 <Sparkle size={13} />
               </span>
               {c.hero.badge}
-              <ArrowUpRight size={14} />
-            </a>
+            </span>
             <h1 className='display'>
               <Words text={c.hero.title} delay={120} />
             </h1>
@@ -57,7 +63,7 @@ export function Landing() {
                 {c.hero.primary}
                 <ArrowUpRight size={17} />
               </a>
-              <a className='btn btn-ghost' href='#product'>
+              <a className='btn btn-ghost' href='#tools'>
                 {c.hero.secondary}
                 <ArrowDown size={17} />
               </a>
@@ -93,7 +99,7 @@ export function Landing() {
           </div>
         </section>
 
-        {/* ── Plateformes ──────────────────────────────────────────────── */}
+        {/* ── Plateformes ─────────────────────────────────────────────── */}
         <section className={s.platforms} aria-label={c.platforms}>
           <p data-reveal>{c.platforms}</p>
           <Marquee speed={34}>
@@ -106,7 +112,56 @@ export function Landing() {
           </Marquee>
         </section>
 
-        {/* ── Découvrez Stacbase ───────────────────────────────────────── */}
+        {/* ── 2. La douleur ───────────────────────────────────────────── */}
+        <section className={`container ${s.section} ${s.split}`}>
+          <div className={s.splitText}>
+            <span className='badge' data-reveal>
+              <span className='badge-icon'>
+                <Compass size={13} />
+              </span>
+              {c.pain.badge}
+            </span>
+            <h2 className='h2'>
+              <Words text={c.pain.title} />
+            </h2>
+            <p className='lead' data-reveal>
+              {c.pain.lead}
+            </p>
+            <p className={s.painBody} data-reveal>
+              {c.pain.body}
+            </p>
+          </div>
+          <div className={s.painVisual} data-reveal='scale'>
+            {/* Les onglets s'empilent, la note grimpe. */}
+            <div className={s.tabPile}>
+              {c.pain.tabs.map((label, k) => (
+                <div key={label} className={s.tabCard} style={{ '--k': k } as CSSProperties}>
+                  <span />
+                  {label}
+                  <i aria-hidden>×</i>
+                </div>
+              ))}
+            </div>
+            <div className={s.bill}>
+              <strong>
+                <CountUp value={BILLS.reduce((a, b) => a + b, 0)} locale={locale} prefix={lang === 'fr' ? '' : '$'} suffix={lang === 'fr' ? ' $' : ''} />
+              </strong>
+              <span>
+                {BILLS.length} {c.pain.bills}
+              </span>
+              <ul>
+                {c.pain.tabs.slice(0, 4).map((label, i) => (
+                  <li key={label}>
+                    <span>{label}</span>
+                    <b>{money(BILLS[i])}</b>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 3. La solution ──────────────────────────────────────────── */}
         <section id='product' className={`container ${s.section}`}>
           <header className={s.center}>
             <span className='badge' data-reveal>
@@ -126,12 +181,7 @@ export function Landing() {
             {c.meet.cards.map(([title, body], i) => {
               const Mini = MINIS[i]
               return (
-                <article
-                  key={title}
-                  className={s.feature}
-                  data-reveal
-                  style={{ '--d': `${(i % 2) * 120}ms` } as CSSProperties}
-                >
+                <article key={title} className={s.feature} data-reveal style={{ '--d': `${(i % 2) * 120}ms` } as CSSProperties}>
                   <div className={s.featureText}>
                     <h3 className='h3'>{title}</h3>
                     <p>{body}</p>
@@ -143,79 +193,74 @@ export function Landing() {
               )
             })}
           </div>
-        </section>
-
-        {/* ── Chiffres ─────────────────────────────────────────────────── */}
-        <section className='container'>
-          <div className={s.stats} data-reveal='scale'>
-            {c.stats.map((stat) => (
-              <div key={stat.label} className={s.stat}>
-                <strong>
-                  <CountUp value={stat.value} suffix={stat.suffix} locale={locale} />
-                </strong>
-                <p>{stat.label}</p>
-              </div>
-            ))}
+          <div className={s.ctaRow} data-reveal>
+            <a className='btn btn-primary' href={LINKS.signup}>
+              {c.meet.cta}
+              <ArrowUpRight size={17} />
+            </a>
           </div>
         </section>
 
-        {/* ── Journée ──────────────────────────────────────────────────── */}
-        <section className={`container ${s.section} ${s.split}`}>
-          <div className={s.splitText}>
+        {/* ── 4. Les bénéfices ────────────────────────────────────────── */}
+        <section className={`container ${s.section}`}>
+          <header className={s.center}>
             <span className='badge' data-reveal>
               <span className='badge-icon'>
                 <Rocket size={13} />
               </span>
-              {c.day.badge}
+              {c.benefits.badge}
             </span>
             <h2 className='h2'>
-              <Words text={c.day.title} />
+              <Words text={c.benefits.title} />
             </h2>
-            <p className='lead' data-reveal>
-              {c.day.lead}
-            </p>
-            <ul className={s.checklist}>
-              {c.day.points.map((point, i) => (
-                <li key={point} data-reveal style={{ '--d': `${i * 110}ms` } as CSSProperties}>
-                  <span>
-                    <Check size={14} />
+          </header>
+          <div className={s.benefits}>
+            {c.benefits.items.map(([title, body], i) => {
+              const Icon = BENEFIT_ICONS[i]
+              return (
+                <article key={title} className={s.benefit} data-reveal style={{ '--d': `${i * 90}ms` } as CSSProperties}>
+                  <span className={s.benefitIcon}>
+                    <Icon size={20} />
                   </span>
-                  {point}
-                </li>
-              ))}
-            </ul>
+                  <h3 className='h3'>{title}</h3>
+                  <p>{body}</p>
+                </article>
+              )
+            })}
           </div>
-          <div className={s.splitVisual} data-reveal='scale'>
-            <div className={s.stripesPanel} aria-hidden />
-            <DayMock lang={lang} />
+          <div className={s.ctaRow} data-reveal>
+            <a className='btn btn-dark' href={LINKS.signup}>
+              {c.benefits.cta}
+              <ArrowRight size={17} />
+            </a>
           </div>
         </section>
 
-        {/* ── Boîte à outils (fond sombre) ─────────────────────────────── */}
-        <section className={s.darkWrap}>
+        {/* ── 5. La boîte à outils, par hub ───────────────────────────── */}
+        <section id='tools' className={s.darkWrap}>
           <div className={s.dark}>
             <header className={s.center}>
               <span className='badge badge-dark' data-reveal>
                 <span className='badge-icon'>
                   <Sparkle size={13} />
                 </span>
-                {c.power.badge}
+                {c.tools.badge}
               </span>
               <h2 className='h2'>
-                <Words text={c.power.title} />
+                <Words text={c.tools.title} />
               </h2>
               <p className={`lead ${s.darkLead}`} data-reveal>
-                {c.power.lead}
+                {c.tools.lead}
               </p>
             </header>
             <div className={s.power} ref={tabs.ref} {...tabs.hover}>
-              <div className={s.powerTabs} role='tablist' aria-label={c.power.badge}>
-                {c.power.tabs.map(([title, body], i) => {
-                  const Icon = POWER_ICONS[i]
+              <div className={s.powerTabs} role='tablist' aria-label={c.tools.badge}>
+                {hubs.map((h, i) => {
+                  const Icon = HUB_ICONS[i]
                   const on = tabs.active === i
                   return (
                     <button
-                      key={title}
+                      key={h.hub}
                       type='button'
                       role='tab'
                       aria-selected={on}
@@ -227,9 +272,8 @@ export function Landing() {
                       <span className={s.powerIcon}>
                         <Icon size={17} />
                       </span>
-                      <span className={s.powerTitle}>{title}</span>
-                      <span className={s.powerBody}>
-                        <span>{body}</span>
+                      <span className={s.powerTitle}>
+                        {h.hub} <em className={s.count}>{h.tools.length}</em>
                       </span>
                       {on && tabs.running ? <i className={s.powerProgress} key={`p-${i}`} /> : null}
                     </button>
@@ -239,46 +283,125 @@ export function Landing() {
               <div className={s.powerPanel} role='tabpanel' data-reveal='scale'>
                 <div className={s.powerView}>
                   <Swap id={`${tabs.active}-${lang}`}>
-                    <PowerView lang={lang} />
+                    <div className={s.toolGrid}>
+                      {hub.tools.map((tool, i) => (
+                        <div key={tool.name} className={s.tool} style={{ '--i': i } as CSSProperties} data-soon={tool.soon || undefined}>
+                          <span className={s.toolIcon}>
+                            <HubIcon size={16} />
+                          </span>
+                          <div>
+                            <p className={s.toolName}>
+                              {tool.name}
+                              {tool.soon ? <em>{c.tools.soon}</em> : null}
+                            </p>
+                            <p className={s.toolDesc}>{tool.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </Swap>
                 </div>
               </div>
             </div>
+            <div className={s.ctaRow} data-reveal>
+              <a className='btn btn-light' href={LINKS.signup}>
+                {c.tools.cta}
+                <ArrowUpRight size={17} />
+              </a>
+            </div>
           </div>
         </section>
 
-        {/* ── Comment ça marche ────────────────────────────────────────── */}
-        <section id='how' className={`container ${s.section}`}>
+        {/* ── 6. Pour qui ─────────────────────────────────────────────── */}
+        <section className={`container ${s.section}`}>
           <header className={s.center}>
             <span className='badge' data-reveal>
               <span className='badge-icon'>
-                <ArrowRight size={13} />
+                <Users size={13} />
               </span>
-              {c.how.badge}
+              {c.audience.badge}
             </span>
             <h2 className='h2'>
-              <Words text={c.how.title} />
+              <Words text={c.audience.title} />
             </h2>
           </header>
-          <ol className={s.steps}>
-            {c.how.steps.map(([title, body], i) => (
-              <li key={title} data-reveal style={{ '--d': `${i * 160}ms` } as CSSProperties}>
-                <span className={s.stepNum}>0{i + 1}</span>
-                <i className={s.stepLine} aria-hidden />
-                <h3 className='h3'>{title}</h3>
-                <p>{body}</p>
-              </li>
-            ))}
-          </ol>
+          <div className={s.audience}>
+            {c.audience.items.map(([title, body], i) => {
+              const Icon = AUDIENCE_ICONS[i]
+              return (
+                <article key={title} className={s.persona} data-reveal style={{ '--d': `${i * 90}ms` } as CSSProperties}>
+                  <span className={s.personaIcon} data-tone={i}>
+                    <Icon size={20} />
+                  </span>
+                  <h3 className='h3'>{title}</h3>
+                  <p>{body}</p>
+                </article>
+              )
+            })}
+          </div>
+          <p className={s.closing} data-reveal>
+            {c.audience.closing}
+          </p>
         </section>
 
-        {/* ── Tarifs ───────────────────────────────────────────────────── */}
+        {/* ── 7. La différence ────────────────────────────────────────── */}
+        <section className={`container ${s.section}`}>
+          <header className={s.center}>
+            <span className='badge' data-reveal>
+              <span className='badge-icon'>
+                <Bolt size={13} />
+              </span>
+              {c.difference.badge}
+            </span>
+            <h2 className='h2'>
+              <Words text={c.difference.title} />
+            </h2>
+          </header>
+          <div className={s.diff}>
+            <div className={s.before} data-reveal>
+              <p className={s.diffLabel}>{c.difference.before}</p>
+              <ol>
+                {c.difference.steps.map((step, i) => (
+                  <li key={step} style={{ '--i': i } as CSSProperties}>
+                    <span>{i + 1}</span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className={s.after} data-reveal style={{ '--d': '150ms' } as CSSProperties}>
+              <p className={s.diffLabel}>{c.difference.after}</p>
+              <div className={s.afterCard}>
+                <span className={s.afterLogo}>S</span>
+                <p>{c.difference.afterBody}</p>
+                <div className={s.afterIcons}>
+                  {HUB_ICONS.map((Icon, i) => (
+                    <span key={i} style={{ '--i': i } as CSSProperties}>
+                      <Icon size={16} />
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className={s.punch} data-reveal>
+            {c.difference.punch}
+          </p>
+          <div className={s.ctaRow} data-reveal>
+            <a className='btn btn-ghost' href='#tools'>
+              {c.difference.cta}
+              <ArrowDown size={17} />
+            </a>
+          </div>
+        </section>
+
+        {/* ── 8. Tarifs ───────────────────────────────────────────────── */}
         <section id='pricing' className={s.pricingWrap}>
           <div className={s.pricing}>
             <header className={s.center}>
               <span className='badge badge-dark' data-reveal>
                 <span className='badge-icon'>
-                  <Sparkle size={13} />
+                  <Wallet size={13} />
                 </span>
                 {c.pricing.badge}
               </span>
@@ -293,25 +416,20 @@ export function Landing() {
               {PLANS.map((code, i) => {
                 const [tagline, features] = c.pricing.plans[code]
                 const featured = code === 'pro'
+                const name = code[0].toUpperCase() + code.slice(1)
                 return (
-                  <article
-                    key={code}
-                    className={s.plan}
-                    data-featured={featured || undefined}
-                    data-reveal
-                    style={{ '--d': `${i * 100}ms` } as CSSProperties}
-                  >
+                  <article key={code} className={s.plan} data-featured={featured || undefined} data-reveal style={{ '--d': `${i * 100}ms` } as CSSProperties}>
                     <div className={s.planHead}>
-                      <h3>{code === 'free' ? 'Free' : code[0].toUpperCase() + code.slice(1)}</h3>
+                      <h3>{name}</h3>
                       {featured ? <span className={s.planTag}>{c.pricing.recommended}</span> : null}
                     </div>
                     <p className={s.price}>
-                      <strong>{lang === 'fr' ? `${PLAN_PRICES[code]} $` : `$${PLAN_PRICES[code]}`}</strong>
+                      <strong>{money(PLAN_PRICES[code])}</strong>
                       <span>{c.pricing.month}</span>
                     </p>
                     <p className={s.planTagline}>{tagline}</p>
                     <a className={`btn ${featured ? 'btn-primary' : 'btn-dark'} ${s.planCta}`} href={LINKS.signup}>
-                      {code === 'free' ? c.pricing.cta.free : `${c.pricing.cta.paid} ${code[0].toUpperCase() + code.slice(1)}`}
+                      {code === 'free' ? c.pricing.cta.free : `${c.pricing.cta.paid} ${name}`}
                     </a>
                     <ul>
                       {features.map((f) => (
@@ -330,7 +448,7 @@ export function Landing() {
           </div>
         </section>
 
-        {/* ── Questions ────────────────────────────────────────────────── */}
+        {/* ── 9. Questions ────────────────────────────────────────────── */}
         <section className={`container ${s.section} ${s.faqGrid}`}>
           <div>
             <h2 className='h2'>
@@ -344,34 +462,48 @@ export function Landing() {
           <Faq items={c.faq.items as [string, string][]} />
         </section>
 
-        {/* ── Ouvrez Stacbase ──────────────────────────────────────────── */}
-        <section className={`container ${s.final}`}>
-          <h2 className='h2'>
-            <Words text={c.final.title} />
-          </h2>
-          <p className='lead' data-reveal>
-            {c.final.lead}
-          </p>
-          <div className={s.finalStage} data-reveal='fade'>
-            <section ref={stageRef} className='stage' data-live={live ? 'true' : 'false'}>
-              <h3 className='mark-wrap'>
-                <span className='open'>{c.final.open}</span>
-                <span ref={markRef} className='mark'>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src='/media/stacbase-wordmark.png' alt='Stacbase' width={1600} height={400} draggable={false} />
+        {/* ── 10. Investir : devenir co-propriétaire ──────────────────── */}
+        <section id='invest' className={s.investWrap}>
+          <div className={s.invest} data-reveal='scale'>
+            <div className={s.investGlow} aria-hidden />
+            <div className={s.investText}>
+              <span className='badge badge-dark'>
+                <span className='badge-icon'>
+                  <Sparkle size={13} />
                 </span>
-              </h3>
-              <InkReveal stageRef={stageRef} markRef={markRef} videoSrc='/media/stacbase-logo.mp4' onReady={onReady} />
-            </section>
+                {c.invest.badge}
+              </span>
+              <h2 className='h2'>
+                <Words text={c.invest.title} />
+              </h2>
+              <p className={s.investLead}>{c.invest.lead}</p>
+              <ul className={s.investPoints}>
+                {c.invest.points.map((point, i) => (
+                  <li key={point} style={{ '--i': i } as CSSProperties}>
+                    <span>
+                      <Check size={13} />
+                    </span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <div className={s.investCtas}>
+                <a className='btn btn-light' href={LINKS.invest}>
+                  {c.invest.cta}
+                  <ArrowUpRight size={17} />
+                </a>
+                <button type='button' className={`btn ${s.investGhost}`} onClick={() => setManifesto(true)}>
+                  {c.invest.manifesto}
+                </button>
+              </div>
+            </div>
           </div>
-          <a className='btn btn-primary' href={LINKS.signup} data-reveal>
-            {c.final.cta}
-            <ArrowUpRight size={17} />
-          </a>
         </section>
       </main>
 
+      <Manifesto lang={lang} open={manifesto} onClose={() => setManifesto(false)} />
       <SiteFooter lang={lang} />
     </div>
   )
 }
+

@@ -30,7 +30,7 @@ const HUB = {
       banner: 'Séjour à Dakar', bannerSub: '−20 % ce week-end', book: 'Réserver',
       page: 'Teranga Hotel', postText: 'Le week-end parfait commence ici. −20 % sur votre séjour 🌊', likes: '1,2 k', cta: 'Réserver',
       offer: 'Offre partenaire', offerTitle: '−20 % sur votre séjour', offerBtn: 'Profiter de l’offre',
-      subject: 'Votre week-end à Dakar vous attend', mailHi: 'Bonjour Fatou,', mailBody: 'Profitez de −20 % sur votre séjour ce week-end.', mailBtn: 'Je réserve', opens: 'Ouvertures', clicks: 'Clics',
+      subject: 'Votre week-end à Dakar vous attend', mailHi: 'Bonjour Cynthia,', mailBody: 'Profitez de −20 % sur votre séjour ce week-end.', mailBtn: 'Je réserve', opens: 'Ouvertures', clicks: 'Clics',
     },
   },
   en: {
@@ -51,7 +51,7 @@ const HUB = {
       banner: 'Stay in Dakar', bannerSub: '−20% this weekend', book: 'Book',
       page: 'Teranga Hotel', postText: 'The perfect weekend starts here. −20% on your stay 🌊', likes: '1.2k', cta: 'Book now',
       offer: 'Partner offer', offerTitle: '−20% on your stay', offerBtn: 'Get the offer',
-      subject: 'Your weekend in Dakar is waiting', mailHi: 'Hello Fatou,', mailBody: 'Enjoy −20% on your stay this weekend.', mailBtn: 'Book my stay', opens: 'Opens', clicks: 'Clicks',
+      subject: 'Your weekend in Dakar is waiting', mailHi: 'Hello Cynthia,', mailBody: 'Enjoy −20% on your stay this weekend.', mailBtn: 'Book my stay', opens: 'Opens', clicks: 'Clicks',
     },
   },
 }
