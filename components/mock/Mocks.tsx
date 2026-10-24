@@ -150,7 +150,8 @@ export function AppMock({ lang }: { lang: Lang }) {
               <span className={s.iconBtn}>
                 <Bell size={15} />
               </span>
-              <span className={s.avatar}>JA</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className={s.avatarImg} src='/media/people/portrait.jpg' alt='' width={30} height={30} />
             </div>
           </div>
           <div className={s.kpis}>

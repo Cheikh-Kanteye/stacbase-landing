@@ -327,13 +327,20 @@ export function Landing() {
               <Words text={c.audience.title} />
             </h2>
           </header>
+          <figure className={s.faces} data-reveal='scale'>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src='/media/people/stacbase-grid.jpg' alt={c.audience.photoAlt} width={1280} height={721} loading='lazy' />
+          </figure>
           <div className={s.audience}>
             {c.audience.items.map(([title, body], i) => {
               const Icon = AUDIENCE_ICONS[i]
               return (
                 <article key={title} className={s.persona} data-reveal style={{ '--d': `${i * 90}ms` } as CSSProperties}>
-                  <span className={s.personaIcon} data-tone={i}>
-                    <Icon size={20} />
+                  <span className={s.personaHead}>
+                    <span className={s.personaFace} style={{ '--x': `${[0, 33, 68, 100][i]}%` } as CSSProperties} aria-hidden />
+                    <span className={s.personaIcon} data-tone={i}>
+                      <Icon size={16} />
+                    </span>
                   </span>
                   <h3 className='h3'>{title}</h3>
                   <p>{body}</p>
@@ -386,9 +393,11 @@ export function Landing() {
               </div>
             </div>
           </div>
-          <p className={s.punch} data-reveal>
-            {c.difference.punch}
-          </p>
+          <figure className={s.band} data-reveal='scale'>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src='/media/people/group.jpg' alt='' width={1199} height={800} loading='lazy' />
+            <figcaption>{c.difference.punch}</figcaption>
+          </figure>
           <div className={s.ctaRow} data-reveal>
             <a className='btn btn-ghost' href='#tools'>
               {c.difference.cta}

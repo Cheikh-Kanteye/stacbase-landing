@@ -1347,3 +1347,89 @@
   border-color: #fff;
   transform: translateY(-2px);
 }
+
+/* ── Des visages (retour d'Abdou : « trop froid, ça fait trop IA ») ───── */
+
+.faces {
+  overflow: hidden;
+  margin: clamp(36px, 5vw, 56px) 0 0;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.faces img {
+  width: 100%;
+  height: auto;
+  transform: scale(1.06);
+  transition: transform 1.6s var(--ease-out);
+}
+
+.faces:global(.is-in) img {
+  transform: none;
+}
+
+.faces:hover img {
+  transform: scale(1.02);
+}
+
+.personaHead {
+  position: relative;
+  width: 56px;
+  height: 56px;
+}
+
+/* Un visage par persona, découpé dans la photo des quatre portraits. */
+.personaFace {
+  display: block;
+  width: 56px;
+  height: 56px;
+  border: 3px solid #fff;
+  border-radius: 18px;
+  background: url('/media/people/four-faces.jpg') var(--x) 58% / 460% auto no-repeat;
+  box-shadow: var(--shadow);
+}
+
+.personaHead .personaIcon {
+  position: absolute;
+  right: -8px;
+  bottom: -6px;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #fff;
+  border-radius: 9px;
+}
+
+.band {
+  position: relative;
+  overflow: hidden;
+  max-width: 1100px;
+  height: clamp(280px, 38vw, 460px);
+  margin: clamp(32px, 5vw, 52px) auto 0;
+  border-radius: var(--radius-xl);
+}
+
+.band img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  transform: scale(1.08);
+  transition: transform 1.8s var(--ease-out);
+}
+
+.band:global(.is-in) img {
+  transform: none;
+}
+
+.band figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: clamp(24px, 4vw, 44px);
+  background: linear-gradient(0deg, rgb(15 12 46 / 0.78), transparent);
+  color: #fff;
+  font-size: clamp(20px, 2.4vw, 32px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
