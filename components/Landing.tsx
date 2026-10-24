@@ -2,7 +2,8 @@
 
 import { useState, type CSSProperties } from 'react'
 import { COPY, LINKS, PLAN_PRICES, PLATFORMS, TOOL_HUBS, type PlanCode } from '@/lib/copy'
-import { AppMock, MiniAnalytics, MiniCampaign, MiniCrm, MiniWhatsApp } from './mock/Mocks'
+import { AdsWave, GoalRing } from './mock/Charts'
+import { AppMock, MiniCrm, MiniWhatsApp } from './mock/Mocks'
 import {
   ArrowDown, ArrowRight, ArrowUpRight, Bolt, Calendar, Chart, Chat, Check, Compass, Doc, Layers, Megaphone, Pen, Rocket,
   Sparkle, Users, Wallet,
@@ -14,7 +15,8 @@ import { CountUp, Marquee, Swap, useAutoTabs, useReveal, useScrollProgress, Word
 import { SiteFooter, SiteNav } from './site/Shell'
 import s from './Landing.module.css'
 
-const MINIS = [MiniCampaign, MiniWhatsApp, MiniCrm, MiniAnalytics]
+// Courbe Meta / Google et anneau d'objectif : les graphiques repris de Qarin.
+const MINIS = [AdsWave, MiniWhatsApp, MiniCrm, GoalRing]
 const PLANS: PlanCode[] = ['free', 'starter', 'pro', 'large']
 const HUB_ICONS = [Megaphone, Chart, Chat, Layers, Doc, Sparkle]
 const BENEFIT_ICONS = [Calendar, Pen, Bolt, Wallet]

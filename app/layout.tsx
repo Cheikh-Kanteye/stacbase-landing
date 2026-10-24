@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import { Poppins } from 'next/font/google'
 import './globals.css'
 
@@ -10,6 +11,9 @@ const poppins = Poppins({
   display: 'swap',
   variable: '--font-sans',
 })
+
+/** Propriété Google Analytics de stacbase.com. */
+const GA_ID = 'G-WNVSXRG6ZC'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://stacbase.com'),
@@ -33,6 +37,17 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en' className={poppins.variable}>
+      <head>
+        {/* Balise Google (GA4) du site : suivi du trafic de stacbase.com. Chargée
+            après l'affichage, pour ne pas retarder la première vue. */}
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy='afterInteractive' />
+        <Script id='ga4' strategy='afterInteractive'>
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`}
+        </Script>
+      </head>
       <body>{children}</body>
     </html>
   )
