@@ -25,7 +25,7 @@ const story = {
     lead: 'Tout a commencé avec vos campagnes. Aujourd’hui, notre ambition accompagne tout votre quotidien.',
     cta: 'Découvrir Stacbase', read: 'Lire notre histoire',
     chapters: [
-      { tab: 'Nos origines', label: '01 — Nos origines', title: 'La publicité nous a réunis.', body: 'Adafri est né d’une idée simple : rendre la publicité Google plus accessible aux PME africaines. De Dakar à Brazzaville, vous avez donné vie à cette idée, campagne après campagne.', link: 'Les chiffres de notre évolution' },
+      { tab: 'Nos origines', label: '01 — Nos origines', title: 'La publicité nous a réunis.', body: 'Adafri est né d’une idée simple : rendre la publicité Google accessible aux petites entreprises. D’une campagne à l’autre, d’un pays à l’autre, vous avez donné vie à cette idée, campagne après campagne.', link: 'Les chiffres de notre évolution' },
       { tab: 'Ce que nous avons appris', label: '02 — Ce que nous avons appris', title: 'Votre journée ne s’arrête pas à une campagne.', body: 'Il y a aussi les clients à suivre, les projets à faire avancer et l’équipe à coordonner. À vos côtés, nous avons vu les onglets s’accumuler, les données se disperser et les outils se multiplier.', link: 'Lire la lettre à notre communauté' },
       { tab: 'Le prochain chapitre', label: '03 — Le prochain chapitre', title: 'Ouvrez Stacbase.', body: 'Adafri, c’était la publicité. Stacbase va plus loin : autour du hub Publicité, cinq autres hubs réunissent marketing, échanges d’équipe, outils, documents et agent IA, dans un même espace.', link: 'Explorer les outils' },
       { tab: 'La communauté', label: '04 — La communauté', title: 'La suite se construit avec vous.', body: 'Vos usages ont fait grandir Adafri. Ils continuent de guider Stacbase. Notre ambition : construire avec notre communauté un environnement qui répond à la réalité de votre travail.', link: 'Lire la lettre à notre communauté' },
@@ -34,6 +34,7 @@ const story = {
     campaigns: 'campagnes lancées avec Adafri', people: 'personnes avec qui repenser le parcours',
     tabsPile: ['Google Ads', 'WhatsApp', 'Tableur', 'Gmail', 'Factures', 'Agenda'],
     toolsLabel: '6 hubs, 25+ outils, un seul espace',
+    routeFrom: 'Local', routeTo: 'International',
     hubAdafri: 'Là où Adafri a commencé', hubNew: 'Nouveau avec Stacbase',
     quote: 'Un outil nous a réunis. Un espace de travail nous fait avancer.',
     quoteBy: 'L’équipe Stacbase',
@@ -47,7 +48,7 @@ const story = {
       ],
       more: 'Explorer les outils',
     },
-    team: { title: 'Lancement · Teranga Hotel', comments: [['Jacob', 'Visuels validés, on lance lundi ?'], ['Marc', 'Oui, budget et ciblage prêts.'], ['Cynthia', 'Je prépare la relance WhatsApp.']], tasks: 'tâches terminées' },
+    team: { title: 'Lancement · Harbor Hotel', comments: [['Jacob', 'Visuels validés, on lance lundi ?'], ['Marc', 'Oui, budget et ciblage prêts.'], ['Cynthia', 'Je prépare la relance WhatsApp.']], tasks: 'tâches terminées' },
     questions: 'Vous connaissiez Adafri ?',
     faq: [
       ['Comment Adafri va plus loin avec Stacbase ?', 'Adafri poursuit son histoire dans un espace de travail plus large : Stacbase. La publicité reste une partie de cet écosystème.'],
@@ -64,7 +65,7 @@ const story = {
     lead: 'It started with your campaigns. Today, our ambition reaches across your working day.',
     cta: 'Discover Stacbase', read: 'Read our story',
     chapters: [
-      { tab: 'Where we started', label: '01 — Where we started', title: 'Advertising brought us together.', body: 'Adafri began with a simple idea: make Google advertising more accessible to African small businesses. From Dakar to Brazzaville, you brought that idea to life, one campaign at a time.', link: 'The numbers behind our evolution' },
+      { tab: 'Where we started', label: '01 — Where we started', title: 'Advertising brought us together.', body: 'Adafri began with a simple idea: make Google advertising accessible to small businesses. Campaign after campaign, country after country, you brought that idea to life, one campaign at a time.', link: 'The numbers behind our evolution' },
       { tab: 'What we learned', label: '02 — What we learned', title: 'Your day goes beyond a campaign.', body: 'There are clients to follow up with, projects to move forward and a team to coordinate. Working alongside you, we saw tabs pile up, information scatter and tools multiply.', link: 'Read our letter to the community' },
       { tab: 'What comes next', label: '03 — What comes next', title: 'Open Stacbase.', body: 'Adafri was advertising. Stacbase goes further: around the Advertising hub, five more hubs bring marketing, team communication, tools, documents and an AI agent into one workspace.', link: 'Explore the tools' },
       { tab: 'Our community', label: '04 — Our community', title: 'The next chapter is built with you.', body: 'The way you work helped Adafri grow. It continues to guide Stacbase. Our ambition is to build with our community a workspace that reflects the reality of your day.', link: 'Read our letter to the community' },
@@ -73,6 +74,7 @@ const story = {
     campaigns: 'campaigns launched with Adafri', people: 'people who helped rethink the experience',
     tabsPile: ['Google Ads', 'WhatsApp', 'Spreadsheet', 'Gmail', 'Invoices', 'Calendar'],
     toolsLabel: '6 hubs, 25+ tools, one workspace',
+    routeFrom: 'Local', routeTo: 'Worldwide',
     hubAdafri: 'Where Adafri started', hubNew: 'New with Stacbase',
     quote: 'One tool brought us together. One workspace moves us forward.',
     quoteBy: 'The Stacbase team',
@@ -86,7 +88,7 @@ const story = {
       ],
       more: 'Explore the tools',
     },
-    team: { title: 'Launch · Teranga Hotel', comments: [['Jacob', 'Visuals approved, launch on Monday?'], ['Marc', 'Yes, budget and targeting are ready.'], ['Cynthia', 'I’m preparing the WhatsApp follow-up.']], tasks: 'tasks done' },
+    team: { title: 'Launch · Harbor Hotel', comments: [['Jacob', 'Visuals approved, launch on Monday?'], ['Marc', 'Yes, budget and targeting are ready.'], ['Cynthia', 'I’m preparing the WhatsApp follow-up.']], tasks: 'tasks done' },
     questions: 'Already know Adafri?',
     faq: [
       ['How does Adafri continue with Stacbase?', 'Adafri continues its story within a broader workspace: Stacbase. Advertising remains part of this ecosystem.'],
@@ -126,9 +128,9 @@ function ChapterVisual({ i, c, lang }: { i: number; c: Copy; lang: Lang }) {
           <span>{c.people}</span>
         </div>
         <div className={s.route}>
-          <span>Dakar</span>
+          <span>{c.routeFrom}</span>
           <i />
-          <span>Brazzaville</span>
+          <span>{c.routeTo}</span>
         </div>
       </div>
     )
