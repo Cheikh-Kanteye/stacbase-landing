@@ -82,6 +82,7 @@ export const COPY = {
         ['Growing teams', 'As the workload grows, so does the software mess. Give your team a more connected way to organize and execute its work.'],
       ],
       closing: 'One workspace. Less operational chaos.',
+      photoAlt: 'Eight smiling people on coloured backgrounds spelling the word stacbase',
     },
     difference: {
       badge: 'The difference',
@@ -185,6 +186,7 @@ export const COPY = {
         ['Équipes en croissance', 'Quand la charge grandit, le désordre logiciel aussi. Donnez à votre équipe une façon plus connectée de s’organiser.'],
       ],
       closing: 'Un seul espace. Moins de chaos opérationnel.',
+      photoAlt: 'Huit personnes souriantes sur fonds colorés, qui forment le mot stacbase',
     },
     difference: {
       badge: 'La différence',
