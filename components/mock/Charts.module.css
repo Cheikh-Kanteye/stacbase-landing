@@ -1,0 +1,225 @@
+.card {
+  display: grid;
+  gap: 4px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  font-size: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.sub {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ── Courbe ───────────────────────────────────────────────────────────── */
+
+.waveBox {
+  position: relative;
+  margin: 26px 0 6px;
+}
+
+.wave {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.grid {
+  stroke: #efedf6;
+  stroke-dasharray: 3 4;
+}
+
+.cursor {
+  stroke: #7c3aed;
+  stroke-dasharray: 3 3;
+  opacity: 0.7;
+}
+
+.dot {
+  fill: #7c3aed;
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+
+.tip {
+  position: absolute;
+  top: -22px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.totals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.totals > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.totals p {
+  display: grid;
+  margin: 0;
+  color: var(--muted);
+}
+
+.totals strong {
+  color: var(--ink);
+  font-size: 15px;
+  letter-spacing: -0.02em;
+}
+
+.badge {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.badgeMeta {
+  background: #e7efff;
+  color: #1877f2;
+}
+
+.badgeGoogle {
+  background: #e9f8ef;
+  color: #16a34a;
+}
+
+/* ── Anneau de barres ─────────────────────────────────────────────────── */
+
+.ringBox {
+  position: relative;
+  width: min(100%, 210px);
+  margin: 6px auto;
+}
+
+.ring {
+  width: 100%;
+  height: auto;
+}
+
+.tick,
+.tickOn {
+  stroke-width: 3.2;
+  stroke-linecap: round;
+}
+
+.tick {
+  stroke: #ece9f5;
+}
+
+.ringCenter {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.ringCenter strong {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.ringCenter span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 10px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-2);
+  font-size: 11px;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ── Animations, jouées quand la carte est révélée ────────────────────── */
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(6px) scale(0.9);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes tick {
+  from {
+    opacity: 0.15;
+  }
+}
+
+:global(.is-in) .line {
+  stroke-dasharray: 1;
+  animation: draw 1.8s var(--ease-out) 0.3s both;
+}
+
+:global(.is-in) .area,
+:global(.is-in) .cursor,
+:global(.is-in) .dot {
+  animation: fade 0.8s ease 1.4s both;
+}
+
+:global(.is-in) .tip {
+  animation: pop 0.6s var(--ease-out) 1.6s both;
+}
+
+:global(.is-in) .tickOn {
+  animation: tick 0.5s ease both;
+  animation-delay: calc(var(--i) * 22ms + 200ms);
+}
