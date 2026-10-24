@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, type CSSProperties } from 'react'
-import { LINKS, type Lang } from '@/lib/copy'
+import { LINKS, TOOL_HUBS, type Lang } from '@/lib/copy'
 import { AdHub } from './AdHub'
 import { MiniCampaign, MiniCrm } from './mock/Mocks'
 import {
@@ -27,13 +27,14 @@ const story = {
     chapters: [
       { tab: 'Nos origines', label: '01 — Nos origines', title: 'La publicité nous a réunis.', body: 'Adafri est né d’une idée simple : rendre la publicité Google plus accessible aux PME africaines. De Dakar à Brazzaville, vous avez donné vie à cette idée, campagne après campagne.', link: 'Les chiffres de notre évolution' },
       { tab: 'Ce que nous avons appris', label: '02 — Ce que nous avons appris', title: 'Votre journée ne s’arrête pas à une campagne.', body: 'Il y a aussi les clients à suivre, les projets à faire avancer et l’équipe à coordonner. À vos côtés, nous avons vu les onglets s’accumuler, les données se disperser et les outils se multiplier.', link: 'Lire la lettre à notre communauté' },
-      { tab: 'Le prochain chapitre', label: '03 — Le prochain chapitre', title: 'Ouvrez Stacbase.', body: 'Adafri évolue au sein d’un écosystème plus large : Stacbase. Un même espace pour réunir les outils du quotidien des agences, des freelances et des équipes marketing.', link: 'Explorer les outils' },
+      { tab: 'Le prochain chapitre', label: '03 — Le prochain chapitre', title: 'Ouvrez Stacbase.', body: 'Adafri, c’était la publicité. Stacbase va plus loin : autour du hub Publicité, cinq autres hubs réunissent marketing, échanges d’équipe, outils, documents et agent IA, dans un même espace.', link: 'Explorer les outils' },
       { tab: 'La communauté', label: '04 — La communauté', title: 'La suite se construit avec vous.', body: 'Vos usages ont fait grandir Adafri. Ils continuent de guider Stacbase. Notre ambition : construire avec notre communauté un environnement qui répond à la réalité de votre travail.', link: 'Lire la lettre à notre communauté' },
     ],
     storyKicker: 'Notre histoire', storyTitle: 'D’Adafri à Stacbase, en quatre chapitres.',
     campaigns: 'campagnes lancées avec Adafri', people: 'personnes avec qui repenser le parcours',
     tabsPile: ['Google Ads', 'WhatsApp', 'Tableur', 'Gmail', 'Factures', 'Agenda'],
-    toolsLabel: '25+ outils, un seul espace',
+    toolsLabel: '6 hubs, 25+ outils, un seul espace',
+    hubAdafri: 'Là où Adafri a commencé', hubNew: 'Nouveau avec Stacbase',
     quote: 'Un outil nous a réunis. Un espace de travail nous fait avancer.',
     quoteBy: 'L’équipe Stacbase',
     mid: { eyebrow: 'Ce qui ne change pas', title: 'La même envie de vous faire avancer.', lead: 'La publicité reste au cœur de notre histoire. Autour d’elle, Stacbase ajoute tout ce qui fait votre journée : vos clients, vos projets, vos documents et votre équipe.', cta: 'Ouvrir mon espace' },
@@ -65,13 +66,14 @@ const story = {
     chapters: [
       { tab: 'Where we started', label: '01 — Where we started', title: 'Advertising brought us together.', body: 'Adafri began with a simple idea: make Google advertising more accessible to African small businesses. From Dakar to Brazzaville, you brought that idea to life, one campaign at a time.', link: 'The numbers behind our evolution' },
       { tab: 'What we learned', label: '02 — What we learned', title: 'Your day goes beyond a campaign.', body: 'There are clients to follow up with, projects to move forward and a team to coordinate. Working alongside you, we saw tabs pile up, information scatter and tools multiply.', link: 'Read our letter to the community' },
-      { tab: 'What comes next', label: '03 — What comes next', title: 'Open Stacbase.', body: 'Adafri is evolving within a broader ecosystem: Stacbase. One workspace bringing together everyday tools for agencies, freelancers and marketing teams.', link: 'Explore the tools' },
+      { tab: 'What comes next', label: '03 — What comes next', title: 'Open Stacbase.', body: 'Adafri was advertising. Stacbase goes further: around the Advertising hub, five more hubs bring marketing, team communication, tools, documents and an AI agent into one workspace.', link: 'Explore the tools' },
       { tab: 'Our community', label: '04 — Our community', title: 'The next chapter is built with you.', body: 'The way you work helped Adafri grow. It continues to guide Stacbase. Our ambition is to build with our community a workspace that reflects the reality of your day.', link: 'Read our letter to the community' },
     ],
     storyKicker: 'Our story', storyTitle: 'From Adafri to Stacbase, in four chapters.',
     campaigns: 'campaigns launched with Adafri', people: 'people who helped rethink the experience',
     tabsPile: ['Google Ads', 'WhatsApp', 'Spreadsheet', 'Gmail', 'Invoices', 'Calendar'],
-    toolsLabel: '25+ tools, one workspace',
+    toolsLabel: '6 hubs, 25+ tools, one workspace',
+    hubAdafri: 'Where Adafri started', hubNew: 'New with Stacbase',
     quote: 'One tool brought us together. One workspace moves us forward.',
     quoteBy: 'The Stacbase team',
     mid: { eyebrow: 'What stays the same', title: 'The same drive to move you forward.', lead: 'Advertising remains at the heart of our story. Around it, Stacbase adds everything that makes your day: your clients, your projects, your documents and your team.', cta: 'Open my workspace' },
@@ -99,7 +101,8 @@ const story = {
 const CHAPTER_ICONS = [Compass, Bolt, Rocket, Heart]
 // `null` : le chapitre ouvre le manifeste (la lettre à la communauté).
 const CHAPTER_LINKS: (string | null)[] = [null, null, PRODUCTS, null]
-const TOOL_ICONS = [Megaphone, Chat, Users, Mail, Calendar, Doc, Pen, Wallet, Chart, Globe, Sparkle, Quote]
+// Un pictogramme par hub, dans l'ordre de `TOOL_HUBS`.
+const HUB_ICONS = [Megaphone, Chart, Chat, Calendar, Doc, Sparkle]
 const SPLIT_ICONS = [Megaphone, Users, Chat]
 
 type Copy = (typeof story)['fr']
@@ -143,12 +146,22 @@ function ChapterVisual({ i, c, lang }: { i: number; c: Copy; lang: Lang }) {
   if (i === 2)
     return (
       <div className={`${s.visual} ${s.vTools}`}>
-        <div className={s.toolGrid}>
-          {TOOL_ICONS.map((Icon, k) => (
-            <span key={k} style={{ '--k': k } as CSSProperties}>
-              <Icon size={20} />
-            </span>
-          ))}
+        {/* Les outils rangés par hub, comme dans l'application. */}
+        <div className={s.hubGrid}>
+          {TOOL_HUBS[lang].map((h, k) => {
+            const Icon = HUB_ICONS[k]
+            return (
+              <div key={h.hub} className={s.hubCard} style={{ '--k': k } as CSSProperties}>
+                <span className={s.hubIcon} data-tone={k}>
+                  <Icon size={18} />
+                </span>
+                <p className={s.hubName}>{h.hub}</p>
+                {/* La publicité, c'était Adafri ; tout le reste, Stacbase l'ajoute. */}
+                <span className={s.hubTag} data-origin={k === 0 || undefined}>{k === 0 ? c.hubAdafri : c.hubNew}</span>
+                <p className={s.hubTools}>{h.tools.filter((tool) => !tool.soon).map((tool) => tool.name).join(' · ')}</p>
+              </div>
+            )
+          })}
         </div>
         <p>{c.toolsLabel}</p>
       </div>
