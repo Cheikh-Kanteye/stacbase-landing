@@ -15,23 +15,23 @@ const T = {
     kpis: [['Spend', '$1,240', '+12%'], ['Clicks', '8,432', '+8%'], ['Conversions', '312', '+21%'], ['WhatsApp delivered', '98%', '+3%']],
     perf: 'Campaign performance', last: 'Last 14 days', clicks: 'Clicks', conv: 'Conversions',
     sheet: 'Day sheet',
-    sheetItems: [['09:00', 'Review the Search campaign', 'done'], ['11:30', 'WhatsApp promo · 2,000 contacts', 'live'], ['14:00', 'Send the invoice to Nafa Foods', 'todo'], ['16:30', 'Client call · Teranga Hotel', 'todo']],
+    sheetItems: [['09:00', 'Review the Search campaign', 'done'], ['11:30', 'WhatsApp promo · 2,000 contacts', 'live'], ['14:00', 'Send the invoice to Maple Foods', 'todo'], ['16:30', 'Client call · Harbor Hotel', 'todo']],
     campaigns: 'Campaigns', cols: ['Campaign', 'Channel', 'Status', 'Spend'],
     rows: [['Summer sale', 'Search', 'Live', '$420'], ['Brand awareness', 'Display', 'Live', '$310'], ['New collection', 'Meta', 'Paused', '$180']],
     live: 'Live', paused: 'Paused', delivered: 'Delivered', sent: 'Sent', reading: 'Read',
     waHello: 'Hello Cynthia 👋', waBody: 'Our new collection is here: −20% this weekend only. Reply YES to receive the catalogue.',
     waYes: 'YES, please!', sending: 'Sending · Weekend promo',
-    pipe: [['Teranga Hotel', 'Proposal', '$2,400'], ['Nafa Foods', 'Won', '$1,150'], ['Kora Studio', 'Contacted', '$900']],
+    pipe: [['Harbor Hotel', 'Proposal', '$2,400'], ['Maple Foods', 'Won', '$1,150'], ['Bloom Studio', 'Contacted', '$900']],
     sessions: 'Sessions', sources: [['Organic search', 46], ['Social', 28], ['Paid', 18], ['Direct', 8]],
     rate: 'Conversion rate', vsLast: 'vs last month',
     invoice: 'Invoice', billed: 'Billed to', total: 'Total', signed: 'Signed',
     lines: [['Search campaign setup', '$350'], ['Monthly management', '$600'], ['Creative pack', '$250']],
     week: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
     posts: [[0, 'Instagram', 'Teaser'], [1, 'LinkedIn', 'Case study'], [2, 'Facebook', 'Promo'], [3, 'Instagram', 'Reel'], [4, 'LinkedIn', 'Hiring']],
-    kanban: [['Contacted', ['Kora Studio', 'Dakar Bikes']], ['Proposal', ['Teranga Hotel']], ['Won', ['Nafa Foods', 'Sahel Tech']]],
+    kanban: [['Contacted', ['Bloom Studio', 'Brooklyn Bikes']], ['Proposal', ['Harbor Hotel']], ['Won', ['Maple Foods', 'Summit Tech']]],
     ask: 'Summarise last week’s campaigns and draft a WhatsApp follow-up for clients who clicked.',
     answer: 'Spend $1,240 (+12%), 312 conversions. Search performs best (CPC $0.21). Draft ready for 184 contacts:',
-    draft: '“Hello {first name}, thanks for your visit! Here is your −20% code: TERANGA20.”',
+    draft: '“Hello {first name}, thanks for your visit! Here is your −20% code: HARBOR20.”',
     agent: 'Stacbase agent',
   },
   fr: {
@@ -41,23 +41,23 @@ const T = {
     kpis: [['Dépenses', '1 240 $', '+12 %'], ['Clics', '8 432', '+8 %'], ['Conversions', '312', '+21 %'], ['WhatsApp livrés', '98 %', '+3 %']],
     perf: 'Performance des campagnes', last: '14 derniers jours', clicks: 'Clics', conv: 'Conversions',
     sheet: 'Feuille de service',
-    sheetItems: [['09:00', 'Revoir la campagne Search', 'done'], ['11:30', 'Promo WhatsApp · 2 000 contacts', 'live'], ['14:00', 'Envoyer la facture à Nafa Foods', 'todo'], ['16:30', 'Appel client · Teranga Hotel', 'todo']],
+    sheetItems: [['09:00', 'Revoir la campagne Search', 'done'], ['11:30', 'Promo WhatsApp · 2 000 contacts', 'live'], ['14:00', 'Envoyer la facture à Maple Foods', 'todo'], ['16:30', 'Appel client · Harbor Hotel', 'todo']],
     campaigns: 'Campagnes', cols: ['Campagne', 'Canal', 'Statut', 'Dépenses'],
     rows: [['Soldes d’été', 'Search', 'En ligne', '420 $'], ['Notoriété', 'Display', 'En ligne', '310 $'], ['Nouvelle collection', 'Meta', 'En pause', '180 $']],
     live: 'En ligne', paused: 'En pause', delivered: 'Livrés', sent: 'Envoyés', reading: 'Lus',
     waHello: 'Bonjour Cynthia 👋', waBody: 'Notre nouvelle collection est arrivée : −20 % ce week-end seulement. Répondez OUI pour recevoir le catalogue.',
     waYes: 'OUI, avec plaisir !', sending: 'Envoi · Promo du week-end',
-    pipe: [['Teranga Hotel', 'Proposition', '2 400 $'], ['Nafa Foods', 'Gagné', '1 150 $'], ['Kora Studio', 'Contacté', '900 $']],
+    pipe: [['Harbor Hotel', 'Proposition', '2 400 $'], ['Maple Foods', 'Gagné', '1 150 $'], ['Bloom Studio', 'Contacté', '900 $']],
     sessions: 'Sessions', sources: [['Recherche naturelle', 46], ['Réseaux sociaux', 28], ['Payant', 18], ['Direct', 8]],
     rate: 'Taux de conversion', vsLast: 'vs mois dernier',
     invoice: 'Facture', billed: 'Facturé à', total: 'Total', signed: 'Signée',
     lines: [['Mise en place Search', '350 $'], ['Gestion mensuelle', '600 $'], ['Pack créatif', '250 $']],
     week: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven'],
     posts: [[0, 'Instagram', 'Teaser'], [1, 'LinkedIn', 'Étude de cas'], [2, 'Facebook', 'Promo'], [3, 'Instagram', 'Reel'], [4, 'LinkedIn', 'Recrutement']],
-    kanban: [['Contacté', ['Kora Studio', 'Dakar Bikes']], ['Proposition', ['Teranga Hotel']], ['Gagné', ['Nafa Foods', 'Sahel Tech']]],
+    kanban: [['Contacté', ['Bloom Studio', 'Brooklyn Bikes']], ['Proposition', ['Harbor Hotel']], ['Gagné', ['Maple Foods', 'Summit Tech']]],
     ask: 'Résume les campagnes de la semaine dernière et prépare une relance WhatsApp pour les clients qui ont cliqué.',
     answer: 'Dépenses 1 240 $ (+12 %), 312 conversions. Le Search performe le mieux (CPC 0,21 $). Brouillon prêt pour 184 contacts :',
-    draft: '« Bonjour {prénom}, merci de votre visite ! Voici votre code −20 % : TERANGA20. »',
+    draft: '« Bonjour {prénom}, merci de votre visite ! Voici votre code −20 % : HARBOR20. »',
     agent: 'Agent Stacbase',
   },
 } as const
@@ -513,7 +513,7 @@ function DocsView({ lang }: { lang: Lang }) {
           </span>
         </div>
         <p className={s.billed}>
-          {t.billed} <strong>Nafa Foods</strong>
+          {t.billed} <strong>Maple Foods</strong>
         </p>
         <ul>
           {t.lines.map(([label, amount], i) => (

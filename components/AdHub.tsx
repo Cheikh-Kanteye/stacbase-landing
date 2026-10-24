@@ -24,13 +24,13 @@ const HUB = {
       { name: 'E-mailing', title: 'Des e-mails à l’image de votre marque.', body: 'Composez vos campagnes à partir de modèles, envoyez-les à vos listes CRM et suivez ouvertures et clics.' },
     ],
     v: {
-      sponsored: 'Sponsorisé', adTitle: 'Teranga Hotel | Séjour à Dakar −20 % | Réservez en ligne',
+      sponsored: 'Sponsorisé', adTitle: 'Harbor Hotel | Séjour à Miami −20 % | Réservez en ligne',
       adDesc: 'Chambres vue mer, petit-déjeuner inclus. Offre valable ce week-end seulement.',
-      keywords: ['hôtel dakar', 'séjour vue mer', 'week-end sénégal'],
-      banner: 'Séjour à Dakar', bannerSub: '−20 % ce week-end', book: 'Réserver',
-      page: 'Teranga Hotel', postText: 'Le week-end parfait commence ici. −20 % sur votre séjour 🌊', likes: '1,2 k', cta: 'Réserver',
+      keywords: ['hôtel miami', 'séjour vue mer', 'week-end miami'],
+      banner: 'Séjour à Miami', bannerSub: '−20 % ce week-end', book: 'Réserver',
+      page: 'Harbor Hotel', postText: 'Le week-end parfait commence ici. −20 % sur votre séjour 🌊', likes: '1,2 k', cta: 'Réserver',
       offer: 'Offre partenaire', offerTitle: '−20 % sur votre séjour', offerBtn: 'Profiter de l’offre',
-      subject: 'Votre week-end à Dakar vous attend', mailHi: 'Bonjour Cynthia,', mailBody: 'Profitez de −20 % sur votre séjour ce week-end.', mailBtn: 'Je réserve', opens: 'Ouvertures', clicks: 'Clics',
+      subject: 'Votre week-end à Miami vous attend', mailHi: 'Bonjour Cynthia,', mailBody: 'Profitez de −20 % sur votre séjour ce week-end.', mailBtn: 'Je réserve', opens: 'Ouvertures', clicks: 'Clics',
     },
   },
   en: {
@@ -45,13 +45,13 @@ const HUB = {
       { name: 'E-mailing', title: 'E-mails that look like your brand.', body: 'Build campaigns from templates, send them to your CRM lists and follow opens and clicks.' },
     ],
     v: {
-      sponsored: 'Sponsored', adTitle: 'Teranga Hotel | Stay in Dakar −20% | Book online',
+      sponsored: 'Sponsored', adTitle: 'Harbor Hotel | Stay in Miami −20% | Book online',
       adDesc: 'Sea-view rooms, breakfast included. Offer valid this weekend only.',
-      keywords: ['hotel dakar', 'sea view stay', 'senegal weekend'],
-      banner: 'Stay in Dakar', bannerSub: '−20% this weekend', book: 'Book',
-      page: 'Teranga Hotel', postText: 'The perfect weekend starts here. −20% on your stay 🌊', likes: '1.2k', cta: 'Book now',
+      keywords: ['hotel miami', 'sea view stay', 'miami weekend'],
+      banner: 'Stay in Miami', bannerSub: '−20% this weekend', book: 'Book',
+      page: 'Harbor Hotel', postText: 'The perfect weekend starts here. −20% on your stay 🌊', likes: '1.2k', cta: 'Book now',
       offer: 'Partner offer', offerTitle: '−20% on your stay', offerBtn: 'Get the offer',
-      subject: 'Your weekend in Dakar is waiting', mailHi: 'Hello Cynthia,', mailBody: 'Enjoy −20% on your stay this weekend.', mailBtn: 'Book my stay', opens: 'Opens', clicks: 'Clicks',
+      subject: 'Your weekend in Miami is waiting', mailHi: 'Hello Cynthia,', mailBody: 'Enjoy −20% on your stay this weekend.', mailBtn: 'Book my stay', opens: 'Opens', clicks: 'Clicks',
     },
   },
 }
@@ -82,7 +82,7 @@ function Visual({ i, v, lang }: { i: number; v: V; lang: Lang }) {
         <div className={s.result}>
           <p className={s.sponsored}>{v.sponsored}</p>
           <p className={s.site}>
-            <span>T</span> teranga-hotel.sn
+            <span>T</span> harborhotel.com
           </p>
           <p className={s.adTitle}>{v.adTitle}</p>
           <p className={s.adDesc}>{v.adDesc}</p>
@@ -148,7 +148,7 @@ function Visual({ i, v, lang }: { i: number; v: V; lang: Lang }) {
         <div className={s.offer}>
           <p>{v.offer}</p>
           <strong>{v.offerTitle}</strong>
-          <span>Teranga Hotel</span>
+          <span>Harbor Hotel</span>
           <em>{v.offerBtn}</em>
         </div>
         <div className={s.phoneGrid}>
@@ -169,7 +169,7 @@ function Visual({ i, v, lang }: { i: number; v: V; lang: Lang }) {
     <div className={s.mail}>
       <p className={s.subject}>{v.subject}</p>
       <div className={s.mailCard}>
-        <div className={s.mailHero}>Teranga Hotel</div>
+        <div className={s.mailHero}>Harbor Hotel</div>
         <p>
           <strong>{v.mailHi}</strong>
           <br />
