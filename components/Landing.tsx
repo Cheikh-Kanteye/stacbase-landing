@@ -450,21 +450,7 @@ export function Landing() {
           </div>
         </section>
 
-        {/* ── 9. Questions ────────────────────────────────────────────── */}
-        <section className={`container ${s.section} ${s.faqGrid}`}>
-          <div>
-            <h2 className='h2'>
-              <Words text={c.faq.title} />
-            </h2>
-            <a className={`link-arrow ${s.faqMore}`} href='/adafri' data-reveal>
-              {c.faq.more}
-              <ArrowRight size={16} />
-            </a>
-          </div>
-          <Faq items={c.faq.items as [string, string][]} />
-        </section>
-
-        {/* ── 10. Investir : devenir co-propriétaire ──────────────────── */}
+        {/* ── 9. Investir : devenir co-propriétaire (après les tarifs) ──────────────────── */}
         <section id='invest' className={s.investWrap}>
           <div className={s.invest} data-reveal='scale'>
             <div className={s.investGlow} aria-hidden />
@@ -501,6 +487,20 @@ export function Landing() {
             </div>
           </div>
         </section>
+        {/* ── 10. Questions ────────────────────────────────────────────── */}
+        <section className={`container ${s.section} ${s.faqGrid}`}>
+          <div>
+            <h2 className='h2'>
+              <Words text={c.faq.title} />
+            </h2>
+            <a className={`link-arrow ${s.faqMore}`} href='/adafri' data-reveal>
+              {c.faq.more}
+              <ArrowRight size={16} />
+            </a>
+          </div>
+          <Faq items={c.faq.items as [string, string][]} />
+        </section>
+
       </main>
 
       <Manifesto lang={lang} open={manifesto} onClose={() => setManifesto(false)} />
