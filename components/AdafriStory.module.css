@@ -879,3 +879,19 @@
 .chapter:global(.is-in) .vPhoto img {
   transform: none;
 }
+
+/* Mobile : le cadre du haut colle aux bords, le hub respire en largeur. */
+@media (max-width: 560px) {
+  .heroWrap {
+    padding: 0 4px;
+  }
+
+  .hero {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  .heroText {
+    padding: 0 10px;
+  }
+}
