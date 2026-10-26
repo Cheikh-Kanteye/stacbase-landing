@@ -79,7 +79,7 @@ export function Landing() {
             <div className={s.stripes} aria-hidden />
             <div className={`container ${s.heroFrame}`} data-reveal='scale' style={{ '--d': '500ms' } as CSSProperties}>
               <div className={s.tilt}>
-                <AppShot alt={lang === 'fr' ? 'Le rapport d’une campagne Google Display dans Stacbase' : 'A Google Display campaign report in Stacbase'} />
+                <AppShot alt={lang === 'fr' ? 'Le rapport d’une campagne Google Display dans Stacbase (données de démonstration)' : 'A Google Display campaign report in Stacbase (demo data)'} />
               </div>
               <div className={`${s.float} ${s.floatA}`}>
                 <span className={s.floatIcon}>
