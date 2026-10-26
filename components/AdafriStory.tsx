@@ -156,8 +156,8 @@ function ChapterVisual({ i, c, lang }: { i: number; c: Copy; lang: Lang }) {
                   <Icon size={18} />
                 </span>
                 <p className={s.hubName}>{h.hub}</p>
-                {/* La publicité, c'était Adafri ; tout le reste, Stacbase l'ajoute. */}
-                <span className={s.hubTag} data-origin={k === 0 || undefined}>{k === 0 ? c.hubAdafri : c.hubNew}</span>
+                {/* Seul le hub d'origine porte une étiquette : la publicité, c'était Adafri. */}
+                {k === 0 && <span className={s.hubTag} data-origin>{c.hubAdafri}</span>}
                 <p className={s.hubTools}>{h.tools.filter((tool) => !tool.soon).map((tool) => tool.name).join(' · ')}</p>
               </div>
             )
