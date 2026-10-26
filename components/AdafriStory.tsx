@@ -48,7 +48,7 @@ const story = {
       ],
       more: 'Explorer les outils',
     },
-    team: { title: 'Lancement · Harbor Hotel', comments: [['Jacob', 'Visuels validés, on lance lundi ?'], ['Marc', 'Oui, budget et ciblage prêts.'], ['Cynthia', 'Je prépare la relance WhatsApp.']], tasks: 'tâches terminées' },
+    team: { title: 'Lancement · Harbor Hotel', comments: [['Jacob', 'Visuels validés, on lance lundi ?'], ['Marc', 'Oui, budget et ciblage prêts.'], ['Cynthia', 'Je prépare la relance par e-mail.']], tasks: 'tâches terminées' },
     questions: 'Vous connaissiez Adafri ?',
     faq: [
       ['Comment Adafri va plus loin avec Stacbase ?', 'Adafri poursuit son histoire dans un espace de travail plus large : Stacbase. La publicité reste une partie de cet écosystème.'],
@@ -88,7 +88,7 @@ const story = {
       ],
       more: 'Explore the tools',
     },
-    team: { title: 'Launch · Harbor Hotel', comments: [['Jacob', 'Visuals approved, launch on Monday?'], ['Marc', 'Yes, budget and targeting are ready.'], ['Cynthia', 'I’m preparing the WhatsApp follow-up.']], tasks: 'tasks done' },
+    team: { title: 'Launch · Harbor Hotel', comments: [['Jacob', 'Visuals approved, launch on Monday?'], ['Marc', 'Yes, budget and targeting are ready.'], ['Cynthia', 'I’m preparing the e-mail follow-up.']], tasks: 'tasks done' },
     questions: 'Already know Adafri?',
     faq: [
       ['How does Adafri continue with Stacbase?', 'Adafri continues its story within a broader workspace: Stacbase. Advertising remains part of this ecosystem.'],

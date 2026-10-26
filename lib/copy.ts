@@ -49,7 +49,7 @@ export const COPY = {
       cta: 'Meet your new workspace',
       cards: [
         ['Google & Meta campaigns', 'Launch Search, Display, Facebook and Instagram campaigns, then follow spend, clicks and conversions in one report.'],
-        ['WhatsApp at scale', 'Send personalised messages to your lists, with images and documents, and follow every delivery live.'],
+        ['Social publishing', 'Plan and publish your posts on Facebook, Instagram and LinkedIn from one calendar.'],
         ['Clients and pipeline', 'Contacts, deals and follow-ups in one place, connected to your campaigns and your e-mails.'],
         ['Analytics that read clearly', 'Traffic, sources and conversions from Google Analytics, laid out for wide screens.'],
       ],
@@ -153,7 +153,7 @@ export const COPY = {
       cta: 'Découvrir votre nouvel espace',
       cards: [
         ['Campagnes Google et Meta', 'Lancez vos campagnes Search, Display, Facebook et Instagram, puis suivez dépenses, clics et conversions dans un seul rapport.'],
-        ['WhatsApp en masse', 'Envoyez des messages personnalisés à vos listes, avec images et documents, et suivez chaque envoi en direct.'],
+        ['Publication sur les réseaux', 'Planifiez et publiez vos posts sur Facebook, Instagram et LinkedIn depuis un seul calendrier.'],
         ['Clients et pipeline', 'Contacts, opportunités et relances au même endroit, reliés à vos campagnes et à vos e-mails.'],
         ['Des analytics lisibles', 'Trafic, sources et conversions de Google Analytics, présentés pour les grands écrans.'],
       ],

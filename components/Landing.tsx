@@ -3,7 +3,7 @@
 import { useState, type CSSProperties } from 'react'
 import { COPY, LINKS, PLAN_PRICES, PLATFORMS, TOOL_HUBS, type PlanCode } from '@/lib/copy'
 import { AdsWave, GoalRing } from './mock/Charts'
-import { AppMock, MiniCrm, MiniWhatsApp } from './mock/Mocks'
+import { AppMock, MiniCrm, MiniPosts } from './mock/Mocks'
 import {
   ArrowDown, ArrowRight, ArrowUpRight, Bolt, Calendar, Chart, Chat, Check, Compass, Doc, Layers, Megaphone, Pen, Rocket,
   Sparkle, Users, Wallet,
@@ -16,7 +16,7 @@ import { SiteFooter, SiteNav } from './site/Shell'
 import s from './Landing.module.css'
 
 // Courbe Meta / Google et anneau d'objectif : les graphiques repris de Qarin.
-const MINIS = [AdsWave, MiniWhatsApp, MiniCrm, GoalRing]
+const MINIS = [AdsWave, MiniPosts, MiniCrm, GoalRing]
 const PLANS: PlanCode[] = ['free', 'starter', 'pro', 'large']
 const HUB_ICONS = [Megaphone, Chart, Chat, Layers, Doc, Sparkle]
 const BENEFIT_ICONS = [Calendar, Pen, Bolt, Wallet]
@@ -94,7 +94,7 @@ export function Landing() {
                 <span className={`${s.floatIcon} ${s.floatPink}`}>+</span>
                 <div>
                   <strong>{lang === 'fr' ? '184 nouveaux contacts' : '184 new contacts'}</strong>
-                  <span>{lang === 'fr' ? 'depuis la campagne WhatsApp' : 'from the WhatsApp campaign'}</span>
+                  <span>{lang === 'fr' ? 'depuis la campagne Meta' : 'from the Meta campaign'}</span>
                 </div>
               </div>
             </div>
