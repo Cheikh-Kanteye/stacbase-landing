@@ -3,7 +3,8 @@
 import { useState, type CSSProperties } from 'react'
 import { COPY, LINKS, PLAN_PRICES, PLATFORMS, TOOL_HUBS, type PlanCode } from '@/lib/copy'
 import { AdsWave, GoalRing } from './mock/Charts'
-import { AppShot, MiniCrm, MiniPosts } from './mock/Mocks'
+import { AppReport } from './mock/AppReport'
+import { MiniCrm, MiniPosts } from './mock/Mocks'
 import {
   ArrowDown, ArrowRight, ArrowUpRight, Bolt, Calendar, Chart, Chat, Check, Compass, Doc, Layers, Megaphone, Pen, Rocket,
   Sparkle, Users, Wallet,
@@ -79,7 +80,7 @@ export function Landing() {
             <div className={s.stripes} aria-hidden />
             <div className={`container ${s.heroFrame}`} data-reveal='scale' style={{ '--d': '500ms' } as CSSProperties}>
               <div className={s.tilt}>
-                <AppShot alt={lang === 'fr' ? 'Le rapport d’une campagne Google Display dans Stacbase (données de démonstration)' : 'A Google Display campaign report in Stacbase (demo data)'} />
+                <AppReport lang={lang} />
               </div>
               <div className={`${s.float} ${s.floatA}`}>
                 <span className={s.floatIcon}>
