@@ -195,7 +195,8 @@ export function AdHub({ lang, id }: { lang: Lang; id?: string }) {
   const active = tabs.active
   const p = t.products[active]
   const Icon = ICONS[active]
-  const tag = active === 3 ? [t.tags.early, t.tags.sn] : active === 4 ? [t.tags.new] : []
+  // WhatsApp n'est plus mis en avant : pas d'étiquette « Nouveau ».
+  const tag = active === 3 ? [t.tags.early, t.tags.sn] : []
   const color = COLORS[active]
 
   // Sens de l'échange : vers la droite quand on avance, vers la gauche sinon.

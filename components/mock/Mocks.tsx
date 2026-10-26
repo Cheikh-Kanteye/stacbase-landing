@@ -12,10 +12,10 @@ const T = {
     nav: ['Home', 'Campaigns', 'WhatsApp', 'CRM', 'E-mails', 'Analytics', 'Invoices', 'AI agent'],
     hello: 'Good morning, Jacob', today: 'Here is your day at ACME Studio',
     search: 'Search anything…',
-    kpis: [['Spend', '$1,240', '+12%'], ['Clicks', '8,432', '+8%'], ['Conversions', '312', '+21%'], ['WhatsApp delivered', '98%', '+3%']],
+    kpis: [['Spend', '$1,240', '+12%'], ['Clicks', '8,432', '+8%'], ['Conversions', '312', '+21%'], ['E-mails opened', '42%', '+3%']],
     perf: 'Campaign performance', last: 'Last 14 days', clicks: 'Clicks', conv: 'Conversions',
     sheet: 'Day sheet',
-    sheetItems: [['09:00', 'Review the Search campaign', 'done'], ['11:30', 'WhatsApp promo · 2,000 contacts', 'live'], ['14:00', 'Send the invoice to Maple Foods', 'todo'], ['16:30', 'Client call · Harbor Hotel', 'todo']],
+    sheetItems: [['09:00', 'Review the Search campaign', 'done'], ['11:30', 'E-mail newsletter · 2,000 contacts', 'live'], ['14:00', 'Send the invoice to Maple Foods', 'todo'], ['16:30', 'Client call · Harbor Hotel', 'todo']],
     campaigns: 'Campaigns', cols: ['Campaign', 'Channel', 'Status', 'Spend'],
     rows: [['Summer sale', 'Search', 'Live', '$420'], ['Brand awareness', 'Display', 'Live', '$310'], ['New collection', 'Meta', 'Paused', '$180']],
     live: 'Live', paused: 'Paused', delivered: 'Delivered', sent: 'Sent', reading: 'Read',
@@ -29,7 +29,7 @@ const T = {
     week: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
     posts: [[0, 'Instagram', 'Teaser'], [1, 'LinkedIn', 'Case study'], [2, 'Facebook', 'Promo'], [3, 'Instagram', 'Reel'], [4, 'LinkedIn', 'Hiring']],
     kanban: [['Contacted', ['Bloom Studio', 'Brooklyn Bikes']], ['Proposal', ['Harbor Hotel']], ['Won', ['Maple Foods', 'Summit Tech']]],
-    ask: 'Summarise last week’s campaigns and draft a WhatsApp follow-up for clients who clicked.',
+    ask: 'Summarise last week’s campaigns and draft an e-mail follow-up for clients who clicked.',
     answer: 'Spend $1,240 (+12%), 312 conversions. Search performs best (CPC $0.21). Draft ready for 184 contacts:',
     draft: '“Hello {first name}, thanks for your visit! Here is your −20% code: HARBOR20.”',
     agent: 'Stacbase agent',
@@ -38,10 +38,10 @@ const T = {
     nav: ['Accueil', 'Campagnes', 'WhatsApp', 'CRM', 'E-mails', 'Analytics', 'Factures', 'Agent IA'],
     hello: 'Bonjour, Jacob', today: 'Voici votre journée chez ACME Studio',
     search: 'Rechercher…',
-    kpis: [['Dépenses', '1 240 $', '+12 %'], ['Clics', '8 432', '+8 %'], ['Conversions', '312', '+21 %'], ['WhatsApp livrés', '98 %', '+3 %']],
+    kpis: [['Dépenses', '1 240 $', '+12 %'], ['Clics', '8 432', '+8 %'], ['Conversions', '312', '+21 %'], ['E-mails ouverts', '42 %', '+3 %']],
     perf: 'Performance des campagnes', last: '14 derniers jours', clicks: 'Clics', conv: 'Conversions',
     sheet: 'Feuille de service',
-    sheetItems: [['09:00', 'Revoir la campagne Search', 'done'], ['11:30', 'Promo WhatsApp · 2 000 contacts', 'live'], ['14:00', 'Envoyer la facture à Maple Foods', 'todo'], ['16:30', 'Appel client · Harbor Hotel', 'todo']],
+    sheetItems: [['09:00', 'Revoir la campagne Search', 'done'], ['11:30', 'Newsletter e-mail · 2 000 contacts', 'live'], ['14:00', 'Envoyer la facture à Maple Foods', 'todo'], ['16:30', 'Appel client · Harbor Hotel', 'todo']],
     campaigns: 'Campagnes', cols: ['Campagne', 'Canal', 'Statut', 'Dépenses'],
     rows: [['Soldes d’été', 'Search', 'En ligne', '420 $'], ['Notoriété', 'Display', 'En ligne', '310 $'], ['Nouvelle collection', 'Meta', 'En pause', '180 $']],
     live: 'En ligne', paused: 'En pause', delivered: 'Livrés', sent: 'Envoyés', reading: 'Lus',
@@ -55,7 +55,7 @@ const T = {
     week: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven'],
     posts: [[0, 'Instagram', 'Teaser'], [1, 'LinkedIn', 'Étude de cas'], [2, 'Facebook', 'Promo'], [3, 'Instagram', 'Reel'], [4, 'LinkedIn', 'Recrutement']],
     kanban: [['Contacté', ['Bloom Studio', 'Brooklyn Bikes']], ['Proposition', ['Harbor Hotel']], ['Gagné', ['Maple Foods', 'Summit Tech']]],
-    ask: 'Résume les campagnes de la semaine dernière et prépare une relance WhatsApp pour les clients qui ont cliqué.',
+    ask: 'Résume les campagnes de la semaine dernière et prépare une relance par e-mail pour les clients qui ont cliqué.',
     answer: 'Dépenses 1 240 $ (+12 %), 312 conversions. Le Search performe le mieux (CPC 0,21 $). Brouillon prêt pour 184 contacts :',
     draft: '« Bonjour {prénom}, merci de votre visite ! Voici votre code −20 % : HARBOR20. »',
     agent: 'Agent Stacbase',
@@ -275,6 +275,35 @@ export function MiniWhatsApp({ lang }: { lang: Lang }) {
           <i style={{ '--w': '92%' } as CSSProperties} />
         </div>
       </div>
+    </div>
+  )
+}
+
+const POSTS = {
+  en: { title: 'Scheduled posts', items: [['Mon 09:00', 'Instagram', 'New collection teaser'], ['Wed 12:30', 'LinkedIn', 'Client case study'], ['Fri 18:00', 'Facebook', 'Weekend offer']] },
+  fr: { title: 'Posts programmés', items: [['Lun 09:00', 'Instagram', 'Teaser nouvelle collection'], ['Mer 12:30', 'LinkedIn', 'Étude de cas client'], ['Ven 18:00', 'Facebook', 'Offre du week-end']] },
+} as const
+
+/** Publication sur les réseaux : trois posts programmés, un par réseau. */
+export function MiniPosts({ lang }: { lang: Lang }) {
+  const t = POSTS[lang]
+  return (
+    <div className={s.mini}>
+      <div className={s.cardHead}>
+        <p>{t.title}</p>
+      </div>
+      <ul className={s.pipe}>
+        {t.items.map(([when, net, label], i) => (
+          <li key={label} style={{ '--i': i } as CSSProperties}>
+            <span className={s.initials} data-tone={i}>{net[0]}</span>
+            <div>
+              <p>{label}</p>
+              <span>{when}</span>
+            </div>
+            <Pill tone={net === 'Instagram' ? 'pink' : net === 'LinkedIn' ? 'violet' : 'slate'}>{net}</Pill>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
