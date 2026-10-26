@@ -136,13 +136,11 @@ function ChapterVisual({ i, c, lang }: { i: number; c: Copy; lang: Lang }) {
     )
   if (i === 1)
     return (
-      <div className={`${s.visual} ${s.vTabs}`}>
-        {c.tabsPile.map((label, k) => (
-          <div key={label} className={s.tabCard} style={{ '--k': k } as CSSProperties}>
-            <span />
-            {label}
-          </div>
-        ))}
+      // Une vraie photo : quelqu'un noyé sous les papiers, plutôt qu'une pile
+      // d'onglets dessinés (retour du 2026-10-26).
+      <div className={`${s.visual} ${s.vPhoto}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src='/media/people/gars.jpeg' alt='' width={1080} height={810} loading='lazy' />
       </div>
     )
   if (i === 2)
