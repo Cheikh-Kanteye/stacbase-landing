@@ -1058,3 +1058,9 @@
   object-fit: cover;
   object-position: 50% 18%;
 }
+
+.shot {
+  display: block;
+  width: 100%;
+  height: auto;
+}

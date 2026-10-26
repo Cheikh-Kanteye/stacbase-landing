@@ -112,6 +112,25 @@ function Pill({ tone, children }: { tone: 'green' | 'amber' | 'violet' | 'slate'
 
 const channelTone = (c: string) => (c === 'Meta' ? 'pink' : c === 'Display' ? 'slate' : 'violet') as 'pink' | 'slate' | 'violet'
 
+/**
+ * La vraie interface de Stacbase (capture du rapport d'une campagne Google
+ * Display), dans le cadre de navigateur des maquettes.
+ */
+export function AppShot({ alt }: { alt: string }) {
+  return (
+    <div className={s.app}>
+      <div className={s.chrome}>
+        <span />
+        <span />
+        <span />
+        <p>work.stacbase.com</p>
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className={s.shot} src='/media/dashboard-stacbase.png' alt={alt} width={1920} height={995} />
+    </div>
+  )
+}
+
 /** Le tableau de bord complet, pour la première vue. */
 export function AppMock({ lang }: { lang: Lang }) {
   const t = T[lang]
