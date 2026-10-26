@@ -292,7 +292,7 @@ export function AdHub({ lang, id }: { lang: Lang; id?: string }) {
               ))}
             </p>
             <h2 className={s.title}>{p.title}</h2>
-            <p className={s.body}>{p.body}</p>
+            {/* Pas de description : le titre et l'aperçu suffisent (retour d'Abdou). */}
             <a className={s.more} href={`${APP}/${ROUTES[active]}`}>
               {t.more}
               <ArrowRight size={16} />
