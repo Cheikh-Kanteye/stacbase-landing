@@ -705,12 +705,43 @@
     border-radius: 16px;
   }
 
+  /* Sur mobile, chaque pixel compte : marges réduites, l'aperçu prend toute
+     la largeur de la carte (retour du 2026-10-26). */
+  .stage {
+    margin-top: 76px;
+    padding: 20px 6px 10px;
+  }
+
   .card {
-    padding: 22px 16px;
+    gap: 18px;
+    min-height: 0;
+    margin-top: 14px;
+    padding: 20px 12px 12px;
+    border-radius: 22px;
+  }
+
+  .text {
+    gap: 10px;
+    padding: 0 6px;
   }
 
   .visual {
-    padding: 14px;
+    min-height: 0;
+    padding: 14px 10px;
+    border-radius: 16px;
+  }
+
+  .visualSwap > * > *,
+  .phone {
+    width: 100% !important;
+  }
+
+  .banner {
+    min-height: 220px;
+  }
+
+  .siteBody {
+    grid-template-columns: 1fr 1.3fr;
   }
 
   .pillL,
