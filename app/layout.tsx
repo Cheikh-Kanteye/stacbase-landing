@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: 'Stacbase — 25+ tools in one system',
   description:
     'The everyday tools for modern digital marketers into one stack: campaigns, WhatsApp, CRM, e-mails, invoices and analytics. This OS doesn’t add another tab. It makes them disappear.',
-  icons: { icon: '/icon.png' },
+  icons: { icon: [{ url: '/favicon.ico', sizes: 'any' }, { url: '/icon.png', type: 'image/png' }], apple: '/apple-touch-icon.png' },
   openGraph: {
     title: 'Stacbase — 25+ tools in one system',
     description: 'The everyday tools for modern digital marketers into one stack.',
