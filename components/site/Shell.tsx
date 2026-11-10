@@ -6,11 +6,11 @@ import { ArrowUpRight, InstagramIcon, LinkedInIcon } from './icons'
 
 const NAV = {
   en: {
-    links: [['/#product', 'Product'], ['/#tools', 'Tools'], ['/#pricing', 'Pricing'], ['/adafri', 'Adafri']],
+    links: [['/#product', 'Product'], ['/#tools', 'Tools'], ['/#pricing', 'Pricing']],
     login: 'Sign in', start: 'Get started for free', menu: 'Menu', lang: 'Language',
   },
   fr: {
-    links: [['/#product', 'Produit'], ['/#tools', 'Outils'], ['/#pricing', 'Tarifs'], ['/adafri', 'Adafri']],
+    links: [['/#product', 'Produit'], ['/#tools', 'Outils'], ['/#pricing', 'Tarifs']],
     login: 'Se connecter', start: 'Commencer gratuitement', menu: 'Menu', lang: 'Langue',
   },
 } as const
