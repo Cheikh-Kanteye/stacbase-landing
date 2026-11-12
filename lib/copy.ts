@@ -99,6 +99,7 @@ export const COPY = {
       title: 'Your money should go into your growth. Not your tool addiction.',
       lead: 'Stop evaluating software one subscription at a time. Look at your entire workflow, and choose the plan that fits your needs. Prices in US dollars, billed monthly.',
       month: '/month',
+      perDay: 'that is {price} a day',
       recommended: 'Recommended',
       cta: { free: 'Get started for free', paid: 'Choose' },
       plans: {
@@ -203,6 +204,7 @@ export const COPY = {
       title: 'Votre argent doit servir votre croissance. Pas votre collection d’abonnements.',
       lead: 'Arrêtez d’évaluer vos logiciels un abonnement à la fois. Regardez votre travail dans son ensemble, puis choisissez le plan qui vous correspond. Prix en dollars US, facturés chaque mois.',
       month: '/mois',
+      perDay: 'soit {price} par jour',
       recommended: 'Recommandé',
       cta: { free: 'Commencer gratuitement', paid: 'Choisir' },
       plans: {

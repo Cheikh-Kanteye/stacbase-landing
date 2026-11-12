@@ -37,6 +37,11 @@ export function Landing() {
   const hub = hubs[tabs.active]
   const HubIcon = HUB_ICONS[tabs.active]
   const money = (n: number) => (lang === 'fr' ? `${n} $` : `$${n}`)
+  // Équivalent par jour (÷ 30) : 20 $ / mois ≈ 0,67 $ / jour, plus concret qu'un prix mensuel.
+  const perDay = (n: number) => {
+    const d = (n / 30).toFixed(2)
+    return c.pricing.perDay.replace('{price}', lang === 'fr' ? `${d.replace('.', ',')} $` : `$${d}`)
+  }
 
   const [manifesto, setManifesto] = useState(false)
 
@@ -439,6 +444,7 @@ export function Landing() {
                       <strong>{money(PLAN_PRICES[code])}</strong>
                       <span>{c.pricing.month}</span>
                     </p>
+                    {PLAN_PRICES[code] > 0 ? <p className={s.perDay}>{perDay(PLAN_PRICES[code])}</p> : null}
                     <p className={s.planTagline}>{tagline}</p>
                     <a className={`btn ${featured ? 'btn-primary' : 'btn-dark'} ${s.planCta}`} href={LINKS.signup}>
                       {code === 'free' ? c.pricing.cta.free : `${c.pricing.cta.paid} ${name}`}
