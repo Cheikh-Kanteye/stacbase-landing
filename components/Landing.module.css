@@ -675,6 +675,17 @@
   letter-spacing: -0.05em;
 }
 
+.perDay {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+[data-featured] .perDay {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .price span,
 .planTagline {
   color: var(--muted);
