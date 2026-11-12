@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, type CSSProperties } from 'react'
-import { COPY, LINKS, PLAN_PRICES, PLATFORMS, TOOL_HUBS, type PlanCode } from '@/lib/copy'
+import { COPY, LINKS, PLAN_NAMES, PLAN_PRICES, PLATFORMS, TOOL_HUBS, type PlanCode } from '@/lib/copy'
 import { AdsWave, GoalRing } from './mock/Charts'
 import { AppReport } from './mock/AppReport'
 import { MiniCrm, MiniPosts } from './mock/Mocks'
@@ -433,7 +433,7 @@ export function Landing() {
               {PLANS.map((code, i) => {
                 const [tagline, features] = c.pricing.plans[code]
                 const featured = code === 'pro'
-                const name = code[0].toUpperCase() + code.slice(1)
+                const name = PLAN_NAMES[code]
                 return (
                   <article key={code} className={s.plan} data-featured={featured || undefined} data-reveal style={{ '--d': `${i * 100}ms` } as CSSProperties}>
                     <div className={s.planHead}>

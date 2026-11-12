@@ -21,7 +21,9 @@ export const PLATFORMS = ['Google Ads', 'Meta', 'Instagram', 'WhatsApp', 'Linked
 export type PlanCode = 'free' | 'starter' | 'pro' | 'large'
 
 /** Tarifs du catalogue de l'API (`GET /plans`), en dollars par mois. */
-export const PLAN_PRICES: Record<PlanCode, number> = { free: 0, starter: 20, pro: 55, large: 150 }
+// Tarifs du 2026-11-12 : Starter devient Solo (5 $), Pro passe à 20 $ pour 5 personnes.
+export const PLAN_PRICES: Record<PlanCode, number> = { free: 0, starter: 5, pro: 20, large: 150 }
+export const PLAN_NAMES: Record<PlanCode, string> = { free: 'Free', starter: 'Solo', pro: 'Pro', large: 'Large' }
 
 export const COPY = {
   en: {
@@ -104,8 +106,8 @@ export const COPY = {
       cta: { free: 'Get started for free', paid: 'Choose' },
       plans: {
         free: ['For trying Stacbase on your own', ['Google & Meta campaigns', '3 connected accounts', '250 CRM contacts', '250 e-mails per month', '5 invoices per month', '1 website', 'AI assistant']],
-        starter: ['For freelancers who run real campaigns', ['Everything in Free', '1 WhatsApp number · 2,500 messages', '2,500 CRM contacts and e-mails', 'Unlimited projects, invoices and sites', '20 e-signatures per month', 'Analytics and HD video']],
-        pro: ['For agencies and growing teams', ['Everything in Starter', '15 connected accounts', '3 WhatsApp numbers · 10,000 messages', '10,000 CRM contacts and e-mails', '10 mailboxes', 'Unlimited e-signatures']],
+        starter: ['For solo workers', ['Everything in Free', 'Just you: 1 person', '1 WhatsApp number · 2,500 messages', '2,500 CRM contacts and e-mails', 'Unlimited projects, invoices and sites', '20 e-signatures per month', 'Analytics and HD video']],
+        pro: ['For teams of up to 5 people', ['Everything in Solo', 'Up to 5 people in the team', '15 connected accounts', '3 WhatsApp numbers · 10,000 messages', '10,000 CRM contacts and e-mails', '10 mailboxes', 'Unlimited e-signatures']],
         large: ['For teams running many brands', ['Everything in Pro', 'Unlimited connected accounts', '10 WhatsApp numbers · 25,000 messages', 'Unlimited CRM contacts', '25,000 e-mails per month', 'Unlimited mailboxes and social accounts']],
       } as Record<PlanCode, [string, string[]]>,
     },
@@ -209,8 +211,8 @@ export const COPY = {
       cta: { free: 'Commencer gratuitement', paid: 'Choisir' },
       plans: {
         free: ['Pour découvrir Stacbase en solo', ['Campagnes Google et Meta', '3 comptes connectés', '250 contacts CRM', '250 e-mails par mois', '5 factures par mois', '1 site web', 'Assistant IA']],
-        starter: ['Pour les freelances qui lancent de vraies campagnes', ['Tout le plan Free', '1 numéro WhatsApp · 2 500 messages', '2 500 contacts CRM et e-mails', 'Projets, factures et sites illimités', '20 signatures électroniques par mois', 'Analytics et vidéo HD']],
-        pro: ['Pour les agences et les équipes qui grandissent', ['Tout le plan Starter', '15 comptes connectés', '3 numéros WhatsApp · 10 000 messages', '10 000 contacts CRM et e-mails', '10 boîtes mail', 'Signatures électroniques illimitées']],
+        starter: ['Pour travailler seul', ['Tout le plan Free', 'Pour vous seul : 1 personne', '1 numéro WhatsApp · 2 500 messages', '2 500 contacts CRM et e-mails', 'Projets, factures et sites illimités', '20 signatures électroniques par mois', 'Analytics et vidéo HD']],
+        pro: ['Pour travailler en équipe, jusqu’à 5 personnes', ['Tout le plan Solo', 'Jusqu’à 5 personnes dans l’équipe', '15 comptes connectés', '3 numéros WhatsApp · 10 000 messages', '10 000 contacts CRM et e-mails', '10 boîtes mail', 'Signatures électroniques illimitées']],
         large: ['Pour les équipes qui gèrent plusieurs marques', ['Tout le plan Pro', 'Comptes connectés illimités', '10 numéros WhatsApp · 25 000 messages', 'Contacts CRM illimités', '25 000 e-mails par mois', 'Boîtes mail et comptes sociaux illimités']],
       } as Record<PlanCode, [string, string[]]>,
     },
