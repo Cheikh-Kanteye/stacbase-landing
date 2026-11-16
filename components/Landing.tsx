@@ -7,7 +7,7 @@ import { AppReport } from './mock/AppReport'
 import { MiniCrm, MiniPosts } from './mock/Mocks'
 import {
   ArrowDown, ArrowRight, ArrowUpRight, Bolt, Calendar, Chart, Chat, Check, Compass, Doc, Layers, Megaphone, Pen, Rocket,
-  Sparkle, Users, Wallet,
+  Users, Wallet,
 } from './site/icons'
 import { Faq } from './site/Faq'
 import { Manifesto } from './site/Manifesto'
@@ -19,9 +19,9 @@ import s from './Landing.module.css'
 // Courbe Meta / Google et anneau d'objectif : les graphiques repris de Qarin.
 const MINIS = [AdsWave, MiniPosts, MiniCrm, GoalRing]
 const PLANS: PlanCode[] = ['free', 'starter', 'pro', 'large']
-const HUB_ICONS = [Megaphone, Chart, Chat, Layers, Doc, Sparkle]
+const HUB_ICONS = [Megaphone, Chart, Chat, Layers, Doc, Bolt]
 const BENEFIT_ICONS = [Calendar, Pen, Bolt, Wallet]
-const AUDIENCE_ICONS = [Megaphone, Users, Sparkle, Rocket]
+const AUDIENCE_ICONS = [Megaphone, Users, Bolt, Rocket]
 // Montants d'illustration de la pile d'abonnements, en dollars par mois.
 const BILLS = [12, 29, 19, 49, 25, 15, 39]
 
@@ -58,7 +58,7 @@ export function Landing() {
           <div className={`container ${s.heroText}`}>
             <span className={`badge ${s.heroBadge}`}>
               <span className='badge-icon'>
-                <Sparkle size={13} />
+                <Rocket size={13} />
               </span>
               {c.hero.badge}
             </span>
@@ -252,7 +252,7 @@ export function Landing() {
             <header className={s.center}>
               <span className='badge badge-dark' data-reveal>
                 <span className='badge-icon'>
-                  <Sparkle size={13} />
+                  <Layers size={13} />
                 </span>
                 {c.tools.badge}
               </span>
@@ -451,7 +451,6 @@ export function Landing() {
                     <p className={s.planTagline}>{tagline}</p>
                     {CO_OWN_PLANS.includes(code) ? (
                       <a className={s.coOwn} href='#invest'>
-                        <Sparkle size={12} />
                         {c.pricing.coOwn}
                       </a>
                     ) : null}
@@ -482,7 +481,7 @@ export function Landing() {
             <div className={s.investText}>
               <span className='badge badge-dark'>
                 <span className='badge-icon'>
-                  <Sparkle size={13} />
+                  <Wallet size={13} />
                 </span>
                 {c.invest.badge}
               </span>

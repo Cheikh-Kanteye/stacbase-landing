@@ -4,7 +4,7 @@
 import type { CSSProperties } from 'react'
 import type { Lang } from '@/lib/copy'
 import {
-  Bell, Calendar, Chart, Chat, Doc, Globe, Home, Image, Mail, Megaphone, Phone, Search, Sparkle, Thumb, Users,
+  Bell, Calendar, Chart, Chat, Doc, Globe, Home, Image, Mail, Bolt, Megaphone, Phone, Search, Thumb, Users,
 } from '../site/icons'
 import s from './AppReport.module.css'
 
@@ -43,7 +43,7 @@ const T = {
 
 const RAIL_ICONS = [Home, Chat, Chart, Megaphone, Calendar, Doc]
 const SUB_ICONS = [Thumb, Image, Globe, Phone, Chat, Mail]
-const KPI_ICONS = [Megaphone, Search, Sparkle, Chart, Users]
+const KPI_ICONS = [Megaphone, Search, Bolt, Chart, Users]
 const DEVICE_COLORS = ['#7c3aed', '#38bdf8', '#2dd4bf', '#94a3b8']
 
 // 30 jours d'impressions et de clics, en coordonnées 0–100.
@@ -96,7 +96,7 @@ export function AppReport({ lang }: { lang: Lang }) {
             )
           })}
           <span className={`${s.railItem} ${s.railFoot}`}>
-            <Sparkle size={15} />
+            <Bolt size={15} />
             {t.connectors}
           </span>
         </nav>

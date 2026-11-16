@@ -3,7 +3,7 @@
 import type { CSSProperties } from 'react'
 import type { Lang } from '@/lib/copy'
 import {
-  Bell, Calendar, Chart, Chat, Check, Doc, Home, Mail, Megaphone, Pen, Search, Sparkle, Users, Wallet,
+  Bell, Bolt, Calendar, Chart, Chat, Check, Doc, Home, Mail, Megaphone, Pen, Search, Users, Wallet,
 } from '../site/icons'
 import s from './Mocks.module.css'
 
@@ -62,7 +62,7 @@ const T = {
   },
 } as const
 
-const NAV_ICONS = [Home, Megaphone, Chat, Users, Mail, Chart, Wallet, Sparkle]
+const NAV_ICONS = [Home, Megaphone, Chat, Users, Mail, Chart, Wallet, Bolt]
 
 // Courbes du graphique (14 points), en coordonnées 0–100.
 const CLICKS = [38, 42, 40, 51, 48, 57, 55, 63, 60, 70, 66, 74, 79, 86]
@@ -589,7 +589,7 @@ function AiView({ lang }: { lang: Lang }) {
       <div className={s.ask}>{t.ask}</div>
       <div className={s.answer}>
         <span className={s.agentName}>
-          <Sparkle size={14} /> {t.agent}
+          <Chat size={14} /> {t.agent}
         </span>
         <p>{t.answer}</p>
         <p className={s.draft}>{t.draft}</p>
@@ -599,4 +599,4 @@ function AiView({ lang }: { lang: Lang }) {
 }
 
 export const POWER_VIEWS = [AdsView, WhatsAppView, CrmView, ContentView, DocsView, AiView]
-export const POWER_ICONS = [Megaphone, Chat, Users, Calendar, Doc, Sparkle]
+export const POWER_ICONS = [Megaphone, Chat, Users, Calendar, Doc, Bolt]
