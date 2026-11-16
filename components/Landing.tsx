@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, type CSSProperties } from 'react'
-import { COPY, LINKS, PLAN_NAMES, PLAN_PRICES, PLATFORMS, TOOL_HUBS, type PlanCode } from '@/lib/copy'
+import { CO_OWN_PLANS, COPY, LINKS, PLAN_NAMES, PLAN_PRICES, PLATFORMS, TOOL_HUBS, annualPrice, type PlanCode } from '@/lib/copy'
 import { AdsWave, GoalRing } from './mock/Charts'
 import { AppReport } from './mock/AppReport'
 import { MiniCrm, MiniPosts } from './mock/Mocks'
@@ -42,6 +42,8 @@ export function Landing() {
     const d = (n / 30).toFixed(2)
     return c.pricing.perDay.replace('{price}', lang === 'fr' ? `${d.replace('.', ',')} $` : `$${d}`)
   }
+  // L'annuel : 12 mois d'un coup, 20 % de moins — et la voie vers la co-propriété.
+  const yearly = (n: number) => c.pricing.yearly.replace('{price}', money(annualPrice(n)))
 
   const [manifesto, setManifesto] = useState(false)
 
@@ -445,7 +447,14 @@ export function Landing() {
                       <span>{c.pricing.month}</span>
                     </p>
                     {PLAN_PRICES[code] > 0 ? <p className={s.perDay}>{perDay(PLAN_PRICES[code])}</p> : null}
+                    {PLAN_PRICES[code] > 0 ? <p className={s.perDay}>{yearly(PLAN_PRICES[code])}</p> : null}
                     <p className={s.planTagline}>{tagline}</p>
+                    {CO_OWN_PLANS.includes(code) ? (
+                      <a className={s.coOwn} href='#invest'>
+                        <Sparkle size={12} />
+                        {c.pricing.coOwn}
+                      </a>
+                    ) : null}
                     <a className={`btn ${featured ? 'btn-primary' : 'btn-dark'} ${s.planCta}`} href={LINKS.signup}>
                       {code === 'free' ? c.pricing.cta.free : `${c.pricing.cta.paid} ${name}`}
                     </a>

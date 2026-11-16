@@ -12,7 +12,7 @@ export const LINKS = {
   instagram: 'https://www.instagram.com/app.stacbase/',
   linkedin: 'https://www.linkedin.com/company/stacbase/',
   /** Devenir co-propriétaire de Stacbase (page « Own the thing you use » de l'app). */
-  invest: `${APP}/dashboard/build-with-us`,
+  invest: `${APP}/dashboard/billing`,
 }
 
 /** Les plateformes réellement branchées dans l'application. */
@@ -23,6 +23,11 @@ export type PlanCode = 'free' | 'starter' | 'pro' | 'large'
 /** Tarifs du catalogue de l'API (`GET /plans`), en dollars par mois. */
 // Tarifs du 2026-11-12 : Starter devient Solo (5 $), Pro passe à 20 $ pour 5 personnes.
 export const PLAN_PRICES: Record<PlanCode, number> = { free: 0, starter: 5, pro: 20, large: 150 }
+/** Remise de l'annuel : 12 mois d'un coup, 20 % de moins. Pro 20 $ → 192 $/an. */
+export const ANNUAL_DISCOUNT = 0.2
+export const annualPrice = (monthly: number) => Math.round(monthly * 12 * (1 - ANNUAL_DISCOUNT))
+/** Les plans qui donnent des parts de co-propriété (annuel, ou 12 mois consécutifs). */
+export const CO_OWN_PLANS: PlanCode[] = ['pro', 'large']
 export const PLAN_NAMES: Record<PlanCode, string> = { free: 'Free', starter: 'Solo', pro: 'Pro', large: 'Large' }
 
 export const COPY = {
@@ -99,9 +104,11 @@ export const COPY = {
     pricing: {
       badge: 'Pricing',
       title: 'Your money should go into your growth. Not your tool addiction.',
-      lead: 'Stop evaluating software one subscription at a time. Look at your entire workflow, and choose the plan that fits your needs. Prices in US dollars, billed monthly.',
+      lead: 'Stop evaluating software one subscription at a time. Look at your entire workflow, and choose the plan that fits your needs. Prices in US dollars, billed monthly or yearly (20% off).',
       month: '/month',
       perDay: 'that is {price} a day',
+      yearly: 'or {price}/year (−20%)',
+      coOwn: 'Co-ownership shares',
       recommended: 'Recommended',
       cta: { free: 'Get started for free', paid: 'Choose' },
       plans: {
@@ -123,11 +130,11 @@ export const COPY = {
       more: 'Read the Adafri story',
     },
     invest: {
-      badge: 'Become a co-owner',
-      title: 'Own the tool you use.',
-      lead: 'Users are the real value behind software. Stacbase shares it: invest and become a co-owner of what we are building together.',
-      points: ['Co-owner via Stacbase SPV Inc.', 'Every module, no time limit', 'A vote on every release'],
-      cta: 'Invest in Stacbase',
+      badge: 'USE. PAY. CO-OWN.',
+      title: 'Don’t just use the software. Own a part of its future.',
+      lead: 'Users are the real value behind software. Stacbase shares it: Pro and Large subscribers receive co-ownership shares, by paying for the year upfront (20% off) or after 12 consecutive months.',
+      points: ['Co-owner via Stacbase SPV Inc.', 'Pro or Large yearly: shares from day one', 'Pro monthly: shares after 12 consecutive months'],
+      cta: 'Choose Pro yearly',
       manifesto: 'Read the manifesto',
     },
   },
@@ -204,9 +211,11 @@ export const COPY = {
     pricing: {
       badge: 'Tarifs',
       title: 'Votre argent doit servir votre croissance. Pas votre collection d’abonnements.',
-      lead: 'Arrêtez d’évaluer vos logiciels un abonnement à la fois. Regardez votre travail dans son ensemble, puis choisissez le plan qui vous correspond. Prix en dollars US, facturés chaque mois.',
+      lead: 'Arrêtez d’évaluer vos logiciels un abonnement à la fois. Regardez votre travail dans son ensemble, puis choisissez le plan qui vous correspond. Prix en dollars US, facturés chaque mois ou à l’année (−20 %).',
       month: '/mois',
       perDay: 'soit {price} par jour',
+      yearly: 'ou {price}/an (−20 %)',
+      coOwn: 'Parts de co-propriété',
       recommended: 'Recommandé',
       cta: { free: 'Commencer gratuitement', paid: 'Choisir' },
       plans: {
@@ -228,11 +237,11 @@ export const COPY = {
       more: 'Lire l’histoire d’Adafri',
     },
     invest: {
-      badge: 'Devenir co-propriétaire',
-      title: 'Possédez l’outil que vous utilisez.',
-      lead: 'Les utilisateurs sont la vraie valeur des logiciels. Stacbase la partage : investissez et devenez co-propriétaire de ce que nous construisons ensemble.',
-      points: ['Co-propriétaire via Stacbase SPV Inc.', 'Tous les modules, sans limite de durée', 'Une voix sur chaque version'],
-      cta: 'Investir dans Stacbase',
+      badge: 'USE. PAY. CO-OWN.',
+      title: 'N’utilisez pas seulement le logiciel. Possédez une part de son avenir.',
+      lead: 'Les utilisateurs sont la vraie valeur des logiciels. Stacbase la partage : les abonnés Pro et Large reçoivent des parts de co-propriété, en payant l’année d’un coup (−20 %) ou après 12 mois consécutifs.',
+      points: ['Co-propriétaire via Stacbase SPV Inc.', 'Pro ou Large à l’année : des parts dès le premier jour', 'Pro au mois : des parts après 12 mois consécutifs'],
+      cta: 'Choisir Pro à l’année',
       manifesto: 'Lire le manifeste',
     },
   },
