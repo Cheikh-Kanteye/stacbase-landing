@@ -702,6 +702,27 @@
   margin: 0;
 }
 
+/* Pro et Large : les parts de co-propriete, en un mot, qui renvoie a la section. */
+.coOwn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 0 0 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgb(124 58 237 / 0.1);
+  color: var(--violet);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+[data-featured] .coOwn {
+  background: rgb(255 255 255 / 0.14);
+  color: #fff;
+}
+
 .planCta {
   width: 100%;
 }
