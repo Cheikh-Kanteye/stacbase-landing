@@ -6,7 +6,7 @@ import { AdHub } from './AdHub'
 import { MiniCampaign, MiniCrm } from './mock/Mocks'
 import {
   ArrowDown, ArrowRight, ArrowUpRight, Bolt, Calendar, Chart, Chat, Compass, Doc, Globe, Heart, Mail, Megaphone, Pen,
-  Quote, Rocket, Sparkle, Users, Wallet,
+  Quote, Rocket, Users, Wallet,
 } from './site/icons'
 import { Faq } from './site/Faq'
 import { useLang } from './site/lang'
@@ -104,7 +104,7 @@ const CHAPTER_ICONS = [Compass, Bolt, Rocket, Heart]
 // `null` : le chapitre ouvre le manifeste (la lettre à la communauté).
 const CHAPTER_LINKS: (string | null)[] = [null, null, PRODUCTS, null]
 // Un pictogramme par hub, dans l'ordre de `TOOL_HUBS`.
-const HUB_ICONS = [Megaphone, Chart, Chat, Calendar, Doc, Sparkle]
+const HUB_ICONS = [Megaphone, Chart, Chat, Calendar, Doc, Bolt]
 const SPLIT_ICONS = [Megaphone, Users, Chat]
 
 type Copy = (typeof story)['fr']
@@ -317,7 +317,7 @@ export function AdafriStory() {
           <div className={s.splitText}>
             <span className='badge' data-reveal>
               <span className='badge-icon'>
-                <Sparkle size={13} />
+                <Compass size={13} />
               </span>
               {c.split.badge}
             </span>
