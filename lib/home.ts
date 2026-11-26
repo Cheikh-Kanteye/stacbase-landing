@@ -15,7 +15,7 @@ export const HOME = {
     hero: {
       alt: 'Three friends laughing, seen from below against a blue sky',
       title: 'Built for digital marketers. Owned by them.',
-      lead: 'You’re paying for a growing stack of software just to keep your work together, and managing your tools has become a job of its own. Enough is enough.',
+      lead: 'Too many tools. Too many subscriptions. Enough.',
       chipsLabel: 'Who it is for',
       chips: ['Community managers', 'Social media managers', 'Content creators', 'Agencies and freelancers'],
       note: 'Membership open. Co-ownership from day one on Pro yearly.',
@@ -43,7 +43,7 @@ export const HOME = {
     ],
     trioCta: 'See how co-ownership works',
     calc: {
-      title: 'How much have you rented so far?',
+      title: 'How much have you spent on software you’ll never own?',
       lead: 'Tick the tools you pay for. The prices are examples: change them to what you actually pay each month.',
       tools: ['Social scheduler', 'Notes and docs', 'Ads reporting', 'Email marketing', 'Project and tasks', 'Team chat', 'Invoicing', 'E-signature'],
       priceLabel: 'Monthly price for {tool}',
@@ -77,7 +77,7 @@ export const HOME = {
     hero: {
       alt: 'Trois amies qui rient, vues d’en bas sur un ciel bleu',
       title: 'Pensé pour les marketeurs digitaux. Détenu par eux.',
-      lead: 'Vous payez une pile grandissante de logiciels juste pour garder votre travail en un seul morceau, et gérer vos outils est devenu un métier à part entière. Ça suffit.',
+      lead: 'Trop d’outils, trop d’abonnements. Ça suffit.',
       chipsLabel: 'Pour qui',
       chips: ['Community managers', 'Social media managers', 'Créateurs de contenu', 'Agences et freelances'],
       note: 'Adhésion ouverte. Co-propriété dès le premier jour avec Pro à l’année.',
@@ -105,7 +105,7 @@ export const HOME = {
     ],
     trioCta: 'Voir comment marche la co-propriété',
     calc: {
-      title: 'Combien avez-vous déjà payé en location ?',
+      title: 'Combien payez-vous pour les outils des autres ?',
       lead: 'Cochez les outils que vous payez. Les prix sont des exemples : mettez ce que vous payez vraiment chaque mois.',
       tools: ['Programmation des réseaux', 'Notes et documents', 'Rapports publicitaires', 'E-mail marketing', 'Projets et tâches', 'Chat d’équipe', 'Facturation', 'Signature électronique'],
       priceLabel: 'Prix mensuel pour {tool}',
