@@ -35,12 +35,13 @@
 }
 
 .section[data-pinned='true'] .inner {
-  gap: clamp(14px, 2.2vh, 24px);
+  gap: clamp(18px, 2.6vh, 26px);
   padding-block: clamp(20px, 3.4vh, 40px) clamp(14px, 2vh, 24px);
 }
 
 .head {
   display: flex;
+  flex: none;
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
@@ -65,8 +66,11 @@
 
 /* ── Pastilles des hubs ───────────────────────────────────────────────── */
 
+/* flex: none : la rangée défile en largeur, donc sans cela la colonne
+   l'écrase en hauteur sur les écrans bas et elle colle à la fenêtre. */
 .pills {
   display: flex;
+  flex: none;
   gap: 8px;
   overflow-x: auto;
   scrollbar-width: none;
