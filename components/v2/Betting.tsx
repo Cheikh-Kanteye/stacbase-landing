@@ -126,6 +126,7 @@ export function Betting({ lang }: { lang: Lang }) {
         brand={brand}
         navLabel={t.navLabel}
         links={t.nav}
+        menu={t.menu}
         cta={
           <a href='#contact' className={`${ui.btn} ${ui.btnPop}`}>
             {t.cta}
@@ -144,6 +145,7 @@ export function Betting({ lang }: { lang: Lang }) {
               brand={brand}
               navLabel={t.navLabel}
               links={t.nav}
+              menu={t.menu}
               lang={
                 <div className={ui.lang} role='group' aria-label={t.langLabel}>
                   {LANGS.map((code) => (

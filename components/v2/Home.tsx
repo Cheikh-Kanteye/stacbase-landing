@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { CO_OWN_PLANS, COPY, LANGS, LINKS, PLAN_NAMES, PLAN_PRICES, annualPrice, type Lang, type PlanCode } from '@/lib/copy'
 import { CALC_DEFAULTS, HOME } from '@/lib/home'
 import { Manifesto } from '../site/Manifesto'
@@ -144,55 +144,6 @@ function Calculator({ lang }: { lang: Lang }) {
   )
 }
 
-function SignForm({ lang }: { lang: Lang }) {
-  const t = HOME[lang].sign
-  const [email, setEmail] = useState('')
-  const [error, setError] = useState('')
-
-  const submit = (event: FormEvent) => {
-    event.preventDefault()
-    const value = email.trim()
-    if (value === '') return setError(t.empty)
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return setError(t.invalid)
-    // La signature ouvre l'inscription de l'application, e-mail déjà rempli.
-    window.location.href = `${LINKS.signup}?email=${encodeURIComponent(value)}&lang=${lang}`
-  }
-
-  return (
-    <form className={s.signForm} onSubmit={submit} noValidate data-reveal>
-      <label htmlFor='sign-email'>{t.label}</label>
-      <div>
-        <input
-          id='sign-email'
-          type='email'
-          autoComplete='email'
-          placeholder={t.placeholder}
-          value={email}
-          aria-invalid={error !== ''}
-          aria-describedby={error ? 'sign-error' : 'sign-note'}
-          onChange={(e) => {
-            setEmail(e.target.value)
-            setError('')
-          }}
-        />
-        <button type='submit' className={`${ui.btn} ${ui.btnInk}`}>
-          {t.button}
-          <Arrow />
-        </button>
-      </div>
-      {error ? (
-        <p id='sign-error' role='alert' className={s.signError}>
-          {error}
-        </p>
-      ) : (
-        <p id='sign-note' className={s.signNote}>
-          {t.note}
-        </p>
-      )}
-    </form>
-  )
-}
-
 export function Home() {
   const [lang, choose] = useLang('en')
   const t = HOME[lang]
@@ -219,9 +170,10 @@ export function Home() {
         brand='stacbase'
         navLabel={t.navLabel}
         links={t.nav}
+        menu={t.menu}
         yieldTo='#workspace'
         cta={
-          <a href='#join' className={`${ui.btn} ${ui.btnPop}`}>
+          <a href={LINKS.signup} className={`${ui.btn} ${ui.btnPop}`}>
             {t.join}
           </a>
         }
@@ -238,9 +190,10 @@ export function Home() {
               brand='stacbase'
               navLabel={t.navLabel}
               links={navLinks}
+              menu={t.menu}
               lang={langSwitch}
               cta={
-                <a href='#join' className={`${ui.btn} ${ui.btnWhite} ${ui.btnSm}`}>
+                <a href={LINKS.signup} className={`${ui.btn} ${ui.btnWhite} ${ui.btnSm}`}>
                   {t.join}
                 </a>
               }
@@ -259,7 +212,7 @@ export function Home() {
                   ))}
                 </ul>
                 <div className={s.heroCta} data-reveal style={{ '--d': '740ms' } as CSSProperties}>
-                  <a href='#join' className={`${ui.btn} ${ui.btnPop}`}>
+                  <a href={LINKS.signup} className={`${ui.btn} ${ui.btnPop}`}>
                     {t.join}
                     <Arrow />
                   </a>
@@ -424,20 +377,6 @@ export function Home() {
           <Questions items={c.faq.items as unknown as readonly (readonly [string, string])[]} />
         </section>
 
-        {/* ── Signer ──────────────────────────────────────────────────── */}
-        <section id='join' className={s.sign} aria-labelledby='sign-title'>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src='/media/people/grid-1400.jpg' alt={c.audience.photoAlt} width={1400} height={788} loading='lazy' data-reveal='scale' />
-          <div>
-            <h2 id='sign-title' className={ui.h2}>
-              <Words text={t.sign.title} />
-            </h2>
-            <p className={ui.lead} data-reveal>
-              {t.sign.lead}
-            </p>
-            <SignForm lang={lang} />
-          </div>
-        </section>
       </main>
 
       <footer className={`${ui.wrap} ${ui.footer}`}>

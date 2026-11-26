@@ -8,6 +8,7 @@ export const HOME = {
   en: {
     nav: [['#manifesto', 'Manifesto'], ['#workspace', 'Workspace'], ['#membership', 'Membership']],
     navLabel: 'Main',
+    menu: { open: 'Menu', close: 'Close the menu' },
     langLabel: 'Language',
     signIn: 'Sign in',
     join: 'Join the movement',
@@ -59,16 +60,6 @@ export const HOME = {
     },
     membership: { lead: 'Prices in USD. Pay monthly, or yearly with 20% off.' },
     faqTitle: 'Before you add another tool, read this.',
-    sign: {
-      title: 'Sign the manifesto.',
-      lead: 'We stop renting the tools we build our careers on. We use what works, we pay a fair price, and we own a part of what we use.',
-      label: 'Work email',
-      placeholder: 'you@company.com',
-      button: 'Sign the manifesto',
-      note: 'Signing opens your free Stacbase account. No card needed.',
-      empty: 'Enter your work email to sign.',
-      invalid: 'That email looks incomplete. Example: you@company.com',
-    },
     footer: {
       nav: 'Footer',
       links: [['#manifesto', 'Manifesto'], ['#workspace', 'Workspace'], ['#membership', 'Membership'], ['/adafri', 'About'], ['/careers', 'Careers'], ['/en/sports-betting-advertising', 'Betting advertising']],
@@ -79,6 +70,7 @@ export const HOME = {
   fr: {
     nav: [['#manifesto', 'Manifeste'], ['#workspace', 'Espace de travail'], ['#membership', 'Adhésion']],
     navLabel: 'Principal',
+    menu: { open: 'Menu', close: 'Fermer le menu' },
     langLabel: 'Langue',
     signIn: 'Se connecter',
     join: 'Rejoindre le mouvement',
@@ -130,16 +122,6 @@ export const HOME = {
     },
     membership: { lead: 'Prix en dollars US. Payez au mois, ou à l’année avec 20 % de remise.' },
     faqTitle: 'Avant d’ajouter un outil de plus, lisez ceci.',
-    sign: {
-      title: 'Signez le manifeste.',
-      lead: 'Nous arrêtons de louer les outils sur lesquels nous bâtissons nos carrières. Nous utilisons ce qui marche, nous payons un prix juste, et nous possédons une part de ce que nous utilisons.',
-      label: 'E-mail professionnel',
-      placeholder: 'vous@entreprise.com',
-      button: 'Signer le manifeste',
-      note: 'Signer ouvre votre compte Stacbase gratuit. Sans carte bancaire.',
-      empty: 'Indiquez votre e-mail professionnel pour signer.',
-      invalid: 'Cet e-mail semble incomplet. Exemple : vous@entreprise.com',
-    },
     footer: {
       nav: 'Pied de page',
       links: [['#manifesto', 'Manifeste'], ['#workspace', 'Espace de travail'], ['#membership', 'Adhésion'], ['/adafri', 'À propos'], ['/careers', 'Carrières'], ['/publicite-paris-sportifs', 'Publicité paris sportifs']],
