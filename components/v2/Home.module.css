@@ -1,0 +1,868 @@
+.home {
+  --shade: 16 10 28;
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+
+.heroImg {
+  object-position: center 55%;
+}
+
+.heroBody {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.heroText {
+  display: flex;
+  flex: 1 1 560px;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 860px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.55);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.heroCta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* Le panneau « Pensé pour » : des métiers qui défilent, pas de faux témoignages. */
+.crowd {
+  display: flex;
+  flex: 0 1 380px;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 24px;
+  background: rgb(250 246 242 / 0.86);
+  color: var(--ink);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.crowdHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.crowdHead button {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.crowdWindow {
+  height: 252px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 44px, #000 208px, transparent 252px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 44px, #000 208px, transparent 252px);
+}
+
+.crowdWindow ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0 0 10px;
+  list-style: none;
+  animation: crowd-up 44s linear infinite;
+}
+
+.crowdWindow ul[data-paused],
+.crowd:hover ul {
+  animation-play-state: paused;
+}
+
+@keyframes crowd-up {
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.crowdWindow li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--rule);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.face {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--sand) url('/media/people/faces.jpg') no-repeat;
+}
+
+.crowdWindow li div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.crowdWindow b {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.crowdWindow li span:last-child {
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+/* ── Use. Pay. Co-own. ────────────────────────────────────────────────── */
+
+.trio {
+  position: relative;
+}
+
+.trioPanel {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  min-height: 100svh;
+  padding: 96px var(--pad);
+  background: var(--cream);
+  text-align: center;
+}
+
+.trioPanel[data-tone='1'],
+.trioPanel[data-tone='2'] {
+  border-radius: 40px 40px 0 0;
+  box-shadow: 0 -30px 60px -40px rgb(26 21 35 / 0.35);
+}
+
+.trioPanel[data-tone='1'] {
+  background: var(--sand);
+}
+
+.trioPanel[data-tone='2'] {
+  background: var(--accent);
+  color: #fff;
+}
+
+.trioPanel h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(88px, 17vw, 240px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+}
+
+.trioPanel p {
+  max-width: 580px;
+  margin: 0;
+  color: var(--ink-2);
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.trioPanel[data-tone='2'] p {
+  color: #ede7ff;
+}
+
+/* ── Calculateur ──────────────────────────────────────────────────────── */
+
+.calc {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 56px;
+  padding-block: clamp(80px, 9vw, 120px);
+}
+
+.calcForm {
+  display: flex;
+  flex: 1 1 520px;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.calcForm > p {
+  max-width: 520px;
+}
+
+.toolList {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule);
+}
+
+.toolRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+  border-bottom: 1px solid var(--rule);
+  transition: opacity 0.3s ease;
+}
+
+.toolName {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.toolName input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.toolRow[data-off] .toolName span,
+.toolRow[data-off] .toolPrice {
+  opacity: 0.5;
+}
+
+.toolPrice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 15px;
+  transition: opacity 0.3s ease;
+}
+
+.toolPrice input {
+  width: 76px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1.5px solid #d9d4e5;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  transition: border-color 0.2s ease;
+}
+
+.toolPrice input:hover,
+.toolPrice input:focus {
+  border-color: var(--accent);
+}
+
+.calc .toolPrice input:focus-visible {
+  border-radius: 10px;
+}
+
+.years {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.years input {
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.years input::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent) var(--fill), #dcd5cc var(--fill));
+}
+
+.years input::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent) var(--fill), #dcd5cc var(--fill));
+}
+
+.years input::-webkit-slider-thumb {
+  width: 26px;
+  height: 26px;
+  margin-top: -10px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 2px 8px rgb(26 21 35 / 0.3);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.years input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 2px 8px rgb(26 21 35 / 0.3);
+}
+
+.calcResult {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex: 1 1 420px;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.rented,
+.owned {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: 28px;
+}
+
+.rented {
+  background: var(--ink);
+  color: #fff;
+}
+
+.rented > span {
+  color: #c9c2da;
+  font-size: 16px;
+}
+
+.owned {
+  background: #f3f1f8;
+}
+
+.owned > span {
+  color: var(--ink-2);
+  font-size: 16px;
+}
+
+.rented strong,
+.owned strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(48px, 5.4vw, 76px);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+.owned strong {
+  color: var(--accent);
+  font-size: clamp(40px, 4.4vw, 60px);
+}
+
+/* Les deux barres, à la même échelle : la différence se voit avant de se lire. */
+.rented i,
+.owned i {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--pop);
+  transform: scaleX(var(--w));
+  transform-origin: 0 50%;
+  transition: transform 0.6s var(--ease);
+}
+
+.owned i {
+  background: var(--accent);
+}
+
+.rented p,
+.owned p {
+  margin: 0;
+  font-size: 18px;
+}
+
+.owned .keep {
+  color: var(--ink-2);
+  font-size: 16px;
+}
+
+.legal {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ── Adhésion ─────────────────────────────────────────────────────────── */
+
+.membership {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-block: 0 clamp(80px, 9vw, 120px);
+}
+
+.membership header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 860px;
+}
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px #e2dbd3;
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), opacity 0.9s var(--ease) var(--d, 0ms), filter 0.9s var(--ease) var(--d, 0ms) !important;
+}
+
+.plan:hover {
+  box-shadow: inset 0 0 0 1.5px var(--ink), 0 30px 50px -36px rgb(26 21 35 / 0.5);
+  transform: translateY(-6px) !important;
+}
+
+.plan[data-featured] {
+  background: var(--accent);
+  box-shadow: none;
+  color: #fff;
+}
+
+.plan[data-featured]:hover {
+  box-shadow: 0 34px 60px -34px var(--accent);
+}
+
+.planHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 30px;
+}
+
+.planHead h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.planHead span {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--pop);
+  color: var(--pop-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.planDesc {
+  min-height: 2.9em;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  opacity: 0.9;
+}
+
+.planPrice {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 104px;
+  font-size: 14px;
+}
+
+.planPrice p {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0;
+  font-size: 16px;
+}
+
+.planPrice strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+.planPrice > span {
+  opacity: 0.85;
+}
+
+.planPrice b {
+  font-weight: 600;
+}
+
+.planCtas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 100px;
+}
+
+.plan ul {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 0;
+  padding: 18px 0 0;
+  border-top: 1px solid #ece6df;
+  font-size: 15px;
+  line-height: 1.4;
+  list-style: none;
+}
+
+.plan[data-featured] ul {
+  border-color: rgb(255 255 255 / 0.25);
+}
+
+.plan li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.plan li::before {
+  content: '';
+  position: absolute;
+  top: 0.42em;
+  left: 2px;
+  width: 9px;
+  height: 5px;
+  border-bottom: 1.8px solid var(--accent);
+  border-left: 1.8px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.plan[data-featured] li::before {
+  border-color: var(--pop);
+}
+
+/* ── Le manifeste ─────────────────────────────────────────────────────── */
+
+.ownWrap {
+  padding: 12px;
+  scroll-margin-top: 72px;
+}
+
+.own {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: clamp(72px, 9vw, 120px) var(--pad);
+  overflow: hidden;
+  border-radius: 40px;
+  background:
+    radial-gradient(ellipse 55% 60% at 0% 0%, rgb(122 24 64 / 0.85) 0%, rgb(122 24 64 / 0) 70%),
+    radial-gradient(ellipse 60% 55% at 70% 0%, rgb(76 32 160 / 0.9) 0%, rgb(76 32 160 / 0) 72%),
+    #12102a;
+  color: #fff;
+  text-align: center;
+}
+
+.ownBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 6px 6px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.04);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.18);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.ownBadge i {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgb(109 40 217 / 0.45);
+}
+
+.own h2 {
+  max-width: 980px;
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 5.6vw, 80px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.own > p {
+  max-width: 780px;
+  margin: 0;
+  color: #cfc8e3;
+  font-size: clamp(17px, 1.6vw, 22px);
+  line-height: 1.6;
+}
+
+.own ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  max-width: 900px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.own li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px 10px 10px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.04);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16);
+  font-size: 17px;
+  text-align: left;
+}
+
+.own li i {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #6d28d9;
+}
+
+.ownCtas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.ownCtas a,
+.ownCtas button {
+  border-radius: 16px;
+}
+
+/* ── Questions ────────────────────────────────────────────────────────── */
+
+.faq {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: start;
+  gap: 40px 56px;
+  padding-block: clamp(80px, 9vw, 120px) 0;
+}
+
+.faq > h2 {
+  position: sticky;
+  top: 96px;
+  font-size: clamp(34px, 3.8vw, 52px);
+}
+
+/* ── Signer ───────────────────────────────────────────────────────────── */
+
+.sign {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 40px 64px;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: clamp(80px, 9vw, 120px) var(--pad);
+  scroll-margin-top: 40px;
+}
+
+.sign > img {
+  width: 100%;
+  height: auto;
+  border-radius: 28px;
+}
+
+.sign > div {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.signForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.signForm > label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.signForm > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.signForm input {
+  flex: 1 1 240px;
+  min-width: 0;
+  height: 56px;
+  padding: 0 20px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 17px;
+}
+
+.signForm input[aria-invalid='true'] {
+  border-color: #7a1010;
+}
+
+.signError,
+.signNote {
+  margin: 0;
+  font-size: 14px;
+}
+
+.signError {
+  color: #7a1010;
+  font-weight: 600;
+}
+
+.signNote {
+  color: var(--muted);
+}
+
+/* ── Petits écrans ────────────────────────────────────────────────────── */
+
+@media (max-width: 1100px) {
+  .crowd {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .calcResult {
+    position: static;
+  }
+
+  .faq,
+  .sign {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .faq > h2 {
+    position: static;
+  }
+
+  .planDesc,
+  .planPrice,
+  .planCtas {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .trioPanel {
+    min-height: 88svh;
+    border-radius: 0;
+  }
+
+  .trioPanel[data-tone='1'],
+  .trioPanel[data-tone='2'] {
+    border-radius: 28px 28px 0 0;
+  }
+
+  .calc {
+    gap: 36px;
+  }
+
+  .toolPrice input {
+    width: 64px;
+  }
+
+  .own {
+    border-radius: 28px;
+  }
+
+  .own li {
+    border-radius: 18px;
+    font-size: 16px;
+  }
+
+  .signForm button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crowdWindow ul {
+    animation: none;
+  }
+
+  .trioPanel {
+    position: static;
+  }
+}
