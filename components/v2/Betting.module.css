@@ -962,33 +962,296 @@
 }
 
 @media (max-width: 560px) {
+  .h2 {
+    font-size: clamp(27px, 7.4vw, 30px);
+    line-height: 1.1;
+  }
+
+  /* Des visages partout sous le texte : le voile couvre tout le bas. */
+  .shade {
+    background: linear-gradient(to bottom, rgb(var(--shade) / 0.6) 0%, rgb(var(--shade) / 0.3) 20%, rgb(var(--shade) / 0.74) 44%, rgb(var(--shade) / 0.94) 100%);
+  }
+
+  .heroBody {
+    gap: 18px;
+  }
+
+  .tag {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .h1 {
+    font-size: clamp(28px, 7.9vw, 34px);
+  }
+
+  .heroCta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13.5px;
+  }
+
+  .facts {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+    margin-top: 4px;
+    padding-top: 16px;
+  }
+
+  .facts > div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .facts dd {
+    font-size: 15px;
+  }
+
+  .figures {
+    gap: 22px;
+    padding-block: 56px 28px;
+  }
+
+  .figureGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .figure {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .figure strong {
+    font-size: 36px;
+  }
+
+  .figure > span {
+    font-size: 14px;
+  }
+
+  .direct {
+    gap: 22px;
+    padding-block: 28px 56px;
+  }
+
+  .sectionHead {
+    gap: 16px;
+  }
+
+  .toggle button {
+    padding: 0 18px;
+    font-size: 14.5px;
+  }
+
+  .route {
+    min-height: 0;
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .path {
+    gap: 12px;
+  }
+
   .node {
-    padding: 14px 18px;
+    padding: 13px 16px;
+    font-size: 16px;
   }
 
   .track {
-    flex-basis: 28px;
+    flex-basis: 24px;
   }
 
   .badge,
   .lost {
     margin-left: 0;
+    font-size: 13px;
   }
 
-  .toggle button {
-    padding: 0 18px;
+  .directText {
+    gap: 12px;
+    font-size: 17px;
+  }
+
+  .promise {
+    gap: 10px;
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .promise strong {
+    font-size: 28px;
+  }
+
+  .formats,
+  .targeting {
+    gap: 24px;
+    padding-block: 56px;
+  }
+
+  .formatsInner {
+    gap: 24px;
+  }
+
+  .formatCard {
+    gap: 22px;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .formatText {
+    flex-basis: 100%;
+    gap: 8px;
+  }
+
+  .formatText h3 {
+    font-size: 40px;
+  }
+
+  .formatText > span {
+    font-size: 18px;
+  }
+
+  .formatText p {
+    margin-top: 4px;
+    font-size: 16px;
+  }
+
+  .screen {
+    flex-basis: 100%;
+    border-radius: 18px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .adDisplay,
+  .adNative {
+    bottom: 12px;
+    left: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .adDisplay {
+    right: 12px;
   }
 
   .adDisplay b {
     font-size: 18px;
   }
 
+  .adNative b {
+    font-size: 16px;
+  }
+
+  .groups {
+    gap: 10px;
+  }
+
+  .groups fieldset,
+  .adults {
+    gap: 10px;
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .groups legend,
+  .adults b {
+    font-size: 16px;
+  }
+
+  .groups button {
+    padding: 0 15px;
+    font-size: 14.5px;
+  }
+
   .summary {
     padding: 22px;
+    border-radius: 20px;
+  }
+
+  .summary p {
+    font-size: 20px;
+    line-height: 1.35;
+  }
+
+  .model {
+    padding: 16px 20px;
+    border-radius: 16px;
+  }
+
+  .story {
+    gap: 22px;
+    padding-block: 0 56px;
+  }
+
+  .story img {
+    height: 200px;
+  }
+
+  .story article > div {
+    padding: 20px;
+  }
+
+  .story h3 {
+    font-size: 18px;
+  }
+
+  .story p {
+    font-size: 15px;
+  }
+
+  .faq {
+    gap: 20px;
+    padding-block: 0 56px;
+  }
+
+  .contactWrap {
+    padding: 8px;
+  }
+
+  .contact {
+    gap: 32px;
+    padding: 48px 16px 16px;
+    border-radius: 24px;
+  }
+
+  .contactText {
+    gap: 18px;
+    padding-inline: 4px;
+  }
+
+  .contactText > p {
+    font-size: 16px;
+  }
+
+  .contactText ol {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .contactText li {
+    gap: 8px;
+    padding: 13px 12px;
+    font-size: 13.5px;
+    line-height: 1.25;
+  }
+
+  .contactText li span {
+    font-size: 18px;
   }
 
   .contactCard {
-    padding: 22px;
+    padding: 22px 18px;
+    border-radius: 20px;
+  }
+
+  .contactCard h3 {
+    font-size: 26px;
+  }
+
+  .footer {
+    padding-block: 28px 40px;
   }
 }
 

@@ -26,6 +26,7 @@ type Group = { key: string; title: string; hint: string; options: readonly strin
 export const BETTING = {
   fr: {
     navLabel: 'Principal',
+    menu: { open: 'Menu', close: 'Fermer le menu' },
     langLabel: 'Langue',
     nav: [['#lien-direct', 'Lien direct'], ['#formats', 'Formats'], ['#ciblage', 'Ciblage'], ['#contact', 'Contact']],
     cta: 'Parlons de vos marchés',
@@ -136,6 +137,7 @@ export const BETTING = {
   },
   en: {
     navLabel: 'Main',
+    menu: { open: 'Menu', close: 'Close the menu' },
     langLabel: 'Language',
     nav: [['#lien-direct', 'Direct link'], ['#formats', 'Formats'], ['#ciblage', 'Targeting'], ['#contact', 'Contact']],
     cta: 'Let’s talk about your markets',

@@ -1145,6 +1145,101 @@
   }
 }
 
+@media (max-width: 560px) {
+  .sticky {
+    padding-block: 64px;
+  }
+
+  .inner {
+    gap: 22px;
+  }
+
+  .head p {
+    font-size: 16px;
+  }
+
+  /* La rangée déborde : un fondu à droite dit qu'elle défile. */
+  .pills {
+    margin-inline: -20px;
+    padding-inline: 20px;
+    scroll-padding-inline: 20px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 44px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 44px), transparent 100%);
+  }
+
+  .pills button {
+    padding: 0 16px 0 13px;
+    font-size: 14px;
+  }
+
+  .chrome {
+    padding: 9px 12px;
+  }
+
+  .chrome p {
+    transform: none;
+  }
+
+  .top {
+    padding: 12px 16px;
+  }
+
+  .top p b {
+    font-size: 15px;
+  }
+
+  .top p span {
+    font-size: 13px;
+  }
+
+  .view {
+    min-height: 0;
+    font-size: 14px;
+  }
+
+  .mail {
+    padding: 12px 16px;
+  }
+
+  .inbox .label,
+  .thread .label {
+    padding: 14px 16px 10px;
+  }
+
+  .mail b,
+  .bubble,
+  .task {
+    font-size: 14.5px;
+  }
+
+  .mail > div > span {
+    font-size: 13.5px;
+  }
+
+  .bubble,
+  .typing {
+    margin-inline: 16px;
+  }
+
+  .composer {
+    margin: 6px 16px 0;
+  }
+
+  .kpi strong {
+    font-size: 26px;
+  }
+
+  .note h4 {
+    font-size: 23px;
+  }
+
+  .invoice,
+  .sign {
+    padding: 16px;
+    font-size: 14.5px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .frame {
     transform: none;

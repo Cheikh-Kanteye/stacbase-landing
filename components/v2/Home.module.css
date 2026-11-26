@@ -711,88 +711,13 @@
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   align-items: start;
   gap: 40px 56px;
-  padding-block: clamp(80px, 9vw, 120px) 0;
+  padding-block: clamp(80px, 9vw, 120px) clamp(56px, 6vw, 88px);
 }
 
 .faq > h2 {
   position: sticky;
   top: 96px;
   font-size: clamp(34px, 3.8vw, 52px);
-}
-
-/* ── Signer ───────────────────────────────────────────────────────────── */
-
-.sign {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 40px 64px;
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: clamp(80px, 9vw, 120px) var(--pad);
-  scroll-margin-top: 40px;
-}
-
-.sign > img {
-  width: 100%;
-  height: auto;
-  border-radius: 28px;
-}
-
-.sign > div {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.signForm {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 6px;
-}
-
-.signForm > label {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.signForm > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.signForm input {
-  flex: 1 1 240px;
-  min-width: 0;
-  height: 56px;
-  padding: 0 20px;
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  background: #fff;
-  color: var(--ink);
-  font-family: inherit;
-  font-size: 17px;
-}
-
-.signForm input[aria-invalid='true'] {
-  border-color: #7a1010;
-}
-
-.signError,
-.signNote {
-  margin: 0;
-  font-size: 14px;
-}
-
-.signError {
-  color: #7a1010;
-  font-weight: 600;
-}
-
-.signNote {
-  color: var(--muted);
 }
 
 /* ── Petits écrans ────────────────────────────────────────────────────── */
@@ -808,8 +733,7 @@
     position: static;
   }
 
-  .faq,
-  .sign {
+  .faq {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -825,8 +749,38 @@
 }
 
 @media (max-width: 560px) {
+  .heroText {
+    gap: 18px;
+  }
+
+  .heroText h1 {
+    font-size: clamp(40px, 11.6vw, 48px);
+  }
+
+  /* Sur mobile le hero dit une seule chose : le titre, puis le bouton. */
+  .heroText > p,
+  .chips {
+    display: none;
+  }
+
+  .heroCta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  .heroCta span {
+    max-width: 30ch;
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+
+  /* Les trois mots : presque toute la largeur, dans des panneaux moins hauts. */
   .trioPanel {
-    min-height: 88svh;
+    gap: 20px;
+    min-height: 76svh;
+    padding: 72px 24px;
     border-radius: 0;
   }
 
@@ -835,25 +789,121 @@
     border-radius: 28px 28px 0 0;
   }
 
+  .trioPanel h2 {
+    font-size: clamp(88px, 27vw, 120px);
+  }
+
+  .trioPanel p {
+    font-size: 17px;
+  }
+
   .calc {
-    gap: 36px;
+    gap: 32px;
+    padding-block: 64px;
+  }
+
+  .calcForm {
+    gap: 20px;
+  }
+
+  .toolRow {
+    min-height: 56px;
+  }
+
+  .toolName,
+  .years {
+    font-size: 15px;
   }
 
   .toolPrice input {
-    width: 64px;
+    width: 62px;
   }
 
-  .own {
-    border-radius: 28px;
+  .rented,
+  .owned {
+    padding: 22px;
+    border-radius: 22px;
   }
 
-  .own li {
-    border-radius: 18px;
+  .rented > span,
+  .owned > span,
+  .owned .keep {
+    font-size: 15px;
+  }
+
+  .rented strong {
+    font-size: 48px;
+  }
+
+  .owned strong {
+    font-size: 40px;
+  }
+
+  .rented p,
+  .owned p {
     font-size: 16px;
   }
 
-  .signForm button {
+  .membership {
+    gap: 28px;
+    padding-block: 0 64px;
+  }
+
+  .plans {
+    gap: 12px;
+  }
+
+  .plan {
+    gap: 14px;
+    padding: 22px;
+    border-radius: 22px;
+  }
+
+  .planPrice strong {
+    font-size: 46px;
+  }
+
+  .own {
+    gap: 22px;
+    padding: 64px 20px;
+    border-radius: 24px;
+  }
+
+  .ownWrap {
+    padding: 8px;
+  }
+
+  .ownBadge {
+    font-size: 13px;
+  }
+
+  .own h2 {
+    font-size: clamp(32px, 9vw, 38px);
+  }
+
+  .own > p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .own ul {
+    display: none;
+  }
+
+  .ownCtas {
+    flex-direction: column;
+    align-items: stretch;
     width: 100%;
+    margin-top: 8px;
+  }
+
+  .faq {
+    gap: 24px;
+    padding-block: 64px 32px;
+  }
+
+  .faq > h2 {
+    font-size: clamp(28px, 7.8vw, 32px);
   }
 }
 

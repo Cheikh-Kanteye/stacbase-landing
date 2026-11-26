@@ -443,6 +443,7 @@ const clamp = (v: number, min = 0, max = 1) => Math.min(max, Math.max(min, v))
 export function Workspace({ lang }: { lang: Lang }) {
   const t = T[lang]
   const section = useRef<HTMLElement>(null)
+  const pills = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
   const [pinned, setPinned] = useState(false)
   const [manual, setManual] = useState(false)
@@ -504,6 +505,15 @@ export function Workspace({ lang }: { lang: Lang }) {
     return () => window.clearTimeout(id)
   }, [auto, active])
 
+  // Sur petit écran les pastilles débordent : celle du hub ouvert est
+  // ramenée au centre de la rangée (sans faire défiler la page).
+  useEffect(() => {
+    const row = pills.current
+    const pill = row?.children[active] as HTMLElement | undefined
+    if (!row || !pill || row.scrollWidth <= row.clientWidth) return
+    row.scrollTo({ left: pill.offsetLeft - (row.clientWidth - pill.offsetWidth) / 2, behavior: 'smooth' })
+  }, [active])
+
   const select = (i: number) => {
     const el = section.current
     if (pinned && el) {
@@ -539,7 +549,7 @@ export function Workspace({ lang }: { lang: Lang }) {
             <p>{t.lead}</p>
           </div>
 
-          <div role='group' aria-label={t.group} className={s.pills}>
+          <div role='group' aria-label={t.group} className={s.pills} ref={pills}>
             {HUBS.map((h, i) => (
               <button key={h.id} type='button' aria-pressed={active === i} data-past={i < active || undefined} onClick={() => select(i)}>
                 <h.Icon size={16} />
