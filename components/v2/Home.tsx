@@ -59,7 +59,7 @@ function useTween(target: number) {
 function Calculator({ lang }: { lang: Lang }) {
   const t = HOME[lang].calc
   const [tools, setTools] = useState(() => CALC_DEFAULTS.map((d) => ({ ...d })))
-  const [years, setYears] = useState(5)
+  const [years, setYears] = useState(1)
 
   const patch = (i: number, next: Partial<{ on: boolean; price: number }>) => setTools((list) => list.map((tool, k) => (k === i ? { ...tool, ...next } : tool)))
   const monthly = tools.reduce((sum, tool) => sum + (tool.on ? tool.price : 0), 0)

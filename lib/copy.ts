@@ -266,8 +266,10 @@ export const TOOL_HUBS: Record<Lang, { hub: string; tools: { name: string; desc:
       { name: 'Bulk SMS', desc: 'Short campaigns straight to your contacts’ phones.', soon: true },
     ] },
     { hub: 'Marketing', tools: [
+      { name: 'Post Publisher', desc: 'Write once, publish on Facebook, Instagram and LinkedIn.' },
+      { name: 'Editorial calendar', desc: 'The week of posts, planned with your team.' },
+      { name: 'Social listening', desc: 'Mentions, sentiment and the conversations around your brand.', soon: true },
       { name: 'CRM', desc: 'Contacts, companies, deals and follow-ups in one pipeline.' },
-      { name: 'Social publishing', desc: 'Plan and publish on Facebook, Instagram and LinkedIn.' },
       { name: 'Google Analytics', desc: 'Traffic, sources and conversions in a readable report.' },
       { name: 'Search Console', desc: 'The queries and pages that bring you organic traffic.' },
     ] },
@@ -306,8 +308,10 @@ export const TOOL_HUBS: Record<Lang, { hub: string; tools: { name: string; desc:
       { name: 'SMS en masse', desc: 'Des campagnes courtes, directement sur le téléphone de vos contacts.', soon: true },
     ] },
     { hub: 'Marketing', tools: [
+      { name: 'Post Publisher', desc: 'Écrivez une fois, publiez sur Facebook, Instagram et LinkedIn.' },
+      { name: 'Calendrier éditorial', desc: 'La semaine de posts, planifiée avec votre équipe.' },
+      { name: 'Social listening', desc: 'Mentions, tonalité et conversations autour de votre marque.', soon: true },
       { name: 'CRM', desc: 'Contacts, entreprises, opportunités et relances dans un seul pipeline.' },
-      { name: 'Publication de posts', desc: 'Planifiez et publiez sur Facebook, Instagram et LinkedIn.' },
       { name: 'Google Analytics', desc: 'Trafic, sources et conversions dans un rapport lisible.' },
       { name: 'Search Console', desc: 'Les recherches et les pages qui vous apportent du trafic naturel.' },
     ] },

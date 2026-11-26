@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://stacbase.com'),
   title: 'Stacbase – Use. Pay. Co-own.',
   description:
-    'Built for digital marketers, owned by them. 25+ tools in one workspace (ads, CRM, publishing, mailing, invoices, docs), one membership from $0, and co-ownership shares on Pro and Large.',
+    'Built for digital marketers, owned by them. 25+ tools in one workspace (post publishing, notes, ads, mailing, invoices), one membership from $0, and co-ownership shares on Pro and Large.',
   icons: { icon: [{ url: '/favicon.ico', sizes: 'any' }, { url: '/icon.png', type: 'image/png' }], apple: '/apple-touch-icon.png' },
   openGraph: {
     title: 'Stacbase – Use. Pay. Co-own.',
