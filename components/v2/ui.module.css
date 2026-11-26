@@ -1,0 +1,563 @@
+/* ── Socle « Use. Pay. Co-own. » ──────────────────────────────────────────
+   Le système visuel des nouvelles pages : Fraunces pour les titres, Space
+   Grotesk pour le texte, un fond crème, une encre presque noire et un seul
+   accent par page. Chaque page pose ses couleurs sur `.theme` ; tout le
+   reste les lit par variables. */
+
+.theme {
+  --cream: #faf6f2;
+  --sand: #f2ece6;
+  --ink: #1a1523;
+  --ink-2: #3b3548;
+  --muted: #5e5870;
+  --rule: #e7e1da;
+  --accent: #5b2be0;
+  --accent-deep: #3e1ba8;
+  --pop: #ffc531;
+  --pop-ink: #1a1523;
+  --night: #17112a;
+  --focus: #ffc531;
+  --shade: 16 10 28;
+  --serif: var(--font-serif), 'Fraunces', Georgia, serif;
+  --sans: var(--font-grotesk), 'Space Grotesk', system-ui, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --pad: clamp(20px, 4vw, 40px);
+
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.theme :global(.words) {
+  display: inline;
+}
+
+.theme a:focus-visible,
+.theme button:focus-visible,
+.theme input:focus-visible,
+.theme summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+.theme ::selection {
+  background: var(--pop);
+  color: var(--pop-ink);
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding-inline: var(--pad);
+}
+
+/* ── Titres ───────────────────────────────────────────────────────────── */
+
+.h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(34px, 4.4vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+.lead {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Boutons ──────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease), background-color 0.25s ease, color 0.25s ease, box-shadow 0.4s var(--ease);
+}
+
+.btn svg {
+  flex: none;
+  transition: transform 0.4s var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btnPop {
+  background: var(--pop);
+  color: var(--pop-ink);
+}
+
+.btnPop:hover {
+  box-shadow: 0 18px 36px -18px var(--pop);
+}
+
+.btnInk {
+  background: var(--ink);
+  color: #fff;
+}
+
+.btnWhite {
+  background: #fff;
+  color: var(--ink);
+}
+
+.btnLine {
+  background: transparent;
+  color: inherit;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+.btnSm {
+  min-height: 46px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+
+/* ── Hero : une photo plein cadre dans un cartouche arrondi ───────────── */
+
+.heroWrap {
+  padding: 12px;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: max(720px, calc(100svh - 24px));
+  overflow: hidden;
+  border-radius: 32px;
+  background: var(--ink);
+  color: #fff;
+  isolation: isolate;
+}
+
+.heroImg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  animation: hero-settle 2.6s var(--ease) both;
+}
+
+@keyframes hero-settle {
+  from {
+    transform: scale(1.08);
+  }
+}
+
+.heroShade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, rgb(var(--shade) / 0.5) 0%, rgb(var(--shade) / 0) 24%, rgb(var(--shade) / 0) 34%, rgb(var(--shade) / 0.8) 100%),
+    rgb(var(--shade) / 0.24);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 28px;
+}
+
+.brand {
+  justify-self: start;
+  color: inherit;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand span {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.navPill {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgb(250 246 242 / 0.18);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.navPill a {
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.25s ease;
+}
+
+.navPill a:hover {
+  background: rgb(255 255 255 / 0.18);
+}
+
+.headEnd {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 10px;
+}
+
+.lang {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgb(250 246 242 / 0.18);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.lang button,
+.lang a {
+  min-width: 38px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.lang [aria-pressed='true'],
+.lang [aria-current='true'] {
+  background: #fff;
+  color: var(--ink);
+}
+
+.heroBody {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: auto;
+  padding: 48px 28px 28px;
+}
+
+.h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(44px, 5.8vw, 88px);
+  line-height: 1;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+.heroLead {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(17px, 1.45vw, 20px);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* ── Barre flottante : apparaît une fois le hero passé ────────────────── */
+
+.dock {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: calc(100vw - 24px);
+  padding: 6px 6px 6px 20px;
+  border-radius: 999px;
+  background: rgb(var(--shade) / 0.82);
+  box-shadow: 0 18px 40px -20px rgb(var(--shade) / 0.7);
+  color: #fff;
+  -webkit-backdrop-filter: saturate(1.4) blur(18px);
+  backdrop-filter: saturate(1.4) blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -140%);
+  transition: transform 0.6s var(--ease), opacity 0.3s ease;
+}
+
+.dock[data-shown='true'] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.dock .brand {
+  margin-right: 10px;
+  font-size: 19px;
+}
+
+.dock nav {
+  display: flex;
+}
+
+.dock nav a {
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.25s ease;
+}
+
+.dock nav a:hover {
+  background: rgb(255 255 255 / 0.14);
+}
+
+.dock .btn {
+  min-height: 40px;
+  margin-left: 6px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+/* ── Questions ────────────────────────────────────────────────────────── */
+
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq details {
+  padding: 0 22px;
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  background: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.faq details[open] {
+  border-color: var(--ink);
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  padding: 12px 0;
+  border-radius: 12px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.faq summary i {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--sand);
+  transition: transform 0.45s var(--ease), background-color 0.3s ease;
+}
+
+.faq summary i::before,
+.faq summary i::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 1.5px;
+  background: var(--ink);
+  transform: translate(-50%, -50%);
+}
+
+.faq summary i::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq details[open] summary i {
+  background: var(--faq-open, var(--pop));
+  transform: rotate(45deg);
+}
+
+.faq details p {
+  max-width: 68ch;
+  margin: 0 0 22px;
+  color: var(--ink-2);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── Pied de page ─────────────────────────────────────────────────────── */
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 48px;
+  font-size: 15px;
+}
+
+.footer .brand {
+  font-size: 22px;
+}
+
+.footBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footBrand small,
+.footMeta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.footer nav a {
+  color: var(--ink);
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat;
+  transition: background-size 0.4s var(--ease);
+}
+
+.footer nav a:hover {
+  background-size: 100% 1.5px;
+}
+
+/* ── Petits écrans ────────────────────────────────────────────────────── */
+
+@media (max-width: 980px) {
+  .header {
+    grid-template-columns: 1fr auto;
+    padding: 18px 18px 0;
+  }
+
+  .navPill {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    justify-self: start;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .navPill::-webkit-scrollbar {
+    display: none;
+  }
+
+  .heroBody {
+    padding: 40px 18px 22px;
+  }
+
+  .dock nav {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    min-height: max(640px, calc(100svh - 24px));
+    border-radius: 26px;
+  }
+
+  .headEnd .btn {
+    display: none;
+  }
+
+  .dock {
+    padding-left: 16px;
+  }
+
+  .dock .brand span {
+    display: none;
+  }
+
+  .btn {
+    min-height: 52px;
+    padding: 0 24px;
+    font-size: 16px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroImg {
+    animation: none;
+  }
+}
