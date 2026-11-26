@@ -17,7 +17,7 @@ export const HOME = {
       title: 'Built for digital marketers. Owned by them.',
       lead: 'You’re paying for a growing stack of software just to keep your work together, and managing your tools has become a job of its own. Enough is enough.',
       chipsLabel: 'Who it is for',
-      chips: ['Performance marketers', 'Growth leads', 'Social media managers', 'Agencies and freelancers'],
+      chips: ['Community managers', 'Social media managers', 'Content creators', 'Agencies and freelancers'],
       note: 'Membership open. Co-ownership from day one on Pro yearly.',
     },
     crowd: {
@@ -26,10 +26,10 @@ export const HOME = {
       pause: 'Pause',
       play: 'Play',
       people: [
-        ['Performance marketer', 'Google and Meta campaigns, one report'],
-        ['Content strategist', 'The editorial calendar and its briefs'],
-        ['Brand manager', 'Bulk WhatsApp and e-mail campaigns'],
         ['Community manager', 'A week of posts, scheduled once'],
+        ['Content strategist', 'Briefs and notes, shared with the team'],
+        ['Brand manager', 'What people say about the brand'],
+        ['Performance marketer', 'Google and Meta campaigns, one report'],
         ['Freelancer', 'One login in place of seven'],
         ['Agency owner', 'Quotes, invoices and e-signatures'],
         ['Growth lead', 'A pipeline fed by every campaign'],
@@ -37,7 +37,7 @@ export const HOME = {
       ],
     },
     trio: [
-      ['Use.', 'Ads, CRM, publishing, mailing, invoices, docs. 25+ tools in one workspace, so your day stops being a tab hunt.'],
+      ['Use.', 'Publish your posts, keep your notes, run your ads, and soon listen to what people say about your brand. 25+ tools in one workspace, so your day stops being a tab hunt.'],
       ['Pay.', 'One membership, from $0 a month, in place of a stack of subscriptions that each want a card on file.'],
       ['Co-own.', 'Pro and Large members receive co-ownership shares in Stacbase. On a yearly plan, from day one. The people who use it are the people who own it.'],
     ],
@@ -45,7 +45,7 @@ export const HOME = {
     calc: {
       title: 'How much have you rented so far?',
       lead: 'Tick the tools you pay for. The prices are examples: change them to what you actually pay each month.',
-      tools: ['Email marketing', 'CRM', 'Social scheduler', 'Ads reporting', 'Project and tasks', 'Team chat', 'Invoicing', 'E-signature'],
+      tools: ['Social scheduler', 'Notes and docs', 'Ads reporting', 'Email marketing', 'Project and tasks', 'Team chat', 'Invoicing', 'E-signature'],
       priceLabel: 'Monthly price for {tool}',
       perMonth: '/mo',
       years: 'Years you’ve worked this way: {n}',
@@ -79,7 +79,7 @@ export const HOME = {
       title: 'Pensé pour les marketeurs digitaux. Détenu par eux.',
       lead: 'Vous payez une pile grandissante de logiciels juste pour garder votre travail en un seul morceau, et gérer vos outils est devenu un métier à part entière. Ça suffit.',
       chipsLabel: 'Pour qui',
-      chips: ['Marketeurs à la performance', 'Responsables croissance', 'Community managers', 'Agences et freelances'],
+      chips: ['Community managers', 'Social media managers', 'Créateurs de contenu', 'Agences et freelances'],
       note: 'Adhésion ouverte. Co-propriété dès le premier jour avec Pro à l’année.',
     },
     crowd: {
@@ -88,10 +88,10 @@ export const HOME = {
       pause: 'Pause',
       play: 'Lecture',
       people: [
-        ['Marketeur à la performance', 'Campagnes Google et Meta, un seul rapport'],
-        ['Stratège de contenu', 'Le calendrier éditorial et ses briefs'],
-        ['Responsable de marque', 'Campagnes WhatsApp et e-mail en masse'],
         ['Community manager', 'Une semaine de posts, programmée en une fois'],
+        ['Stratège de contenu', 'Briefs et notes, partagés avec l’équipe'],
+        ['Responsable de marque', 'Ce qu’on dit de la marque'],
+        ['Marketeur à la performance', 'Campagnes Google et Meta, un seul rapport'],
         ['Freelance', 'Une connexion au lieu de sept'],
         ['Dirigeant d’agence', 'Devis, factures et signatures électroniques'],
         ['Responsable croissance', 'Un pipeline nourri par chaque campagne'],
@@ -99,7 +99,7 @@ export const HOME = {
       ],
     },
     trio: [
-      ['Use.', 'Publicité, CRM, publication, e-mailing, factures, documents. Plus de 25 outils dans un seul espace, pour que votre journée ne soit plus une chasse aux onglets.'],
+      ['Use.', 'Publiez vos posts, gardez vos notes, lancez vos publicités, et bientôt écoutez ce qu’on dit de votre marque. Plus de 25 outils dans un seul espace, pour que votre journée ne soit plus une chasse aux onglets.'],
       ['Pay.', 'Une seule adhésion, à partir de 0 $ par mois, à la place d’une pile d’abonnements qui réclament chacun une carte.'],
       ['Co-own.', 'Les membres Pro et Large reçoivent des parts de co-propriété de Stacbase. À l’année, dès le premier jour. Ceux qui l’utilisent sont ceux qui le possèdent.'],
     ],
@@ -107,7 +107,7 @@ export const HOME = {
     calc: {
       title: 'Combien avez-vous déjà payé en location ?',
       lead: 'Cochez les outils que vous payez. Les prix sont des exemples : mettez ce que vous payez vraiment chaque mois.',
-      tools: ['E-mail marketing', 'CRM', 'Programmation des réseaux', 'Rapports publicitaires', 'Projets et tâches', 'Chat d’équipe', 'Facturation', 'Signature électronique'],
+      tools: ['Programmation des réseaux', 'Notes et documents', 'Rapports publicitaires', 'E-mail marketing', 'Projets et tâches', 'Chat d’équipe', 'Facturation', 'Signature électronique'],
       priceLabel: 'Prix mensuel pour {tool}',
       perMonth: '/mois',
       years: 'Années passées à travailler ainsi : {n}',
@@ -133,10 +133,10 @@ export const HOME = {
 
 /** Outils du calculateur : cochés ou non au départ, prix d'exemple en dollars par mois. */
 export const CALC_DEFAULTS: readonly { on: boolean; price: number }[] = [
-  { on: true, price: 20 },
-  { on: true, price: 30 },
   { on: true, price: 25 },
+  { on: true, price: 10 },
   { on: true, price: 30 },
+  { on: true, price: 20 },
   { on: true, price: 10 },
   { on: false, price: 8 },
   { on: true, price: 15 },
