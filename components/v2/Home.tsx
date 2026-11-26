@@ -206,17 +206,11 @@ export function Home() {
                 <p className={ui.heroLead} data-reveal style={{ '--d': '500ms' } as CSSProperties}>
                   {t.hero.lead}
                 </p>
-                <ul className={s.chips} aria-label={t.hero.chipsLabel} data-reveal style={{ '--d': '620ms' } as CSSProperties}>
-                  {t.hero.chips.map((chip) => (
-                    <li key={chip}>{chip}</li>
-                  ))}
-                </ul>
-                <div className={s.heroCta} data-reveal style={{ '--d': '740ms' } as CSSProperties}>
+                <div className={s.heroCta} data-reveal style={{ '--d': '620ms' } as CSSProperties}>
                   <a href={LINKS.signup} className={`${ui.btn} ${ui.btnPop}`}>
-                    {t.join}
+                    {t.hero.cta}
                     <Arrow />
                   </a>
-                  <span>{t.hero.note}</span>
                 </div>
               </div>
 

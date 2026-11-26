@@ -14,11 +14,9 @@ export const HOME = {
     join: 'Join the movement',
     hero: {
       alt: 'Three friends laughing, seen from below against a blue sky',
-      title: 'Built for digital marketers. Owned by them.',
-      lead: 'Too many tools. Too many subscriptions. Enough.',
-      chipsLabel: 'Who it is for',
-      chips: ['Community managers', 'Social media managers', 'Content creators', 'Agencies and freelancers'],
-      note: 'Membership open. Co-ownership from day one on Pro yearly.',
+      title: 'All your marketing tools. One workspace.',
+      lead: 'Publish, run ads, manage clients and take notes in one place, from $0 a month. Pro members co-own Stacbase.',
+      cta: 'Start for free',
     },
     crowd: {
       title: 'Built for',
@@ -76,11 +74,9 @@ export const HOME = {
     join: 'Rejoindre le mouvement',
     hero: {
       alt: 'Trois amies qui rient, vues d’en bas sur un ciel bleu',
-      title: 'Pensé pour les marketeurs digitaux. Détenu par eux.',
-      lead: 'Trop d’outils, trop d’abonnements. Ça suffit.',
-      chipsLabel: 'Pour qui',
-      chips: ['Community managers', 'Social media managers', 'Créateurs de contenu', 'Agences et freelances'],
-      note: 'Adhésion ouverte. Co-propriété dès le premier jour avec Pro à l’année.',
+      title: 'Tous vos outils marketing. Un seul espace.',
+      lead: 'Publiez, gérez vos pubs, vos clients et vos notes au même endroit, dès 0 $/mois. Les membres Pro deviennent copropriétaires de Stacbase.',
+      cta: 'Commencer gratuitement',
     },
     crowd: {
       title: 'Pensé pour',
